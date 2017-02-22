@@ -1,12 +1,7 @@
 # Pantry
 Project repo for CSE437 group project
 
-Developers:
-Phoebe Moh
-Cindy Chong
-Jeffrey Gu
-Jack Paladin
-Jonathan Shieh
+Project members: Cindy Chong, Jeffrey Gu, Phoebe Moh, Jack Paladin, Jonathan Shieh
 
 
 # Dependencies
