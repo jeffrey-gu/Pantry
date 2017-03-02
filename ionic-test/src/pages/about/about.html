@@ -13,4 +13,11 @@
       Swiped: {{swipe}} times
     </ion-item>
   </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-33 (click)="popover($event, 'pickle')"><ion-card>Pickle</ion-card></ion-col>
+      <ion-col width-33 (click)="showToast('patty')"><ion-card>Patty</ion-card></ion-col>
+      <ion-col width-33 (click)="showToast('parmesan')"><ion-card>Parmesan</ion-card></ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
