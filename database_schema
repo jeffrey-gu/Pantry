@@ -1,0 +1,24 @@
+CREATE TABLE users (
+	id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
+	username VARCHAR(50) NOT NULL,
+	first_name VARCHAR(40) NOT NULL,
+	last_name VARCHAR(40) NOT NULL,
+	date_joined TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	password VARCHAR(40),
+	PRIMARY KEY (id),
+	UNIQUE  key username (username)
+) engine = INNODB DEFAULT character SET = utf8 COLLATE = utf8_general_ci;
+
+
+CREATE TABLE items (
+	api_id MEDIUMINT UNSIGNED NOT NULL,
+	user_id MEDIUMINT UNSIGNED NOT NULL,
+	is_ingredient TINYINT UNSIGNED NOT NULL,
+	date_added TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	days_to_expiration MEDIUMINT UNSIGNED NOT NULL,
+	attribute_1 TINYTEXT,
+	attribute_2 TINYTEXT,
+	attribute_3 TINYTEXT,
+	PRIMARY KEY (api_id),
+	FOREIGN key (user_id) REFERENCES users (id)
+) engine = INNODB DEFAULT character SET = utf8 COLLATE = utf8_general_ci;
