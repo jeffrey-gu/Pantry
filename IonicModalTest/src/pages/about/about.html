@@ -25,10 +25,10 @@
   </ion-card>
   <ion-grid>
   <div *ngFor="let food of foodthings; let i = index">
-    <ion-row *ngIf="i%3 == 0"> 
+    <ion-row *ngIf="i%3 == 0">
       <ion-col col-4  (press)="multicheckPress(food)" (tap)="multicheckTap(food)"><ion-card><ion-item no-lines>{{food.title}}</ion-item><ion-icon item-right name='checkmark-circle' *ngIf=food.selected></ion-icon></ion-card></ion-col>
       <ion-col col-4 *ngIf="(i+1) < foodthings.length" (press)="multicheckPress(foodthings[i+1])" (tap)="multicheckTap(foodthings[i+1])"><ion-card><ion-item no-lines>{{foodthings[i+1].title}}</ion-item><ion-icon item-right name='checkmark-circle' *ngIf=foodthings[i+1].selected></ion-icon></ion-card></ion-col>
-      <ion-col col-4 *ngIf="(i+2) < foodthings.length" (press)="multicheckPress(foodthings[i+2])" (tap)="multicheckTap(foodthings[i+2])"><ion-card><ion-item no-lines>{{foodthings[i+2].title}}</ion-item><ion-icon item-right name='checkmark-circle' *ngIf=foodthings[i+2].selected></ion-icon></ion-card></ion-col>      
+      <ion-col col-4 *ngIf="(i+2) < foodthings.length" (press)="multicheckPress(foodthings[i+2])" (tap)="multicheckTap(foodthings[i+2])"><ion-card><ion-item no-lines>{{foodthings[i+2].title}}</ion-item><ion-icon item-right name='checkmark-circle' *ngIf=foodthings[i+2].selected></ion-icon></ion-card></ion-col>
     </ion-row>
   </div>
   </ion-grid>
