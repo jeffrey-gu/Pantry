@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf=!anySelected>
   <ion-navbar>
     <ion-title>
       About
@@ -6,18 +6,30 @@
   </ion-navbar>
 </ion-header>
 
+<ion-header *ngIf=anySelected>
+  <ion-navbar color="primary">
+  <ion-buttons left>
+    <button ion-button icon-only (click)="closeSelected()"><ion-icon name="close"></ion-icon></button>
+  </ion-buttons>
+    <ion-title>
+      {{selected.length}} items selected
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
 <ion-content padding>
-  <p>HI</p>
   <ion-card (swipe)="swipeEvent($event)">
     <ion-item>
       Swiped: {{swipe}} times
     </ion-item>
   </ion-card>
   <ion-grid>
-    <ion-row>
-      <ion-col width-33 (click)="popover($event, 'pickle')"><ion-card>Pickle</ion-card></ion-col>
-      <ion-col width-33 (click)="showToast('patty')"><ion-card>Patty</ion-card></ion-col>
-      <ion-col width-33 (click)="showToast('parmesan')"><ion-card>Parmesan</ion-card></ion-col>
+  <div *ngFor="let food of foodthings; let i = index">
+    <ion-row *ngIf="i%3 == 0"> 
+      <ion-col col-4  (press)="multicheckPress(food)" (tap)="multicheckTap(food)"><ion-card><ion-item no-lines>{{food.title}}</ion-item><ion-icon item-right name='checkmark-circle' *ngIf=food.selected></ion-icon></ion-card></ion-col>
+      <ion-col col-4 *ngIf="(i+1) < foodthings.length" (press)="multicheckPress(foodthings[i+1])" (tap)="multicheckTap(foodthings[i+1])"><ion-card><ion-item no-lines>{{foodthings[i+1].title}}</ion-item><ion-icon item-right name='checkmark-circle' *ngIf=foodthings[i+1].selected></ion-icon></ion-card></ion-col>
+      <ion-col col-4 *ngIf="(i+2) < foodthings.length" (press)="multicheckPress(foodthings[i+2])" (tap)="multicheckTap(foodthings[i+2])"><ion-card><ion-item no-lines>{{foodthings[i+2].title}}</ion-item><ion-icon item-right name='checkmark-circle' *ngIf=foodthings[i+2].selected></ion-icon></ion-card></ion-col>      
     </ion-row>
+  </div>
   </ion-grid>
 </ion-content>
