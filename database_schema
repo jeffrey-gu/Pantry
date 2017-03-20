@@ -11,6 +11,7 @@ CREATE TABLE users (
 
 
 CREATE TABLE items (
+	id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
 	api_id MEDIUMINT UNSIGNED NOT NULL,
 	user_id MEDIUMINT UNSIGNED NOT NULL,
 	is_ingredient TINYINT UNSIGNED NOT NULL,
@@ -19,6 +20,6 @@ CREATE TABLE items (
 	attribute_1 TINYTEXT,
 	attribute_2 TINYTEXT,
 	attribute_3 TINYTEXT,
-	PRIMARY KEY (api_id),
+	PRIMARY KEY (id),
 	FOREIGN key (user_id) REFERENCES users (id)
 ) engine = INNODB DEFAULT character SET = utf8 COLLATE = utf8_general_ci;
