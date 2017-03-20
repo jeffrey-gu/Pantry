@@ -1,3 +1,4 @@
+"use strict";
 var mysql = require("mysql");
 
 var connection = mysql.createConnection({
@@ -31,12 +32,20 @@ User.prototype.fillPantry = function(connection) {
 }
 
 User.prototype.addToPantry = function(connection, api_id, is_ingredient=1, days_to_expiration=10) {
-	connection.query("INSERT INTO items (api_id, user_id, is_ingredient, days_to_expiration) VALUES (?, ?, ?, ?, ?)", [api_id, this.id, is_ingredient, days_to_expiration], function(error, results, fields) {
-		if(error) throw error;
-		console.log(results);
-	});
+	if(this.pantry.indexOf(api_id) > -1) {
+		console.log("Ingredient Already Exists");
+	} else {
+		this.pantry.push(api_id);
+		connection.query("INSERT INTO items (api_id, user_id, is_ingredient, days_to_expiration) VALUES (?, ?, ?, ?)", [api_id, this.id, is_ingredient, days_to_expiration], function(error, results, fields) {
+			if(error) throw error;
+			
+		});
+	}
+	
 
 }
 
-var joe = Uesr("joe", 1);
-joe.addToPantry(connection, 1);
+var joe = new User("joe", 1);
+joe.addToPantry(connection, 2);
+joe.addToPantry(connection, 2);
+joe.fillPantry(connection);
