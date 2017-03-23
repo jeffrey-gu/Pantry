@@ -1,4 +1,15 @@
 
+<ion-header *ngIf=anySelected>
+  <ion-navbar color="primary">
+  <ion-buttons left>
+    <button ion-button icon-only (click)="closeSelected()"><ion-icon name="close"></ion-icon></button>
+  </ion-buttons>
+    <ion-title>
+      {{selected.length}} items selected
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
 <ion-content padding>
   ₍₍ ◝(•̀ㅂ•́)◟ ⁾⁾ gimme some recipes
   
@@ -34,91 +45,13 @@
     <ion-content>
       Ingredients!
       <ion-grid>
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-  </ion-row>
-  
-  
-</ion-grid>
+        <div *ngFor="let food of foodthings; let i = index">
+          <ion-row *ngIf="i%3 == 0"> 
+            <ion-col col-4  (press)="multicheckPress(food)" (tap)="multicheckTap(food)"><ion-card><ion-item no-lines>{{food.title}}<ion-thumbnail><img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-thumbnail></ion-item><ion-icon item-right name='checkmark-circle' *ngIf=food.selected></ion-icon></ion-card></ion-col>
+            <ion-col col-4 *ngIf="(i+1) < foodthings.length" (press)="multicheckPress(foodthings[i+1])" (tap)="multicheckTap(foodthings[i+1])"><ion-card><ion-item no-lines>{{foodthings[i+1].title}}<ion-thumbnail><img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-thumbnail></ion-item><ion-icon item-right name='checkmark-circle' *ngIf=foodthings[i+1].selected></ion-icon></ion-card></ion-col>
+            <ion-col col-4 *ngIf="(i+2) < foodthings.length" (press)="multicheckPress(foodthings[i+2])" (tap)="multicheckTap(foodthings[i+2])"><ion-card><ion-item no-lines>{{foodthings[i+2].title}}<ion-thumbnail><img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-thumbnail></ion-item><ion-icon item-right name='checkmark-circle' *ngIf=foodthings[i+2].selected></ion-icon></ion-card></ion-col>      
+          </ion-row>
+        </div>
+      </ion-grid>
     </ion-content>
 </ion-pullup>
