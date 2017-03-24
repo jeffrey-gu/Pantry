@@ -105,4 +105,22 @@ export class AboutPage {
     }
   }
 
+  deleteFood(){
+    var matched : boolean = false;
+    var index = 0;
+    for (var item in this.selected){
+      while(!matched){
+        if(this.selected[item].title == this.foodthings[index].title)
+            matched = true;
+        else
+            index++;
+      }
+      this.foodthings.splice(index, 1);
+      index = 0;
+      matched = false;
+    }
+    this.selected = [];
+    this.anySelected = false;
+  }
+
 }

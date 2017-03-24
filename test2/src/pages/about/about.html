@@ -5,6 +5,9 @@
   <ion-title>
     {{selected.length}} items selected
   </ion-title>
+  <ion-buttons right>
+    <button ion-button icon-only (click)="deleteFood()"><ion-icon name="trash"></ion-icon></button>
+  </ion-buttons>
 </ion-toolbar>
 
 <ion-content padding>
