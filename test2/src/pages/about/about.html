@@ -1,4 +1,11 @@
-
+<ion-toolbar color="primary" *ngIf=anySelected>
+  <ion-buttons left>
+    <button ion-button icon-only (click)="closeSelected()"><ion-icon name="close"></ion-icon></button>
+  </ion-buttons>
+  <ion-title>
+    {{selected.length}} items selected
+  </ion-title>
+</ion-toolbar>
 
 <ion-content padding>
    <ion-fab right bottom>
