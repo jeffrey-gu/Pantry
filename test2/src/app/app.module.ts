@@ -4,6 +4,7 @@ import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
+import { FoodCreatePage } from '../pages/food-create/food-create';
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { IonPullupModule } from 'ionic-pullup';
@@ -14,10 +15,11 @@ import { IonPullupModule } from 'ionic-pullup';
     AboutPage,
     ContactPage,
     HomePage,
+    FoodCreatePage,
     TabsPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp,{tabsPlacement:'top'}),
+    IonicModule.forRoot(MyApp,{tabsPlacement:'bottom'}),
     IonPullupModule
   ],
   bootstrap: [IonicApp],
@@ -26,6 +28,7 @@ import { IonPullupModule } from 'ionic-pullup';
     AboutPage,
     ContactPage,
     HomePage,
+    FoodCreatePage,
     TabsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}],

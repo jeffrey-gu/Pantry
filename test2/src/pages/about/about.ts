@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 
 import {Camera} from 'ionic-native';
+
+import { FoodCreatePage } from '../food-create/food-create';
 
 @Component({
   selector: 'page-about',
@@ -30,7 +32,7 @@ export class AboutPage {
   public selected = [];
   public anySelected : boolean = false;
   
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
   }
   
  takePicture(){
@@ -46,54 +48,59 @@ export class AboutPage {
     });
   }
 
+  openFoodCreate(){
+    let createModal = this.modalCtrl.create(FoodCreatePage);
+    createModal.present();
+  }
+
   /******FOR SELECTION MODE*****/
   multicheckPress(food){
 
-  if(!this.anySelected){
-    //checks if item is already selected
-    var index = this.selected.indexOf(food);
-    if(index > -1){
-      this.selected.splice(index, 1);
-      food.selected = false;
-    }
-    else {
-      this.selected.push(food);
-      food.selected = true;
-    }
+    if(!this.anySelected){
+      //checks if item is already selected
+      var index = this.selected.indexOf(food);
+      if(index > -1){
+        this.selected.splice(index, 1);
+        food.selected = false;
+      }
+      else {
+        this.selected.push(food);
+        food.selected = true;
+      }
 
-    //checks if any items are selected
-    if(this.selected.length == 0){
-      this.anySelected = false;    
+      //checks if any items are selected
+      if(this.selected.length == 0){
+        this.anySelected = false;    
+      }
+      else {
+        this.anySelected = true;
+      }
     }
-    else {
-      this.anySelected = true;
-    }
-  }
 
   }
 
   multicheckTap(food){
 
-  if(this.anySelected){
-    //checks if item is already selected
-    var index = this.selected.indexOf(food);
-    if(index > -1){
-      this.selected.splice(index, 1);
-      food.selected = false;
-    }
-    else {
-      this.selected.push(food);
-      food.selected = true;
-    }
+    if(this.anySelected){
+      //checks if item is already selected
+      var index = this.selected.indexOf(food);
+      if(index > -1){
+        this.selected.splice(index, 1);
+        food.selected = false;
+      }
+      else {
+        this.selected.push(food);
+        food.selected = true;
+      }
 
-    //checks if any items are selected
-    if(this.selected.length == 0){
-      this.anySelected = false;
+      //checks if any items are selected
+      if(this.selected.length == 0){
+        this.anySelected = false;
+      }
+      else {
+        this.anySelected = true;
+      }      
     }
-    else {
-      this.anySelected = true;
-    }      
-  }
 
   }
 
@@ -110,10 +117,12 @@ export class AboutPage {
     var index = 0;
     for (var item in this.selected){
       while(!matched){
-        if(this.selected[item].title == this.foodthings[index].title)
-            matched = true;
-        else
-            index++;
+        if(this.selected[item].title == this.foodthings[index].title){
+          matched = true;
+        }
+        else {
+          index++;
+        }
       }
       this.foodthings.splice(index, 1);
       index = 0;
