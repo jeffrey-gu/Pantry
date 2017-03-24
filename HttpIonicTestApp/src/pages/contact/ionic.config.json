@@ -1,0 +1,6 @@
+"proxies": [
+    {
+        "path": "/api",
+        "proxyUrl": "http://api.steampowered.com"
+    }
+]
