@@ -46,63 +46,25 @@ export class HomePage {
     }
 
     /******FOR SELECTION MODE*****/
-    multicheckPress(food){
-
-    if(!this.anySelected){
-      //checks if item is already selected
-      var index = this.selected.indexOf(food);
-      if(index > -1){
-        this.selected.splice(index, 1);
-        food.selected = false;
-      }
-      else {
-        this.selected.push(food);
-        food.selected = true;
-      }
-
-      //checks if any items are selected
-      if(this.selected.length == 0){
-        this.anySelected = false;
-      }
-      else {
-        this.anySelected = true;
-      }
-    }
-
-  }
-
   multicheckTap(food){
-
-    if(this.anySelected){
-      //checks if item is already selected
-      var index = this.selected.indexOf(food);
-      if(index > -1){
-        this.selected.splice(index, 1);
-        food.selected = false;
-      }
-      else {
-        this.selected.push(food);
-        food.selected = true;
-      }
-
-      //checks if any items are selected
-      if(this.selected.length == 0){
-        this.anySelected = false;
-      }
-      else {
-        this.anySelected = true;
-      }      
+    //checks if item is already selected
+    var index = this.selected.indexOf(food);
+    if(index > -1){
+      this.selected.splice(index, 1);
+      food.selected = false;
     }
-    
-  }
+    else {
+      this.selected.push(food);
+      food.selected = true;
+    }
 
-  closeSelected(){
-      this.selected = [];
+    //checks if any items are selected
+    if(this.selected.length == 0){
       this.anySelected = false;
-      for (var index in this.foodthings) {
-       this.foodthings[index].selected = false; 
-      }
+    }
+    else {
+      this.anySelected = true;
+    }      
   }
-
 
 }
