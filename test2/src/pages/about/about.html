@@ -4,11 +4,12 @@
    <ion-fab right bottom>
     <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
     <ion-fab-list side="left">
-      <button ion-fab><ion-icon name="camera"></ion-icon></button>
+      <button ion-fab (click)="takePicture()"><ion-icon name="camera"></ion-icon></button>
       <button ion-fab><ion-icon name="md-create"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
    
+  
    <ion-list>
   <ion-item>
     <ion-label>Sort By</ion-label>
@@ -19,92 +20,307 @@
     </ion-select>
   </ion-item>
 </ion-list>
+   
+<img [src]="base64Image" *ngIf="base64Image" />
 
 <ion-grid>
   <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
   </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
+ <ion-row>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
   </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
+ 
+ <ion-row>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
   </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
+ 
+ <ion-row>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
   </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
+ 
+ <ion-row>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
   </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
+ 
+ <ion-row>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Fooooooooooooood
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
   </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
+ 
+ <ion-row>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
   </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
+ 
+ <ion-row>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
   </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
+ 
+ <ion-row>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
   </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
+ 
+ <ion-row>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
   </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-  </ion-row>
-  
-  <ion-row>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
-    <ion-col col-3> <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-col>
+ 
+ <ion-row>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-4>
+      <ion-card>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=9&txt=100%C3%97100&w=100&h=100"/>
+        <ion-card-content>
+            Food
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
   </ion-row>
   
   
 </ion-grid>
+   
 </ion-content>
