@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController, NavParams, ViewController } from 'ionic-angular';
 
 import {Camera} from 'ionic-native';
+
 
 @Component({
   selector: 'page-about',

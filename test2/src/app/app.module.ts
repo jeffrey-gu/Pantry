@@ -17,7 +17,7 @@ import { IonPullupModule } from 'ionic-pullup';
     TabsPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp,{tabsPlacement:'top'}),
+    IonicModule.forRoot(MyApp,{tabsPlacement:'bottom'}),
     IonPullupModule
   ],
   bootstrap: [IonicApp],
