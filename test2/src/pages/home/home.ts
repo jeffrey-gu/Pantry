@@ -9,22 +9,12 @@ import { IonPullUpFooterState} from 'ionic-pullup';
 })
 export class HomePage {
     footerState: IonPullUpFooterState;
-    public foodthings = [{title:"pickle", selected: false},{title:"chicken", selected: false},{title:"bread", selected: false},{title:"eggs", selected: false},
-    {title:"cheese", selected: false}, {title:"apple", selected: false}, {title:"pickle", selected: false},{title:"chicken", selected: false},{title:"bread", selected: false},{title:"eggs", selected: false},
-    {title:"cheese", selected: false}, {title:"apple", selected: false}, {title:"pickle", selected: false},{title:"chicken", selected: false},{title:"bread", selected: false},{title:"eggs", selected: false},
-    {title:"cheese", selected: false}, {title:"apple", selected: false}, {title:"pickle", selected: false},{title:"chicken", selected: false},{title:"bread", selected: false},{title:"eggs", selected: false},
-    {title:"cheese", selected: false}, {title:"apple", selected: false}, {title:"pickle", selected: false},{title:"chicken", selected: false},{title:"bread", selected: false},{title:"eggs", selected: false},
-    {title:"cheese", selected: false}, {title:"apple", selected: false}, {title:"pickle", selected: false},{title:"chicken", selected: false},{title:"bread", selected: false},{title:"eggs", selected: false},
-    {title:"cheese", selected: false}, {title:"apple", selected: false}, {title:"pickle", selected: false},{title:"chicken", selected: false},{title:"bread", selected: false},{title:"eggs", selected: false},
-    {title:"cheese", selected: false}, {title:"apple", selected: false}, {title:"pickle", selected: false},{title:"chicken", selected: false},{title:"bread", selected: false},{title:"eggs", selected: false},
-    {title:"cheese", selected: false}, {title:"apple", selected: false}, {title:"pickle", selected: false},{title:"chicken", selected: false},{title:"bread", selected: false},{title:"eggs", selected: false},
-    {title:"cheese", selected: false}, {title:"apple", selected: false}, {title:"pickle", selected: false},{title:"chicken", selected: false},{title:"bread", selected: false},{title:"eggs", selected: false},
-    {title:"cheese", selected: false}, {title:"apple", selected: false}, {title:"pickle", selected: false},{title:"chicken", selected: false},{title:"bread", selected: false},{title:"eggs", selected: false},
-    {title:"cheese", selected: false}, {title:"apple", selected: false}, {title:"pickle", selected: false},{title:"chicken", selected: false},{title:"bread", selected: false},{title:"eggs", selected: false},
-    {title:"cheese", selected: false}, {title:"apple", selected: false}, {title:"pickle", selected: false},{title:"chicken", selected: false},{title:"bread", selected: false},{title:"eggs", selected: false},
-    {title:"cheese", selected: false}, {title:"apple", selected: false}, {title:"pickle", selected: false},{title:"chicken", selected: false},{title:"bread", selected: false},{title:"eggs", selected: false},
-    {title:"cheese", selected: false}, {title:"apple", selected: false}, {title:"pickle", selected: false},{title:"chicken", selected: false},{title:"bread", selected: false},{title:"eggs", selected: false},
-    {title:"cheese", selected: false}, {title:"apple", selected: false}];
+    public foodthings = [{title:"Apple", imageURL: "https://staticdelivery.nexusmods.com/mods/110/images/74627-0-1459502036.jpg",selected: false},
+                         {title:"Durian", imageURL: "http://foodnsport.com/assets/images/articles/durian600square.jpg",selected: false},
+                         {title:"Banana", imageURL: "http://www.clker.com/cliparts/f/1/d/9/13683029131592382225bananas-icon-md.png",selected: false},
+                         {title:"Watermelon", imageURL: "http://www.clker.com/cliparts/f/1/d/9/13683029131592382225bananas-icon-md.png",selected: false},
+                         {title:"Coconut", imageURL: "http://www.clker.com/cliparts/f/1/d/9/13683029131592382225bananas-icon-md.png",selected: false},
+                         {title:"Fish", imageURL: "http://www.clker.com/cliparts/f/1/d/9/13683029131592382225bananas-icon-md.png",selected: false}];
     public selected = [];
     public anySelected : boolean = false;
 
