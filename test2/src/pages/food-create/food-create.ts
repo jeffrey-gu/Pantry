@@ -8,12 +8,35 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-food-create',
   templateUrl: 'food-create.html'
 })
 export class FoodCreatePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {}
+	public foodArray = [];
+	public inputList = [];
 
+	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+		this.inputList.push({name: "", quantity: undefined, expiry: ""});
+	}
+
+	ionViewWillEnter(){
+		this.foodArray = this.navParams.get('foodArray');
+	}
+
+	dismiss(){
+    	this.viewCtrl.dismiss();
+    	this.inputList = [];
+    }
+
+    addNewRow(){
+    	this.inputList.push({name: "", quantity: undefined, expiry: ""});
+    }
+
+    addFoodItem(){
+    	for(var i in this.inputList){
+    		console.log("name: " + this.inputList[i].name + " quantity: " + this.inputList[i].quantity + " expiry: " + this.inputList[i].expiry);
+    		this.foodArray.push({title: this.inputList[i].name, selected: false});
+    	}
+    }
 
 }
