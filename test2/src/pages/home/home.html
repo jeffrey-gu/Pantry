@@ -1,3 +1,11 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ingredients
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
 <ion-content padding>
   ₍₍ ◝(•̀ㅂ•́)◟ ⁾⁾ gimme some recipes
   
@@ -28,7 +36,7 @@
       <ion-icon name="search" *ngIf="footerState == 0"></ion-icon><ion-icon name="search" *ngIf="footerState == 1"></ion-icon>
     </ion-pullup-tab>
     <ion-toolbar color="primary" (tap)="toggleFooter()">
-      <ion-title *ngIf="footerState == 0"></ion-title><ion-title *ngIf="footerState == 1">Select Ingredients</ion-title>
+      <ion-title *ngIf="footerState == 0"></ion-title><ion-title *ngIf="footerState == 1 && !anySelected">Select Ingredients</ion-title>
       <ion-title *ngIf="anySelected">{{selected.length}} items selected</ion-title>
     </ion-toolbar>
 
