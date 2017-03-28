@@ -1,3 +1,20 @@
-page-home {
 
+
+.full-image {
+  width: 33%;
+   max-width: 80px;
 }
+
+.card-description {
+  text-align: center;
+  word-wrap: break-word;
+  font-size: 75%;
+}
+
+   ion-grid > ion-item.item > div.item-inner > div.input-wrapper > ion-label {
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 0px;
+        margin-left: 0px;
+    }
+    
