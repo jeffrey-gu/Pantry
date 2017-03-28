@@ -17,14 +17,14 @@
 	<ion-grid>
 		<ion-row>
 			<ion-col col-5 class='text-center'>Name</ion-col>
-			<ion-col col-2 class='text-center'>Quantity</ion-col>
+			<ion-col col-2 class='text-center'>Qty</ion-col>
 			<ion-col col-5 class='text-center'>Expiration Date</ion-col>
 		</ion-row>
 		<div *ngFor="let item of inputList">
 			<ion-row>
-				<ion-col col-5 class='text-center'><ion-input type='text' placeholder='Name'[value]='item.name' [(ngModel)]='item.name'></ion-input></ion-col>
-				<ion-col col-2 class='text-center'><ion-input type='number' placeholder='Quantity'[value]='item.quantity' [(ngModel)]='item.quantity'></ion-input></ion-col>
-				<ion-col col-5 class='text-center'><ion-input type='text' placeholder='Expiration Date'[value]='item.expiry' [(ngModel)]='item.expiry'></ion-input></ion-col>
+				<ion-col col-5><ion-item class='input'><ion-input type='text' placeholder='Name'[value]='item.name' [(ngModel)]='item.name'></ion-input></ion-item></ion-col>
+				<ion-col col-2><ion-item class='input'><ion-input type='number' placeholder='Qty'[value]='item.quantity' [(ngModel)]='item.quantity'></ion-input></ion-item></ion-col>
+				<ion-col col-5><ion-item class='input'><ion-input type='text' placeholder='Expiration Date'[value]='item.expiry' [(ngModel)]='item.expiry'></ion-input></ion-item></ion-col>
 			</ion-row>
 		</div>
 		<button ion-button (click)="addNewRow()"><ion-icon name="add-circle"></ion-icon></button>
