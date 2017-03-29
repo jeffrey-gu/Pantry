@@ -38,6 +38,7 @@
     <ion-toolbar color="primary" (tap)="toggleFooter()">
       <ion-title *ngIf="footerState == 0"></ion-title><ion-title *ngIf="footerState == 1 && !anySelected">Select Ingredients</ion-title>
       <ion-title *ngIf="anySelected">{{selected.length}} items selected</ion-title>
+      <div *ngIf="anySelected">yes</div>
     </ion-toolbar>
 
     <ion-content>
