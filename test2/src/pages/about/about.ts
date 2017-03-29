@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
-<<<<<<< HEAD
 import { NavController, ModalController } from 'ionic-angular';
-=======
-
-
 import { NavController, ModalController, NavParams, ViewController } from 'ionic-angular';
->>>>>>> b02630fbc88f4483d21db1b8cb61088b246caaa6
-
 import {Camera} from 'ionic-native';
 import { FoodCreatePage } from '../food-create/food-create';
 import { Food } from '../../providers/food';

@@ -53,4 +53,15 @@ export class HomePage {
     }      
   }
 
+  unselectAll(){
+    for(var item of this.foodService.foodthings){
+      if(item.recipeSelected){
+        item.recipeSelected = false;
+      }
+    }
+    this.selected = [];
+    this.anySelected = false;
+    console.log("Unselecting all");
+  }
+
 }

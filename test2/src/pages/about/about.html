@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf=!anySelected>
   <ion-navbar>
     <ion-title>
       Pantry
@@ -6,17 +6,20 @@
   </ion-navbar>
 </ion-header>
 
-<ion-toolbar color="primary" *ngIf=anySelected>
-  <ion-buttons left>
-    <button ion-button icon-only (click)="closeSelected()"><ion-icon name="close"></ion-icon></button>
-  </ion-buttons>
-  <ion-title>
-    {{selected.length}} items selected
-  </ion-title>
-  <ion-buttons right>
-    <button ion-button icon-only (click)="deleteFood()"><ion-icon name="trash"></ion-icon></button>
-  </ion-buttons>
-</ion-toolbar>
+<ion-header  *ngIf=anySelected>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="closeSelected()"><ion-icon name="close"></ion-icon></button>
+    </ion-buttons>
+    <ion-title>
+      {{selected.length}} items selected
+    </ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="deleteFood()"><ion-icon name="trash"></ion-icon></button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 
 <ion-content padding>
    <ion-fab right bottom>
