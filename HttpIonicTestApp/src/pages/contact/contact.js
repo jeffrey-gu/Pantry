@@ -10,32 +10,46 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
 var ionic_angular_1 = require("ionic-angular");
+var Tesseract = require('tesseract.js');
 var ContactPage = (function () {
-    function ContactPage(navCtrl, modalCtrl) {
+    function ContactPage(navCtrl, modalCtrl, http, alertCtrl) {
         this.navCtrl = navCtrl;
         this.modalCtrl = modalCtrl;
+        this.http = http;
+        this.alertCtrl = alertCtrl;
+        this.http = http;
+        this.alertCtrl = alertCtrl;
     }
     ContactPage.prototype.openModal = function () {
         var modal = this.modalCtrl.create(ModalPage);
         modal.present();
     };
     ContactPage.prototype.sendMessage = function () {
-        console.log('sending message');
-        var mysql = require('mysql');
-        var connection = mysql.createConnection({
-            host: '52.37.159.82:5000',
-            user: 'pantry',
-            password: 'yummytummy',
-            database: 'pantry'
+        var _this = this;
+        this.http.get('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/add')
+            .subscribe(function (res) {
+            var alert = _this.alertCtrl.create({
+                title: "Your HTTP Response:",
+                subTitle: res.json().message,
+                buttons: ["close"]
+            });
+            alert.present();
+            console.log(res.json());
+        }, function (err) {
+            console.log(err);
         });
-        connection.connect();
-        connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
-            if (err)
-                throw err;
-            console.log('The solution is: ', rows[0].solution);
+    };
+    ContactPage.prototype.scanImage = function () {
+        var imagePath = "../../assets/receipt_test2.jpg";
+        Tesseract.recognize(imagePath)
+            .progress(function (p) { console.log('progress', p); })
+            .then(function (result) {
+            console.log('result', result.text);
+            var text = result.text.value;
+            document.getElementById("ocr-results").innerText = result.text;
         });
-        connection.end();
     };
     return ContactPage;
 }());
@@ -44,7 +58,7 @@ ContactPage = __decorate([
         selector: 'page-contact',
         templateUrl: 'contact.html'
     }),
-    __metadata("design:paramtypes", [ionic_angular_1.NavController, ionic_angular_1.ModalController])
+    __metadata("design:paramtypes", [ionic_angular_1.NavController, ionic_angular_1.ModalController, http_1.Http, ionic_angular_1.AlertController])
 ], ContactPage);
 exports.ContactPage = ContactPage;
 var ModalPage = (function () {

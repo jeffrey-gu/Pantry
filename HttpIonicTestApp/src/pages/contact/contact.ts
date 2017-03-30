@@ -1,10 +1,19 @@
 import { Component } from '@angular/core';
 import {Http} from '@angular/http';
-import { Alert } from 'ionic-angular'
-
+// import { Alert } from 'ionic-angular'
 import { NavController, ModalController, Platform, NavParams, ViewController, AlertController } from 'ionic-angular';
 
+// node-tesseract wrapper:
+// import * as Tesseract from 'node-tesseract';
+// import * from '@node/child_process'
+// var child_process = require(child_process)
+
+
+// tesseract.js
+var Tesseract = require('tesseract.js')
+
 declare function require(name:string);
+
 
 
 @Component({
@@ -12,6 +21,7 @@ declare function require(name:string);
   templateUrl: 'contact.html'
 })
 export class ContactPage {
+  // Tesseract:any;
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public http: Http, public alertCtrl: AlertController) {
       this.http = http;
@@ -38,11 +48,11 @@ export class ContactPage {
         //   console.log('The solution is: ', rows[0].solution)
         // })
         // connection.end()
-	    this.http.get('52.37.159.82:5000/api')
+	    this.http.get('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/add')
 	      .subscribe(res => {
               var alert = this.alertCtrl.create({
-                  title: "Your IP Address",
-                  subTitle: res.json().origin,
+                  title: "Your HTTP Response:",
+                  subTitle: res.json().message,
                   buttons: ["close"]
               });
               alert.present();
@@ -51,7 +61,41 @@ export class ContactPage {
 	      	console.log(err);
 	      });
   }
+  scanImage() {
+      var imagePath = "../../assets/receipt_test2.jpg"
 
+//Tesseract.js version:
+      Tesseract.recognize(imagePath)
+         .progress(function  (p) { console.log('progress', p)    })
+         .then(function (result) {
+             console.log('result', result.text)
+             var text:string = result.text.value
+            //  console.log('Is String: ', text instanceof String)
+            //  var alert = this.alertCtrl.create({
+            //      title: "Tesseractjs Results:",
+            //      subTitle: text,
+            //      buttons: ["close"]
+            //  });
+            //  alert.present();
+            document.getElementById("ocr-results").innerText = result.text;
+         })
+
+//Tesseract/node wrapper version:
+    // Tesseract.process(imagePath, function(err, text) {
+    //     if(err) {
+    //         console.error(err)
+    //     }
+    //     else {
+    //         var alert = this.alertCtrl.create({
+    //           title:"Your Tesseract Results:",
+    //           subTitle:text,
+    //           buttons:["close"]
+    //         });
+    //         alert.present();
+    //         console.log(text);
+    //     }
+    // });
+  }
 }
 
 @Component({
