@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, ViewController } from 'ionic-angular';
+import { Food } from '../../providers/food';
 
 /*
   Generated class for the FoodCreate page.
@@ -12,15 +13,10 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
 })
 export class FoodCreatePage {
 
-	public foodArray = [];
 	public inputList = [];
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+	constructor(public navCtrl: NavController, public foodService: Food, public viewCtrl: ViewController) {
 		this.inputList.push({name: "", quantity: undefined, expiry: ""});
-	}
-
-	ionViewWillEnter(){
-		this.foodArray = this.navParams.get('foodArray');
 	}
 
 	dismiss(){
@@ -28,15 +24,23 @@ export class FoodCreatePage {
     	this.inputList = [];
     }
 
-    addNewRow(){
-    	this.inputList.push({name: "", quantity: undefined, expiry: ""});
-    }
+  addNewRow(){
+  	this.inputList.push({name: "", quantity: undefined, expiry: ""});
+  }
 
-    addFoodItem(){
-    	for(var i in this.inputList){
-    		console.log("name: " + this.inputList[i].name + " quantity: " + this.inputList[i].quantity + " expiry: " + this.inputList[i].expiry);
-    		this.foodArray.push({title: this.inputList[i].name, selected: false});
-    	}
-    }
+  addFoodItem(){
+  	for(var i in this.inputList){
+  		console.log("name: " + this.inputList[i].name + " quantity: " + this.inputList[i].quantity + " expiry: " + this.inputList[i].expiry);
+  		this.foodService.foodthings.push({title: this.inputList[i].name, pantrySelected: false, recipeSelected: false});
+  	}
+  	this.viewCtrl.dismiss();
+  }
+
+  removeRow(item){
+    var index = this.inputList.indexOf(item);
+    this.inputList.splice(index,1);
+    console.log("Row removed");
+
+  }
 
 }

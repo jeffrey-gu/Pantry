@@ -6,6 +6,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { FoodCreatePage } from '../pages/food-create/food-create';
 import { TabsPage } from '../pages/tabs/tabs';
+import { Food } from '../providers/food';
 
 import { IonPullupModule } from 'ionic-pullup';
 
@@ -31,7 +32,7 @@ import { IonPullupModule } from 'ionic-pullup';
     FoodCreatePage,
     TabsPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}],
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Food],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {}

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 import { IonPullUpFooterState} from 'ionic-pullup';
+import { Food } from '../../providers/food';
 
 @Component({
   selector: 'page-home',
@@ -15,12 +16,44 @@ export class HomePage {
                          {title:"Watermelon", imageURL: "http://www.clker.com/cliparts/f/1/d/9/13683029131592382225bananas-icon-md.png",selected: false},
                          {title:"Coconut", imageURL: "http://www.clker.com/cliparts/f/1/d/9/13683029131592382225bananas-icon-md.png",selected: false},
                          {title:"Fish", imageURL: "http://www.clker.com/cliparts/f/1/d/9/13683029131592382225bananas-icon-md.png",selected: false}];
+
     public selected = [];
     public anySelected : boolean = false;
 
-    constructor(public navCtrl: NavController) {
+    constructor(public navCtrl: NavController, public foodService: Food) {
       this.footerState = IonPullUpFooterState.Collapsed;
+      
+      interface food {
+        name: string;
+        imageURL: string;
+        selected:  boolean;
+      }
+      
+      function pantryRequestListener () {
+      var pantrycontents: food[] = JSON.parse(this.responseText);
+      //console.log(pantrycontents[0].name);
     }
+
+    var request = new XMLHttpRequest();
+    request.onload = pantryRequestListener;
+    request.open("get", '../testpantry.json', true);
+    request.send();
+    
+    }
+    
+    /******FOR JSON READING******/
+    
+    /*
+    pantryRequestListener () {
+    var pantrycontents: Level[] = JSON.parse(this.responseText);
+      console.log(pantrycontents[0].name);
+    }
+
+    var request = new XMLHttpRequest();
+    request.onload = pantryRequestListener;
+    request.open("get", "testpantry.json", true);
+    request.send();
+    */
 
     /******FOR FOOTER*****/
     footerExpanded() {
@@ -41,11 +74,11 @@ export class HomePage {
     var index = this.selected.indexOf(food);
     if(index > -1){
       this.selected.splice(index, 1);
-      food.selected = false;
+      food.recipeSelected = false;
     }
     else {
       this.selected.push(food);
-      food.selected = true;
+      food.recipeSelected = true;
     }
 
     //checks if any items are selected
@@ -55,6 +88,17 @@ export class HomePage {
     else {
       this.anySelected = true;
     }      
+  }
+
+  unselectAll(){
+    for(var item of this.foodService.foodthings){
+      if(item.recipeSelected){
+        item.recipeSelected = false;
+      }
+    }
+    this.selected = [];
+    this.anySelected = false;
+    console.log("Unselecting all");
   }
 
 }
