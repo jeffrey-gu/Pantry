@@ -61,24 +61,35 @@ export class ContactPage {
 	      	console.log(err);
 	      });
   }
+
   scanImage() {
       var imagePath = "../../assets/receipt_test2.jpg"
 
+      var text = ""
+    //   var alert = this.alertCtrl.create({
+    //       title: "Tesseractjs Results:",
+    //       subTitle: text,
+    //       buttons: ["close"]
+    //   });
 //Tesseract.js version:
       Tesseract.recognize(imagePath)
          .progress(function  (p) { console.log('progress', p)    })
-         .then(function (result) {
-             console.log('result', result.text)
-             var text:string = result.text.value
+         .then((function (result) {
+             console.log('result', result)
+            //  var text:String = result.text.value
+
             //  console.log('Is String: ', text instanceof String)
-            //  var alert = this.alertCtrl.create({
-            //      title: "Tesseractjs Results:",
-            //      subTitle: text,
-            //      buttons: ["close"]
-            //  });
-            //  alert.present();
-            document.getElementById("ocr-results").innerText = result.text;
-         })
+             var alert = this.alertCtrl.create({
+                 title: "Tesseractjs Results:",
+                 subTitle: result.text,
+                 buttons: ["close"]
+             });
+             alert.present();
+            // text = result.text
+            // document.getElementById("ocr-results").innerText = result.text;
+        }).bind(this))
+
+        //   alert.present()
 
 //Tesseract/node wrapper version:
     // Tesseract.process(imagePath, function(err, text) {

@@ -43,13 +43,18 @@ var ContactPage = (function () {
     };
     ContactPage.prototype.scanImage = function () {
         var imagePath = "../../assets/receipt_test2.jpg";
+        var text = "";
         Tesseract.recognize(imagePath)
             .progress(function (p) { console.log('progress', p); })
-            .then(function (result) {
-            console.log('result', result.text);
-            var text = result.text.value;
-            document.getElementById("ocr-results").innerText = result.text;
-        });
+            .then((function (result) {
+            console.log('result', result);
+            var alert = this.alertCtrl.create({
+                title: "Tesseractjs Results:",
+                subTitle: result.text,
+                buttons: ["close"]
+            });
+            alert.present();
+        }).bind(this));
     };
     return ContactPage;
 }());
