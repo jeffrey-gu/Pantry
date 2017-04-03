@@ -30,9 +30,12 @@ export class HomePage {
       }
       
       function pantryRequestListener () {
-      var pantrycontents: food[] = JSON.parse(this.responseText);
-      //console.log(pantrycontents[0].name);
+      var pantrycontents: food[] = JSON.parse(this.responseText)['food'];
+      console.log("one");
+      console.log(pantrycontents[0].name);
+      console.log("two");
     }
+    
 
     var request = new XMLHttpRequest();
     request.onload = pantryRequestListener;
