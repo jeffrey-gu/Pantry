@@ -3,25 +3,24 @@ import {Http} from '@angular/http';
 // import { Alert } from 'ionic-angular'
 import { NavController, ModalController, Platform, NavParams, ViewController, AlertController } from 'ionic-angular';
 
-// node-tesseract wrapper:
+// node-tesseract wrapper imports:
 // import * as Tesseract from 'node-tesseract';
 // import * from '@node/child_process'
 // var child_process = require(child_process)
 
-
 // tesseract.js
 var Tesseract = require('tesseract.js')
+var gm = require('gm')  //graphicsMagick
 
 declare function require(name:string);
 
-
+import scanner from 'receipt-scanner'
 
 @Component({
   selector: 'page-contact',
   templateUrl: 'contact.html'
 })
 export class ContactPage {
-  // Tesseract:any;
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public http: Http, public alertCtrl: AlertController) {
       this.http = http;
@@ -31,23 +30,9 @@ export class ContactPage {
 		let modal = this.modalCtrl.create(ModalPage);
 		modal.present();
   }
+
+  //http requests
   sendMessage() {
-        // console.log('sending message')
-        // var mysql      = require('mysql');
-        // var connection = mysql.createConnection({
-        //     host     : '52.37.159.82:5000',
-        //     user     : 'pantry',
-        //     password : 'yummytummy',
-        //     database : 'pantry'
-        // });
-        //
-        // connection.connect()
-        // connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
-        //   if (err) throw err
-        //
-        //   console.log('The solution is: ', rows[0].solution)
-        // })
-        // connection.end()
 	    this.http.get('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/add')
 	      .subscribe(res => {
               var alert = this.alertCtrl.create({
@@ -62,36 +47,41 @@ export class ContactPage {
 	      });
   }
 
+//receipt scanning
   scanImage() {
       var imagePath = "../../assets/receipt_test2.jpg"
 
-      var text = ""
-    //   var alert = this.alertCtrl.create({
-    //       title: "Tesseractjs Results:",
-    //       subTitle: text,
-    //       buttons: ["close"]
-    //   });
 //Tesseract.js version:
       Tesseract.recognize(imagePath)
          .progress(function  (p) { console.log('progress', p)    })
          .then((function (result) {
              console.log('result', result)
-            //  var text:String = result.text.value
 
-            //  console.log('Is String: ', text instanceof String)
              var alert = this.alertCtrl.create({
                  title: "Tesseractjs Results:",
                  subTitle: result.text,
                  buttons: ["close"]
              });
              alert.present();
-            // text = result.text
-            // document.getElementById("ocr-results").innerText = result.text;
         }).bind(this))
 
-        //   alert.present()
+//PROBLEM CODE USING RECEIPT-SCANNER MODULE:
+    //   scanner(imagePath)
+    //   .parse(function (err, results) {
+    //     if (err) return console.error(err)
+    //     else {
+    //         console.log('result', results)
+    //         var alert = this.alertCtrl.create({
+    //             title: "Tesseractjs Results:",
+    //             subTitle: results.text,
+    //             buttons: ["close"]
+    //         });
+    //         alert.present();
+    //     }
+    //   })
+/////////////////////////////////////////////
 
-//Tesseract/node wrapper version:
+//Tesseract-node wrapper version (never got this to work):
     // Tesseract.process(imagePath, function(err, text) {
     //     if(err) {
     //         console.error(err)
@@ -109,9 +99,10 @@ export class ContactPage {
   }
 }
 
+/********************************************************************/
+
 @Component({
 	template: `
-
 	<ion-header>
 	  <ion-toolbar>
 	    <ion-title>
@@ -124,7 +115,6 @@ export class ContactPage {
 	    </ion-buttons>
 	  </ion-toolbar>
 	</ion-header>
-
 	<ion-content>
 	  <ion-item>
 	    MODAL STUFF

@@ -13,6 +13,7 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var ionic_angular_1 = require("ionic-angular");
 var Tesseract = require('tesseract.js');
+var gm = require('gm');
 var ContactPage = (function () {
     function ContactPage(navCtrl, modalCtrl, http, alertCtrl) {
         this.navCtrl = navCtrl;
@@ -43,7 +44,6 @@ var ContactPage = (function () {
     };
     ContactPage.prototype.scanImage = function () {
         var imagePath = "../../assets/receipt_test2.jpg";
-        var text = "";
         Tesseract.recognize(imagePath)
             .progress(function (p) { console.log('progress', p); })
             .then((function (result) {
@@ -79,7 +79,7 @@ var ModalPage = (function () {
 }());
 ModalPage = __decorate([
     core_1.Component({
-        template: "\n\n\t<ion-header>\n\t  <ion-toolbar>\n\t    <ion-title>\n\t      Modal\n\t    </ion-title>\n\t    <ion-buttons start>\n\t\t    <button ion-button (click)=\"dismiss()\">\n\t\t    \t<ion-icon name=\"md-close\"></ion-icon>\n\t\t    </button>\n\t    </ion-buttons>\n\t  </ion-toolbar>\n\t</ion-header>\n\n\t<ion-content>\n\t  <ion-item>\n\t    MODAL STUFF\n\t  </ion-item>\n\t</ion-content>\n"
+        template: "\n\t<ion-header>\n\t  <ion-toolbar>\n\t    <ion-title>\n\t      Modal\n\t    </ion-title>\n\t    <ion-buttons start>\n\t\t    <button ion-button (click)=\"dismiss()\">\n\t\t    \t<ion-icon name=\"md-close\"></ion-icon>\n\t\t    </button>\n\t    </ion-buttons>\n\t  </ion-toolbar>\n\t</ion-header>\n\t<ion-content>\n\t  <ion-item>\n\t    MODAL STUFF\n\t  </ion-item>\n\t</ion-content>\n"
     }),
     __metadata("design:paramtypes", [ionic_angular_1.Platform,
         ionic_angular_1.NavParams,
