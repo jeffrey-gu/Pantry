@@ -23,7 +23,38 @@ export class HomePage {
 
     ionViewDidLoad(){
       this.setFilteredItems();
+      
+      interface food {
+        name: string;
+        imageURL: string;
+        selected:  boolean;
+      }
+      
+      function pantryRequestListener () {
+      var pantrycontents: food[] = JSON.parse(this.responseText);
+      //console.log(pantrycontents[0].name);
     }
+
+    var request = new XMLHttpRequest();
+    request.onload = pantryRequestListener;
+    request.open("get", '../testpantry.json', true);
+    request.send();
+
+    }
+    
+    /******FOR JSON READING******/
+    
+    /*
+    pantryRequestListener () {
+    var pantrycontents: Level[] = JSON.parse(this.responseText);
+      console.log(pantrycontents[0].name);
+    }
+
+    var request = new XMLHttpRequest();
+    request.onload = pantryRequestListener;
+    request.open("get", "testpantry.json", true);
+    request.send();
+    */
 
     /******FOR FOOTER*****/
     footerExpanded() {
