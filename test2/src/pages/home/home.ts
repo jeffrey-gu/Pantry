@@ -11,11 +11,18 @@ import { Food } from '../../providers/food';
 export class HomePage {
     footerState: IonPullUpFooterState;
 
+    public copyFoodthings = [];
     public selected = [];
     public anySelected : boolean = false;
+    public searchQuery : string = "";
 
     constructor(public navCtrl: NavController, public foodService: Food) {
       this.footerState = IonPullUpFooterState.Collapsed;
+      this.copyFoodthings = this.foodService.foodthings;
+    }
+
+    ionViewDidLoad(){
+      this.setFilteredItems();
     }
 
     /******FOR FOOTER*****/
@@ -51,10 +58,11 @@ export class HomePage {
     else {
       this.anySelected = true;
     }      
+    this.foodService.foodthings = this.copyFoodthings;
   }
 
   unselectAll(){
-    for(var item of this.foodService.foodthings){
+    for(var item of this.copyFoodthings){
       if(item.recipeSelected){
         item.recipeSelected = false;
       }
@@ -62,6 +70,18 @@ export class HomePage {
     this.selected = [];
     this.anySelected = false;
     console.log("Unselecting all");
+    this.foodService.foodthings = this.copyFoodthings;
+  }
+
+  /******FOR FILTERING*****/
+  checkIfEmpty(){
+    if(this.searchQuery == ""){
+      this.copyFoodthings = this.foodService.foodthings;
+    }
+  }
+  setFilteredItems(){
+    console.log("searching");
+    this.copyFoodthings = this.foodService.filterItems(this.searchQuery);
   }
 
 }
