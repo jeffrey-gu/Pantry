@@ -10,18 +10,19 @@ import { Food } from '../../providers/food';
 })
 export class HomePage {
     footerState: IonPullUpFooterState;
-    public foodthings = [{title:"Apple", imageURL: "https://staticdelivery.nexusmods.com/mods/110/images/74627-0-1459502036.jpg",selected: false},
-                         {title:"Durian", imageURL: "http://foodnsport.com/assets/images/articles/durian600square.jpg",selected: false},
-                         {title:"Banana", imageURL: "http://www.clker.com/cliparts/f/1/d/9/13683029131592382225bananas-icon-md.png",selected: false},
-                         {title:"Watermelon", imageURL: "http://www.clker.com/cliparts/f/1/d/9/13683029131592382225bananas-icon-md.png",selected: false},
-                         {title:"Coconut", imageURL: "http://www.clker.com/cliparts/f/1/d/9/13683029131592382225bananas-icon-md.png",selected: false},
-                         {title:"Fish", imageURL: "http://www.clker.com/cliparts/f/1/d/9/13683029131592382225bananas-icon-md.png",selected: false}];
 
+    public copyFoodthings = [];
     public selected = [];
     public anySelected : boolean = false;
+    public searchQuery : string = "";
 
     constructor(public navCtrl: NavController, public foodService: Food) {
       this.footerState = IonPullUpFooterState.Collapsed;
+      this.copyFoodthings = this.foodService.foodthings;
+    }
+
+    ionViewDidLoad(){
+      this.setFilteredItems();
       
       interface food {
         name: string;
@@ -41,7 +42,7 @@ export class HomePage {
     request.onload = pantryRequestListener;
     request.open("get", '../testpantry.json', true);
     request.send();
-    
+
     }
     
     /******FOR JSON READING******/
@@ -91,10 +92,11 @@ export class HomePage {
     else {
       this.anySelected = true;
     }      
+    this.foodService.foodthings = this.copyFoodthings;
   }
 
   unselectAll(){
-    for(var item of this.foodService.foodthings){
+    for(var item of this.copyFoodthings){
       if(item.recipeSelected){
         item.recipeSelected = false;
       }
@@ -102,6 +104,18 @@ export class HomePage {
     this.selected = [];
     this.anySelected = false;
     console.log("Unselecting all");
+    this.foodService.foodthings = this.copyFoodthings;
+  }
+
+  /******FOR FILTERING*****/
+  checkIfEmpty(){
+    if(this.searchQuery == ""){
+      this.copyFoodthings = this.foodService.foodthings;
+    }
+  }
+  setFilteredItems(){
+    console.log("searching");
+    this.copyFoodthings = this.foodService.filterItems(this.searchQuery);
   }
 
 }
