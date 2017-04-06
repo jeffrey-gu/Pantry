@@ -23,6 +23,7 @@ export class Food {
 
       this.http.get("../testpantry.json").map(res => res.json()).subscribe(data => {
           this.foodthings = data.food;
+          console.log(this.foodthings);
         });
     
 		for(var i in this.foodthings){
