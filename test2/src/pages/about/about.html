@@ -33,11 +33,11 @@
   
    <ion-list>
     <ion-item>
-      <ion-label>Sort By</ion-label>
-      <ion-select [(ngModel)]="gaming">
-        <ion-option value="nes">Alphabetical</ion-option>
-        <ion-option value="nes">By Category</ion-option>
-        <ion-option value="nes">Recent</ion-option>
+      <ion-label>Sort</ion-label>
+      <ion-select [(ngModel)]="sort">
+          <ion-option value="alph">Alphabetical</ion-option>
+          <ion-option value="cat">Category</ion-option>
+          <ion-option value="recent">Recent</ion-option>
       </ion-select>
     </ion-item>
   </ion-list>
@@ -47,9 +47,17 @@
   <ion-grid>
     <div *ngFor="let food of foodService.foodthings; let i = index">
       <ion-row *ngIf="i%3 == 0"> 
-        <ion-col col-4  (press)="multicheckPress(food)" (tap)="multicheckTap(food)"><ion-card><ion-item no-lines>{{food.name}}<ion-thumbnail><img src="{{food.imageURL}}"></ion-thumbnail></ion-item><ion-icon item-right name='checkmark-circle' *ngIf=food.pantrySelected></ion-icon></ion-card></ion-col>
-        <ion-col col-4 *ngIf="(i+1) < foodService.foodthings.length" (press)="multicheckPress(foodService.foodthings[i+1])" (tap)="multicheckTap(foodService.foodthings[i+1])"><ion-card><ion-item no-lines>{{foodService.foodthings[i+1].name}}<ion-thumbnail><img src="{{foodService.foodthings[i+1].imageURL}}"></ion-thumbnail></ion-item><ion-icon item-right name='checkmark-circle' *ngIf=foodService.foodthings[i+1].pantrySelected></ion-icon></ion-card></ion-col>
-        <ion-col col-4 *ngIf="(i+2) < foodService.foodthings.length" (press)="multicheckPress(foodService.foodthings[i+2])" (tap)="multicheckTap(foodService.foodthings[i+2])"><ion-card><ion-item no-lines>{{foodService.foodthings[i+2].name}}<ion-thumbnail><img src="{{foodService.foodthings[i+2].imageURL}}"></ion-thumbnail></ion-item><ion-icon item-right name='checkmark-circle' *ngIf=foodService.foodthings[i+2].pantrySelected></ion-icon></ion-card></ion-col>
+        <ion-col col-4  (press)="multicheckPress(food)" (tap)="multicheckTap(food)">
+          <ion-card><ion-item no-lines>{{food.name}}<ion-thumbnail><img src={{food.imageURL}}>
+          </ion-thumbnail></ion-item><ion-icon item-right name='checkmark-circle' *ngIf=food.pantrySelected></ion-icon></ion-card></ion-col>
+       
+        <ion-col col-4 *ngIf="(i+1) < foodService.foodthings.length" (press)="multicheckPress(foodService.foodthings[i+1])" (tap)="multicheckTap(foodService.foodthings[i+1])">
+          <ion-card><ion-item no-lines>{{foodService.foodthings[i+1].name}}
+          <ion-thumbnail><img src={{foodService.foodthings[i+1].imageURL}}></ion-thumbnail></ion-item><ion-icon item-right name='checkmark-circle' *ngIf=foodService.foodthings[i+1].pantrySelected></ion-icon></ion-card></ion-col>
+        
+        <ion-col col-4 *ngIf="(i+2) < foodService.foodthings.length" (press)="multicheckPress(foodService.foodthings[i+2])" (tap)="multicheckTap(foodService.foodthings[i+2])">
+          <ion-card><ion-item no-lines>{{foodService.foodthings[i+2].name}}
+          <ion-thumbnail><img src={{foodService.foodthings[i+2].imageURL}}></ion-thumbnail></ion-item><ion-icon item-right name='checkmark-circle' *ngIf=foodService.foodthings[i+2].pantrySelected></ion-icon></ion-card></ion-col>      
       </ion-row>
     </div>
   </ion-grid>

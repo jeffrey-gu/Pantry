@@ -22,6 +22,28 @@ export class HomePage {
 
     constructor(public navCtrl: NavController, public foodService: Food, public http: Http, public platform: Platform) {
       this.footerState = IonPullUpFooterState.Collapsed;
+      /*
+<<<<<<< HEAD
+      this.copyFoodthings = this.foodService.foodthings;
+      
+      
+      for(var i in this.foodService.foodthings){
+        console.log("begin");
+                console.log(this.foodService.foodthings[i].name);
+              }
+              
+      /*if(this.platform.is('android')){*/
+        this.http.get("../testpantry.json").map(res => res.json()).subscribe(data => {
+          this.recipes = data.food;});
+        /*
+      }
+      else
+        this.http.get("../testpantry.json").map(res => res.json()).subscribe(data => {
+          this.recipes = data.food;
+        });
+        */
+
+
       this.http.get("../testpantry.json").map(res => res.json()).subscribe(data => {
         this.recipes = data.food;
       });
@@ -63,6 +85,7 @@ export class HomePage {
     }
 
     /******FOR RECIPE VIEW******/
+    
     generateRecipes(){
       //make a GET request to populate recipes array
 
