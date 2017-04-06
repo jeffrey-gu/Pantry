@@ -7,6 +7,7 @@
 </ion-header>
 
 <ion-content padding>
+  
   ₍₍ ◝(•̀ㅂ•́)◟ ⁾⁾ gimme some recipes
   
   <ion-list *ngFor="let recipe of recipes">
@@ -44,9 +45,26 @@
     <ion-content>
       <ion-searchbar animated='true' [(ngModel)]="searchQuery" [showCancelButton]="shouldShowCancel" (ionInput)="checkIfEmpty()" (keyup.enter)="setFilteredItems()" (ionCancel)="onCancel($event)">>
       </ion-searchbar>
-      <ion-buttons right>
-        <button ion-button (click)="unselectAll()" [disabled]="!anySelected">UNSELECT ALL</button>
-      </ion-buttons>
+      <ion-row>
+          <ion-col col-7>
+            <ion-row>
+              <ion-item>
+              <ion-label>Sort</ion-label>
+              <ion-select [(ngModel)]="sort">
+                <ion-option value="alph">Alphabetical</ion-option>
+                <ion-option value="cat">Category</ion-option>
+                <ion-option value="recent">Recent</ion-option>
+              </ion-select>
+              </ion-item>
+              </ion-row>
+            </ion-col>
+          <ion-col col-5>
+            <ion-buttons right>
+              <button ion-button (click)="unselectAll()" [disabled]="!anySelected">UNSELECT ALL</button>
+            </ion-buttons>
+          </ion-col>
+      </ion-row>
+      
       
       <ion-grid>
         

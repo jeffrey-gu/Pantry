@@ -7,6 +7,7 @@ import { Platform } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { IonPullUpFooterState} from 'ionic-pullup';
 
+
 /*
   Generated class for the Food provider.
 
