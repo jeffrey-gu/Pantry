@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { IonPullUpFooterState} from 'ionic-pullup';
-import { Http } from '@angular/http';
 
 /*
   Generated class for the Food provider.
@@ -17,7 +17,8 @@ import { Http } from '@angular/http';
 export class Food {
 
 	public foodthings = [];
-	
+	/*
+<<<<<<< HEAD
 	constructor() {
         console.log("check1");
         
@@ -61,7 +62,24 @@ export class Food {
             console.log("check5");
         request.send();
             console.log("constructor complete");
-            
+            */
+	constructor(public http: Http) {
+    interface food {
+        name: string;
+        imageURL: string;
+        recipeSelected: boolean;
+        pantrySelected:  boolean;
+      }
+
+      this.http.get("../testpantry.json").map(res => res.json()).subscribe(data => {
+          this.foodthings = data.food;
+        });
+    
+		for(var i in this.foodthings){
+      console.log(this.foodthings[i].name);
+			this.foodthings[i]['recipeSelected'] = false;
+			this.foodthings[i]['pantrySelected'] = false;
+		}
 	}
 
 	filterItems(searchQuery){
