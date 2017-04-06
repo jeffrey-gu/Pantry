@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
+import { Component } from '@angular/core';
+import { Platform } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
+import { IonPullUpFooterState} from 'ionic-pullup';
+import { Http } from '@angular/http';
+
 /*
   Generated class for the Food provider.
 
@@ -13,31 +19,49 @@ export class Food {
 	public foodthings = [];
 	
 	constructor() {
-    interface food {
-        name: string;
-        imageURL: string;
-        selected:  boolean;
-        recipeSelected: boolean;
-        pantrySelected:  boolean;
-      }
-      
-        function pantryRequestListener () {
-          this.foodthings = JSON.parse(this.responseText)['food'];
-          for(var i in this.foodthings){
-          console.log(this.foodthings[i].name);
+        console.log("check1");
+        
+      interface food {
+          name: string;
+          imageURL: string;
+          recipeSelected: boolean;
+          pantrySelected:  boolean;
         }
-      }
+          console.log("check2");
+          
+         
+          for(var i in this.foodthings){
+                
+                console.log(this.foodthings[i].name);
+                console.log(this.foodthings[i].imageURL);
+                
+                this.foodthings[i]['recipeSelected'] = false;
+                this.foodthings[i]['pantrySelected'] = false;
+              }
+          
+        function pantryRequestListener () {
+              console.log("Parsing!");
+            this.foodthings = JSON.parse(this.responseText)['food'];
+                console.log("parsed!");
+              for(var i in this.foodthings){
+                
+                console.log(this.foodthings[i].name);
+                console.log(this.foodthings[i].imageURL);
+                
+                this.foodthings[i]['recipeSelected'] = false;
+                this.foodthings[i]['pantrySelected'] = false;
+              }
+                  console.log("made foodthings!");
+        }
+            console.log("check3");
        var request = new XMLHttpRequest();
-       
-    request.onload = pantryRequestListener;
-    request.open("get", '../testpantry.json', true);
-    request.send();
-    
-		for(var i in this.foodthings){
-      console.log(this.foodthings[i].name);
-			this.foodthings[i]['recipeSelected'] = false;
-			this.foodthings[i]['pantrySelected'] = false;
-		}
+        request.onload = pantryRequestListener;
+            console.log("check4");
+        request.open("get", '../testpantry.json', true);
+            console.log("check5");
+        request.send();
+            console.log("constructor complete");
+            
 	}
 
 	filterItems(searchQuery){
