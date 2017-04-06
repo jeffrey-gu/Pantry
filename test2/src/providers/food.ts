@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 /*
@@ -12,26 +13,17 @@ export class Food {
 
 	public foodthings = [];
 	
-	constructor() {
+	constructor(public http: Http) {
     interface food {
         name: string;
         imageURL: string;
-        selected:  boolean;
         recipeSelected: boolean;
         pantrySelected:  boolean;
       }
-      
-        function pantryRequestListener () {
-          this.foodthings = JSON.parse(this.responseText)['food'];
-          for(var i in this.foodthings){
-          console.log(this.foodthings[i].name);
-        }
-      }
-       var request = new XMLHttpRequest();
-       
-    request.onload = pantryRequestListener;
-    request.open("get", '../testpantry.json', true);
-    request.send();
+
+      this.http.get("../testpantry.json").map(res => res.json()).subscribe(data => {
+          this.foodthings = data.food;
+        });
     
 		for(var i in this.foodthings){
       console.log(this.foodthings[i].name);

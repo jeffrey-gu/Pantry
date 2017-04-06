@@ -22,37 +22,14 @@ export class HomePage {
 
     constructor(public navCtrl: NavController, public foodService: Food, public http: Http, public platform: Platform) {
       this.footerState = IonPullUpFooterState.Collapsed;
-      this.copyFoodthings = this.foodService.foodthings;
-      if(this.platform.is('android')){
-        this.http.get("../../assets/testpantry.json").map(res => res.json()).subscribe(data => {
-          this.recipes = data.foods;
-        });
-      }
-      else
-        this.http.get("../../assets/testpantry.json").map(res => res.json()).subscribe(data => {
-          this.recipes = data.foods;
-        });
+      this.http.get("../testpantry.json").map(res => res.json()).subscribe(data => {
+        this.recipes = data.food;
+      });
     }
 
     ionViewDidLoad(){
       this.setFilteredItems();
-      
-      interface food {
-        name: string;
-        imageURL: string;
-        selected:  boolean;
-      }
-
-      function pantryRequestListener () {
-      var pantrycontents: food[] = JSON.parse(this.responseText)['food'];
-      
-    }
-
-      // var request = new XMLHttpRequest();
-      // request.onload = pantryRequestListener;
-      // request.open("get", '../testpantry.json', true);
-      // request.send();
-
+      console.log(this.foodService.foodthings);
     }
 
 
@@ -74,6 +51,7 @@ export class HomePage {
     /******FOR FOOTER*****/
     footerExpanded() {
       console.log('Footer expanded!');
+      this.copyFoodthings = this.foodService.foodthings;
     }
 
     footerCollapsed() {
