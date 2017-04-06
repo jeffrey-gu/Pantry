@@ -35,7 +35,7 @@ export class Food {
 	filterItems(searchQuery){
 		console.log("food filtering");
 		return this.foodthings.filter((food) => {
-			return food.title.indexOf(searchQuery.toLowerCase()) > -1;
+			return food.name.indexOf(searchQuery.toLowerCase()) > -1;
 		});
 	}
 
