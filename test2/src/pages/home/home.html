@@ -47,13 +47,13 @@
       <ion-buttons right>
         <button ion-button (click)="unselectAll()" [disabled]="!anySelected">UNSELECT ALL</button>
       </ion-buttons>
-      1
+      
       <ion-grid>
-        2
+        
         
         
         <div *ngFor="let food of copyFoodthings; let i = index">
-          3
+          
           <ion-row *ngIf="i%3 == 0">
             
               <ion-col col-4 (tap)="multicheckTap(food)"><ion-card>
@@ -78,11 +78,11 @@
               </ion-card></ion-col>
               
           </ion-row>
-          4
+          
         </div>
         
-        5
+        
       </ion-grid>
-      6
+      
     </ion-content>
 </ion-pullup>
