@@ -42,12 +42,11 @@ export class HomePage {
         imageURL: string;
         selected:  boolean;
       }
+
+      function pantryRequestListener () {
+      var pantrycontents: food[] = JSON.parse(this.responseText)['food'];
       
-      // function pantryRequestListener () {
-       // var pantrycontents: food[] = JSON.parse(this.responseText);
-       //  console.log(pantrycontents[0].name);
-      //   console.log(this.responseText);
-      // }
+    }
 
       // var request = new XMLHttpRequest();
       // request.onload = pantryRequestListener;

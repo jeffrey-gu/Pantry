@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ingredients
+      Recipes
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -48,6 +48,7 @@
         <button ion-button (click)="unselectAll()" [disabled]="!anySelected">UNSELECT ALL</button>
       </ion-buttons>
       <ion-grid>
+        
         <div *ngFor="let food of copyFoodthings; let i = index">
           <ion-row *ngIf="i%3 == 0"> 
             <ion-col col-4 (tap)="multicheckTap(food)">
