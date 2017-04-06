@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-
+import { Platform } from 'ionic-angular';
 import { NavController } from 'ionic-angular';
 import { IonPullUpFooterState} from 'ionic-pullup';
 import { Food } from '../../providers/food';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'page-home',
@@ -14,11 +16,22 @@ export class HomePage {
     public copyFoodthings = [];
     public selected = [];
     public anySelected : boolean = false;
+    public anyRecipes : boolean = false;
     public searchQuery : string = "";
+    public recipes = [];
 
-    constructor(public navCtrl: NavController, public foodService: Food) {
+    constructor(public navCtrl: NavController, public foodService: Food, public http: Http, public platform: Platform) {
       this.footerState = IonPullUpFooterState.Collapsed;
       this.copyFoodthings = this.foodService.foodthings;
+      if(this.platform.is('android')){
+        this.http.get("../../assets/testpantry.json").map(res => res.json()).subscribe(data => {
+          this.recipes = data.foods;
+        });
+      }
+      else
+        this.http.get("../../assets/testpantry.json").map(res => res.json()).subscribe(data => {
+          this.recipes = data.foods;
+        });
     }
 
     ionViewDidLoad(){
@@ -30,17 +43,20 @@ export class HomePage {
         selected:  boolean;
       }
       
-      function pantryRequestListener () {
-      var pantrycontents: food[] = JSON.parse(this.responseText);
-      //console.log(pantrycontents[0].name);
+      // function pantryRequestListener () {
+       // var pantrycontents: food[] = JSON.parse(this.responseText);
+       //  console.log(pantrycontents[0].name);
+      //   console.log(this.responseText);
+      // }
+
+      // var request = new XMLHttpRequest();
+      // request.onload = pantryRequestListener;
+      // request.open("get", '../testpantry.json', true);
+      // request.send();
+
     }
 
-    var request = new XMLHttpRequest();
-    request.onload = pantryRequestListener;
-    request.open("get", '../testpantry.json', true);
-    request.send();
 
-    }
     
     /******FOR JSON READING******/
     
@@ -69,50 +85,57 @@ export class HomePage {
       this.footerState = this.footerState == IonPullUpFooterState.Collapsed ? IonPullUpFooterState.Expanded : IonPullUpFooterState.Collapsed;
     }
 
+    /******FOR RECIPE VIEW******/
+    generateRecipes(){
+      //make a GET request to populate recipes array
+
+      
+    }
+
     /******FOR SELECTION MODE*****/
-  multicheckTap(food){
-    //checks if item is already selected
-    var index = this.selected.indexOf(food);
-    if(index > -1){
-      this.selected.splice(index, 1);
-      food.recipeSelected = false;
-    }
-    else {
-      this.selected.push(food);
-      food.recipeSelected = true;
+    multicheckTap(food){
+      //checks if item is already selected
+      var index = this.selected.indexOf(food);
+      if(index > -1){
+        this.selected.splice(index, 1);
+        food.recipeSelected = false;
+      }
+      else {
+        this.selected.push(food);
+        food.recipeSelected = true;
+      }
+
+      //checks if any items are selected
+      if(this.selected.length == 0){
+        this.anySelected = false;
+      }
+      else {
+        this.anySelected = true;
+      }      
+      this.foodService.foodthings = this.copyFoodthings;
     }
 
-    //checks if any items are selected
-    if(this.selected.length == 0){
+    unselectAll(){
+      for(var item of this.copyFoodthings){
+        if(item.recipeSelected){
+          item.recipeSelected = false;
+        }
+      }
+      this.selected = [];
       this.anySelected = false;
+      console.log("Unselecting all");
+      this.foodService.foodthings = this.copyFoodthings;
     }
-    else {
-      this.anySelected = true;
-    }      
-    this.foodService.foodthings = this.copyFoodthings;
-  }
 
-  unselectAll(){
-    for(var item of this.copyFoodthings){
-      if(item.recipeSelected){
-        item.recipeSelected = false;
+    /******FOR FILTERING*****/
+    checkIfEmpty(){
+      if(this.searchQuery == ""){
+        this.copyFoodthings = this.foodService.foodthings;
       }
     }
-    this.selected = [];
-    this.anySelected = false;
-    console.log("Unselecting all");
-    this.foodService.foodthings = this.copyFoodthings;
-  }
-
-  /******FOR FILTERING*****/
-  checkIfEmpty(){
-    if(this.searchQuery == ""){
-      this.copyFoodthings = this.foodService.foodthings;
+    setFilteredItems(){
+      console.log("searching");
+      this.copyFoodthings = this.foodService.filterItems(this.searchQuery);
     }
-  }
-  setFilteredItems(){
-    console.log("searching");
-    this.copyFoodthings = this.foodService.filterItems(this.searchQuery);
-  }
 
 }

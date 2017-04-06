@@ -9,15 +9,15 @@
 <ion-content padding>
   ₍₍ ◝(•̀ㅂ•́)◟ ⁾⁾ gimme some recipes
   
-  <ion-list>
+  <ion-list *ngFor="let recipe of recipes">
     
     <ion-item>
       <ion-thumbnail item-left>
-        <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50">
+        <img src={{recipe.imageURL}}>
       </ion-thumbnail>
       <div>
-        <h2>RECIPE NAME</h2>
-        <p>SOMETHING</p>
+        <h2>{{recipe.name}}</h2>
+        <p>{{recipe.selected}}</p>
       </div>
       <div>
         <button ion-button icon-only clear item-right>
@@ -31,7 +31,7 @@
 
 </ion-content>
 
-<ion-pullup (onExpand)="footerExpanded()" (onCollapse)="footerCollapsed()" [(state)]="footerState" padding>
+<ion-pullup (onExpand)="footerExpanded()" (onCollapse)="footerCollapsed()" (onCollapse)="generateRecipes()" [(state)]="footerState" padding>
     <ion-pullup-tab color="primary" [footer]="pullup" (tap)="toggleFooter()">
       <ion-icon name="search" *ngIf="footerState == 0"></ion-icon><ion-icon name="search" *ngIf="footerState == 1"></ion-icon>
     </ion-pullup-tab>
@@ -50,9 +50,24 @@
       <ion-grid>
         <div *ngFor="let food of copyFoodthings; let i = index">
           <ion-row *ngIf="i%3 == 0"> 
-            <ion-col col-4 (tap)="multicheckTap(food)"><ion-card><ion-item no-lines>{{food.title}}<ion-thumbnail><div><img class="full-image" src={{food.imageURL}}></div></ion-thumbnail></ion-item><ion-icon item-right name='checkmark-circle' *ngIf=food.recipeSelected></ion-icon></ion-card></ion-col>
-            <ion-col col-4 *ngIf="(i+1) < copyFoodthings.length" (tap)="multicheckTap(copyFoodthings[i+1])"><ion-card><ion-item no-lines>{{copyFoodthings[i+1].title}}<ion-thumbnail><div><img class="full-image" src={{copyFoodthings[i+1].imageURL}}></div></ion-thumbnail></ion-item><ion-icon item-right name='checkmark-circle' *ngIf=copyFoodthings[i+1].recipeSelected></ion-icon></ion-card></ion-col>
-            <ion-col col-4 *ngIf="(i+2) < copyFoodthings.length" (tap)="multicheckTap(copyFoodthings[i+2])"><ion-card><ion-item no-lines>{{copyFoodthings[i+2].title}}<ion-thumbnail><div><img class="full-image" src={{copyFoodthings[i+2].imageURL}}></div></ion-thumbnail><ion-icon item-right name='checkmark-circle' *ngIf=copyFoodthings[i+2].recipeSelected></ion-icon></ion-card></ion-col>           
+            <ion-col col-4 (tap)="multicheckTap(food)">
+              <ion-card>
+                <ion-item no-lines>{{food.title}}<ion-thumbnail><div><img class="full-image" src={{food.imageURL}}></div></ion-thumbnail></ion-item>
+                <ion-icon item-right name='checkmark-circle' *ngIf=food.recipeSelected></ion-icon>
+              </ion-card>
+            </ion-col>
+            <ion-col col-4 *ngIf="(i+1) < copyFoodthings.length" (tap)="multicheckTap(copyFoodthings[i+1])">
+              <ion-card>
+                <ion-item no-lines>{{copyFoodthings[i+1].title}}<ion-thumbnail><div><img class="full-image" src={{copyFoodthings[i+1].imageURL}}></div></ion-thumbnail></ion-item>
+                <ion-icon item-right name='checkmark-circle' *ngIf=copyFoodthings[i+1].recipeSelected></ion-icon>
+              </ion-card>
+            </ion-col>
+            <ion-col col-4 *ngIf="(i+2) < copyFoodthings.length" (tap)="multicheckTap(copyFoodthings[i+2])">
+              <ion-card>
+                <ion-item no-lines>{{copyFoodthings[i+2].title}}<ion-thumbnail><div><img class="full-image" src={{copyFoodthings[i+2].imageURL}}></div></ion-thumbnail></ion-item>
+                <ion-icon item-right name='checkmark-circle' *ngIf=copyFoodthings[i+2].recipeSelected></ion-icon>
+              </ion-card>
+            </ion-col>           
           </ion-row>
         </div>
       </ion-grid>
