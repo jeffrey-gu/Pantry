@@ -50,7 +50,7 @@
             <ion-row>
               <ion-item tappable>
                 <ion-label class='select-label'>Sort</ion-label>
-                <ion-select class='select-box' [(ngModel)]="sort">
+                <ion-select class='select-box' [(ngModel)]="sort" (ionChange)="foodService.sortPantry()">
                   <ion-option value="alph">Alphabetical</ion-option>
                   <ion-option value="cat">Category</ion-option>
                   <ion-option value="recent">Recent</ion-option>
@@ -67,36 +67,35 @@
       
       
       <ion-grid>
-        
-        
-        
         <div *ngFor="let food of copyFoodthings; let i = index">
-
-          <ion-row *ngIf="i%3 == 0"> 
+          <ion-row *ngIf="i%3 == 0">
+            
             <ion-col col-4 (tap)="multicheckTap(food)">
               <ion-card>
-                <ion-item no-lines>{{food.name}}<ion-thumbnail><div><img class="full-image" src={{food.imageURL}}></div></ion-thumbnail></ion-item>
+                <ion-item no-lines><div class="card-description">{{food.name}}</div>
+                <img class="full-image" src={{food.imageURL}}></ion-item>
                 <ion-icon item-right name='checkmark-circle' *ngIf=food.recipeSelected></ion-icon>
               </ion-card>
             </ion-col>
+            
             <ion-col col-4 *ngIf="(i+1) < copyFoodthings.length" (tap)="multicheckTap(copyFoodthings[i+1])">
               <ion-card>
-                <ion-item no-lines>{{copyFoodthings[i+1].name}}<ion-thumbnail><div><img class="full-image" src={{copyFoodthings[i+1].imageURL}}></div></ion-thumbnail></ion-item>
+                <ion-item no-lines><div class="card-description">{{copyFoodthings[i+1].name}}</div>
+                <img class="full-image" src={{copyFoodthings[i+1].imageURL}}></ion-item>
                 <ion-icon item-right name='checkmark-circle' *ngIf=copyFoodthings[i+1].recipeSelected></ion-icon>
               </ion-card>
             </ion-col>
+            
             <ion-col col-4 *ngIf="(i+2) < copyFoodthings.length" (tap)="multicheckTap(copyFoodthings[i+2])">
               <ion-card>
-                <ion-item no-lines>{{copyFoodthings[i+2].name}}<ion-thumbnail><div><img class="full-image" src={{copyFoodthings[i+2].imageURL}}></div></ion-thumbnail></ion-item>
-
+                <ion-item no-lines><div class="card-description">{{copyFoodthings[i+2].name}}</div>
+                <img class="full-image" src={{copyFoodthings[i+2].imageURL}}></ion-item>
                 <ion-icon item-right name='checkmark-circle' *ngIf=copyFoodthings[i+2].recipeSelected></ion-icon>
-              </ion-card></ion-col>
-              
+              </ion-card>
+            </ion-col>
+            
           </ion-row>
-          
         </div>
-        
-        
       </ion-grid>
       
     </ion-content>

@@ -47,5 +47,28 @@ export class Food {
 			return food.name.indexOf(searchQuery.toLowerCase()) > -1;
 		});
 	}
+  
+  sortPantry(){
+    console.log("boop");
+    
+    this.foodthings = this.foodthings.sort((n1,n2) => {
+        if (n1.name > n2.name) {
+            return 1;
+        }
+    
+        if (n1.name < n2.name) {
+            return -1;
+        }
+    
+        return 0;
+    });
+    console.log("one");
+    for(var i in this.foodthings){
+      console.log(this.foodthings[i].name);
+		}
+    console.log("done");
+		
+  }
+  
 
 }
