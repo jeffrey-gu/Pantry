@@ -22,53 +22,15 @@ export class HomePage {
 
     constructor(public navCtrl: NavController, public foodService: Food, public http: Http, public platform: Platform) {
       this.footerState = IonPullUpFooterState.Collapsed;
-      /*
-<<<<<<< HEAD
-      this.copyFoodthings = this.foodService.foodthings;
-      
-      
-      for(var i in this.foodService.foodthings){
-        console.log("begin");
-                console.log(this.foodService.foodthings[i].name);
-              }
-              
-      /*if(this.platform.is('android')){*/
-        this.http.get("../testpantry.json").map(res => res.json()).subscribe(data => {
-          this.recipes = data.food;});
-        /*
-      }
-      else
-        this.http.get("../testpantry.json").map(res => res.json()).subscribe(data => {
-          this.recipes = data.food;
-        });
-        */
-
 
       this.http.get("../testpantry.json").map(res => res.json()).subscribe(data => {
-        this.recipes = data.food;
-      });
+        this.recipes = data.food;});
     }
 
     ionViewDidLoad(){
       this.setFilteredItems();
       console.log(this.foodService.foodthings);
     }
-
-
-    
-    /******FOR JSON READING******/
-    
-    /*
-    pantryRequestListener () {
-    var pantrycontents: Level[] = JSON.parse(this.responseText);
-      console.log(pantrycontents[0].name);
-    }
-
-    var request = new XMLHttpRequest();
-    request.onload = pantryRequestListener;
-    request.open("get", "testpantry.json", true);
-    request.send();
-    */
 
     /******FOR FOOTER*****/
     footerExpanded() {

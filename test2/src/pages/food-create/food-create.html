@@ -16,16 +16,12 @@
 <ion-content padding>
 	<ion-grid>
 		<ion-row>
-			<ion-col col-4 class='text-center'>Name</ion-col>
-			<ion-col col-2 class='text-center'>Qty</ion-col>
-			<ion-col col-5 class='text-center'>Expiration Date</ion-col>
+			<ion-col col-11 class='text-center'>Name</ion-col>
 			<ion-col col-1></ion-col>
 		</ion-row>
 		<div *ngFor="let item of inputList">
 			<ion-row>
-				<ion-col col-4><ion-item class='input'><ion-input type='text' placeholder='Name'[value]='item.name' [(ngModel)]='item.name'></ion-input></ion-item></ion-col>
-				<ion-col col-2><ion-item class='input'><ion-input type='number' placeholder='Qty'[value]='item.quantity' [(ngModel)]='item.quantity'></ion-input></ion-item></ion-col>
-				<ion-col col-5><ion-item class='input'><ion-input type='text' placeholder='Expiration Date'[value]='item.expiry' [(ngModel)]='item.expiry'></ion-input></ion-item></ion-col>
+				<ion-col col-11><ion-item class='input'><ion-input type='text' placeholder='Name'[value]='item.name' [(ngModel)]='item.name'></ion-input></ion-item></ion-col>
 				<ion-col col-1><ion-icon *ngIf='inputList.length > 1' class='col-icon' color='danger' name='close-circle' (click)='removeRow(item)'></ion-icon></ion-col>
 			</ion-row>
 		</div>

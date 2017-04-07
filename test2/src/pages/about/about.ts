@@ -3,6 +3,8 @@ import { NavController, ModalController } from 'ionic-angular';
 import { Camera } from 'ionic-native';
 import { FoodCreatePage } from '../food-create/food-create';
 import { Food } from '../../providers/food';
+import { Http, Headers, RequestOptions } from '@angular/http';
+import 'rxjs/add/operator/map';
 
 
 @Component({
@@ -14,7 +16,7 @@ export class AboutPage {
   public selected = [];
   public anySelected : boolean = false;
   
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public foodService: Food) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public foodService: Food, public http: Http) {
   }
   
  takePicture(){
@@ -25,6 +27,21 @@ export class AboutPage {
     }).then((imageData) => {
       // imageData is a base64 encoded string
         this.base64Image = "data:image/jpeg;base64," + imageData;
+        var dataImage = JSON.stringify({image: this.base64Image});
+        
+        let headers = new Headers({
+          'Content-Type': 'application/json'
+        });
+         let options = new RequestOptions({
+           headers: headers
+         });
+          this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/receipt', dataImage, options)
+          .map(res => res.json())
+        .subscribe(data => {
+           alert(data.json().message);
+        }, error => {
+            console.log("Oooops!");
+        });
     }, (err) => {
         console.log(err);
     });
@@ -99,13 +116,29 @@ export class AboutPage {
     var index = 0;
     for (var item in this.selected){
       while(!matched){
-        if(this.selected[item].title == this.foodService.foodthings[index].title){
+        if(this.selected[item].name == this.foodService.foodthings[index].name){
           matched = true;
         }
         else {
           index++;
         }
       }
+
+      var array = JSON.stringify({data: this.selected});
+      let headers = new Headers({
+          'Content-Type': 'application/json'
+        });
+         let options = new RequestOptions({
+           headers: headers
+         });
+          this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/deleteItem', array, options)
+          .map(res => res.json())
+        .subscribe(data => {
+           alert(data.json().message);
+        }, error => {
+            console.log("Oooops!");
+        });
+
       this.foodService.foodthings.splice(index, 1);
       index = 0;
       matched = false;
