@@ -33,13 +33,13 @@
 </ion-content>
 
 <ion-pullup (onExpand)="footerExpanded()" (onCollapse)="footerCollapsed()" (onCollapse)="generateRecipes()" [(state)]="footerState" padding>
-    <ion-pullup-tab color="primary" [footer]="pullup" (tap)="toggleFooter()">
+    <ion-pullup-tab class='pullup-tab' color="primary" [footer]="pullup" (tap)="toggleFooter()">
       <ion-icon name="search" *ngIf="footerState == 0"></ion-icon><ion-icon name="search" *ngIf="footerState == 1"></ion-icon>
     </ion-pullup-tab>
-    <ion-toolbar color="primary" (tap)="toggleFooter()">
+    <ion-toolbar class='pullup-toolbar' color="primary" (tap)="toggleFooter()">
       <ion-title *ngIf="footerState == 0"></ion-title><ion-title *ngIf="footerState == 1 && !anySelected">Select Ingredients</ion-title>
       <ion-title *ngIf="anySelected">{{selected.length}} items selected</ion-title>
-      <div *ngIf="anySelected">yes</div>
+      <!-- <div *ngIf="anySelected"><span *ngFor="let item of selected">{{item.name}}&nbsp;</span></div> -->
     </ion-toolbar>
 
     <ion-content>

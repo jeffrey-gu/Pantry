@@ -1,13 +1,13 @@
-
-
 .full-image {
   display: block;
   max-width:55%;
   height: auto;
 }
+
 .no-padding {
-padding: 0 !important;
+  padding: 0 !important;
 }
+
 .card-description {
   text-align: center;
   word-wrap: break-word;
@@ -15,15 +15,24 @@ padding: 0 !important;
 }
 
 ion-grid > ion-item.item > div.item-inner > div.input-wrapper > ion-label {
-        margin-top: 0px;
-        margin-right: 0px;
-        margin-bottom: 0px;
-        margin-left: 0px;
-    }
-    
-    ion-label > ion-row > ion-col {
-        padding-top: 4px;
-        padding-right: 5px;
-        padding-bottom: 0px;
-        padding-left: 5px;
-    }
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+}
+
+ion-label > ion-row > ion-col {
+    padding-top: 4px;
+    padding-right: 5px;
+    padding-bottom: 0px;
+    padding-left: 5px;
+}
+
+.pullup-tab {
+  width: 96px !important;
+  padding-top: 5px;
+}
+
+.pullup-toolbar {
+  min-height: 36px !important;
+}
