@@ -31,7 +31,7 @@ export class Food {
       this.http.get('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/fetchPantry')
       .map(res => res.json())
       .subscribe(data => {
-          alert(data.message);
+          console.log(data.message);
         });
     
 		for(var i in this.foodthings){

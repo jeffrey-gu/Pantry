@@ -47,7 +47,7 @@ export class FoodCreatePage {
           this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/addItem', array, options)
           .map(res => res.json())
         .subscribe(data => {
-           alert(data.json().message);
+           console.log(data.json().message);
         }, error => {
             console.log("Oooops!");
         });

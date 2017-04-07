@@ -22,8 +22,8 @@ export class AboutPage {
  takePicture(){
     Camera.getPicture({
         destinationType: Camera.DestinationType.DATA_URL,
-        targetWidth: 1000,
-        targetHeight: 1000
+        targetWidth: 600,
+        targetHeight: 900
     }).then((imageData) => {
       // imageData is a base64 encoded string
         this.base64Image = "data:image/jpeg;base64," + imageData;
@@ -38,7 +38,7 @@ export class AboutPage {
           this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/receipt', dataImage, options)
           .map(res => res.json())
         .subscribe(data => {
-           alert(data.json().message);
+           console.log(data.json().message);
         }, error => {
             console.log("Oooops!");
         });
@@ -134,7 +134,7 @@ export class AboutPage {
           this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/deleteItem', array, options)
           .map(res => res.json())
         .subscribe(data => {
-           alert(data.json().message);
+           console.log(data.json().message);
         }, error => {
             console.log("Oooops!");
         });
