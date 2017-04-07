@@ -48,13 +48,13 @@
       <ion-row>
           <ion-col col-7>
             <ion-row>
-              <ion-item>
-              <ion-label>Sort</ion-label>
-              <ion-select [(ngModel)]="sort">
-                <ion-option value="alph">Alphabetical</ion-option>
-                <ion-option value="cat">Category</ion-option>
-                <ion-option value="recent">Recent</ion-option>
-              </ion-select>
+              <ion-item tappable>
+                <ion-label class='select-label'>Sort</ion-label>
+                <ion-select class='select-box' [(ngModel)]="sort">
+                  <ion-option value="alph">Alphabetical</ion-option>
+                  <ion-option value="cat">Category</ion-option>
+                  <ion-option value="recent">Recent</ion-option>
+                </ion-select>
               </ion-item>
               </ion-row>
             </ion-col>
