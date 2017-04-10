@@ -5,31 +5,44 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-
 <ion-content padding>
-  
+  <div>
+    <ion-segment [(ngModel)]="recipeView">
+      <ion-segment-button value="default">
+        Search
+      </ion-segment-button>
+      <ion-segment-button value="recent">
+        Recent
+      </ion-segment-button>
+      <ion-segment-button value="favorites">
+        Favorites
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <br>
   ₍₍ ◝(•̀ㅂ•́)◟ ⁾⁾ gimme some recipes
-  
-  <ion-list *ngFor="let recipe of recipes">
-    
-    <ion-item>
-      <ion-thumbnail item-left>
-        <img src={{recipe.imageURL}}>
-      </ion-thumbnail>
-      <div>
-        <h2>{{recipe.name}}</h2>
-        <p>{{recipe.selected}}</p>
+  <div [ngSwitch]="recipeView">
+    <div *ngSwitchCase="'default'">
+      <ion-list *ngFor="let recipe of recipes">
+        <ion-row onclick="echo()">
+        <ion-item>
+          <ion-thumbnail item-left>
+            <img src={{recipe.image}}>
+          </ion-thumbnail>
+          <div>
+            <h2>{{recipe.title}}</h2>
+            <!--<p>{{recipe.selected}}</p>-->
+          </div>
+          <div>
+            <button ion-button icon-only clear item-right>
+            <ion-icon name="star-outline"></ion-icon>
+            </button>
+          </div>
+        </ion-item>
+        </ion-row>
+      </ion-list>
       </div>
-      <div>
-        <button ion-button icon-only clear item-right>
-        <ion-icon name="star-outline"></ion-icon>
-        </button>
-      </div>
-    </ion-item>
-    
-    
-  </ion-list>
-
+    </div>
 </ion-content>
 
 <ion-pullup (onExpand)="footerExpanded()" (onCollapse)="footerCollapsed()" (onCollapse)="generateRecipes()" [(state)]="footerState" padding>
@@ -50,9 +63,9 @@
             <ion-row>
               <ion-item tappable>
                 <ion-label class='select-label'>Sort</ion-label>
-                <ion-select class='select-box' [(ngModel)]="sort" (ionChange)="foodService.sortPantry()">
-                  <ion-option value="alph">Alphabetical</ion-option>
-                  <ion-option value="cat">Category</ion-option>
+                <ion-select class='select-box' [(ngModel)]="sort" (ionChange)="foodService.sortPantry(sort)">
+                  <ion-option value="alphabetical">Alphabetical</ion-option>
+                  <ion-option value="category">Category</ion-option>
                   <ion-option value="recent">Recent</ion-option>
                 </ion-select>
               </ion-item>
