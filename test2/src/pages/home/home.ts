@@ -19,13 +19,20 @@ export class HomePage {
     public anyRecipes : boolean = false;
     public searchQuery : string = "";
     public recipes = [];
+    
 
     constructor(public navCtrl: NavController, public foodService: Food, public http: Http, public platform: Platform) {
       this.footerState = IonPullUpFooterState.Collapsed;
       
-
+      this.http.get('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/loguser')
+      .map(res => res.json()).subscribe(data => {
+        this.recipes=data.message2;
+        console.log("recipes read!");
+        });
+/*
       this.http.get("../testrecipes.json").map(res => res.json()).subscribe(data => {
         this.recipes = data;});
+      */
     }
 
     ionViewDidLoad(){

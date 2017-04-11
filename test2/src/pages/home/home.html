@@ -24,16 +24,17 @@
   <div [ngSwitch]="recipeView">
     <div *ngSwitchCase="'default'">
       <ion-list *ngFor="let recipe of recipes">
-        <ion-row onclick="echo()">
+        <ion-row (click)="echo()">
         <ion-item>
           <ion-thumbnail item-left>
-            <img src={{recipe.image}}>
+            <img src={{recipe.image_link}}>
           </ion-thumbnail>
           <div>
-            <h2>{{recipe.title}}</h2>
+            <h2>{{recipe.name}}</h2>
             <!--<p>{{recipe.selected}}</p>-->
           </div>
           <div>
+            
             <button ion-button icon-only clear item-right>
             <ion-icon name="star-outline"></ion-icon>
             </button>
@@ -44,72 +45,75 @@
       </div>
     </div>
 </ion-content>
-
-<ion-pullup (onExpand)="footerExpanded()" (onCollapse)="footerCollapsed()" (onCollapse)="generateRecipes()" [(state)]="footerState" padding>
-    <ion-pullup-tab class='pullup-tab' color="primary" [footer]="pullup" (tap)="toggleFooter()">
-      <ion-icon name="search" *ngIf="footerState == 0"></ion-icon><ion-icon name="search" *ngIf="footerState == 1"></ion-icon>
-    </ion-pullup-tab>
-    <ion-toolbar class='pullup-toolbar' color="primary" (tap)="toggleFooter()">
-      <ion-title *ngIf="footerState == 0"></ion-title><ion-title *ngIf="footerState == 1 && !anySelected">Select Ingredients</ion-title>
-      <ion-title *ngIf="anySelected">{{selected.length}} items selected</ion-title>
-      <div *ngIf="anySelected"><span *ngFor="let item of selected">{{item.name}}&nbsp;</span></div>
-    </ion-toolbar>
-
-    <ion-content>
-      <ion-searchbar animated='true' [(ngModel)]="searchQuery" [showCancelButton]="shouldShowCancel" (ionInput)="checkIfEmpty()" (keyup.enter)="setFilteredItems()" (ionCancel)="onCancel($event)">>
-      </ion-searchbar>
-      <ion-row>
-          <ion-col col-7>
-            <ion-row>
-              <ion-item tappable>
-                <ion-label class='select-label'>Sort</ion-label>
-                <ion-select class='select-box' [(ngModel)]="sort" (ionChange)="foodService.sortPantry(sort)">
-                  <ion-option value="alphabetical">Alphabetical</ion-option>
-                  <ion-option value="category">Category</ion-option>
-                  <ion-option value="recent">Recent</ion-option>
-                </ion-select>
-              </ion-item>
-              </ion-row>
-            </ion-col>
-          <ion-col col-5>
-            <ion-buttons right>
-              <button ion-button (click)="unselectAll()" [disabled]="!anySelected">UNSELECT ALL</button>
-            </ion-buttons>
-          </ion-col>
-      </ion-row>
-      
-      
-      <ion-grid>
-        <div *ngFor="let food of copyFoodthings; let i = index">
-          <ion-row *ngIf="i%3 == 0">
-            
-            <ion-col col-4 (tap)="multicheckTap(food)">
-              <ion-card>
-                <ion-item no-lines><div class="card-description">{{food.name}}</div>
-                <img class="full-image" src={{food.imageURL}}></ion-item>
-                <ion-icon item-right name='checkmark-circle' *ngIf=food.recipeSelected></ion-icon>
-              </ion-card>
-            </ion-col>
-            
-            <ion-col col-4 *ngIf="(i+1) < copyFoodthings.length" (tap)="multicheckTap(copyFoodthings[i+1])">
-              <ion-card>
-                <ion-item no-lines><div class="card-description">{{copyFoodthings[i+1].name}}</div>
-                <img class="full-image" src={{copyFoodthings[i+1].imageURL}}></ion-item>
-                <ion-icon item-right name='checkmark-circle' *ngIf=copyFoodthings[i+1].recipeSelected></ion-icon>
-              </ion-card>
-            </ion-col>
-            
-            <ion-col col-4 *ngIf="(i+2) < copyFoodthings.length" (tap)="multicheckTap(copyFoodthings[i+2])">
-              <ion-card>
-                <ion-item no-lines><div class="card-description">{{copyFoodthings[i+2].name}}</div>
-                <img class="full-image" src={{copyFoodthings[i+2].imageURL}}></ion-item>
-                <ion-icon item-right name='checkmark-circle' *ngIf=copyFoodthings[i+2].recipeSelected></ion-icon>
-              </ion-card>
-            </ion-col>
-            
+<div [ngSwitch]="recipeView">
+    <div *ngSwitchCase="'default'">
+    <ion-pullup (onExpand)="footerExpanded()" (onCollapse)="footerCollapsed()" (onCollapse)="generateRecipes()" [(state)]="footerState" padding>
+        <ion-pullup-tab class='pullup-tab' color="primary" [footer]="pullup" (tap)="toggleFooter()">
+          <ion-icon name="search" *ngIf="footerState == 0"></ion-icon><ion-icon name="search" *ngIf="footerState == 1"></ion-icon>
+        </ion-pullup-tab>
+        <ion-toolbar class='pullup-toolbar' color="primary" (tap)="toggleFooter()">
+          <ion-title *ngIf="footerState == 0"></ion-title><ion-title *ngIf="footerState == 1 && !anySelected">Select Ingredients</ion-title>
+          <ion-title *ngIf="anySelected">{{selected.length}} items selected</ion-title>
+          <div *ngIf="anySelected"><span *ngFor="let item of selected">{{item.name}}&nbsp;</span></div>
+        </ion-toolbar>
+    
+        <ion-content>
+          <ion-searchbar animated='true' [(ngModel)]="searchQuery" [showCancelButton]="shouldShowCancel" (ionInput)="checkIfEmpty()" (keyup.enter)="setFilteredItems()" (ionCancel)="onCancel($event)">>
+          </ion-searchbar>
+          <ion-row>
+              <ion-col col-7>
+                <ion-row>
+                  <ion-item tappable>
+                    <ion-label class='select-label'>Sort</ion-label>
+                    <ion-select class='select-box' [(ngModel)]="sort" (ionChange)="foodService.sortPantry(sort)">
+                      <ion-option value="alphabetical">Alphabetical</ion-option>
+                      <ion-option value="category">Category</ion-option>
+                      <ion-option value="recent">Recent</ion-option>
+                    </ion-select>
+                  </ion-item>
+                  </ion-row>
+                </ion-col>
+              <ion-col col-5>
+                <ion-buttons right>
+                  <button ion-button (click)="unselectAll()" [disabled]="!anySelected">UNSELECT ALL</button>
+                </ion-buttons>
+              </ion-col>
           </ion-row>
-        </div>
-      </ion-grid>
-      
-    </ion-content>
-</ion-pullup>
+          
+          
+          <ion-grid>
+            <div *ngFor="let food of copyFoodthings; let i = index">
+              <ion-row *ngIf="i%3 == 0">
+                
+                <ion-col col-4 (tap)="multicheckTap(food)">
+                  <ion-card>
+                    <ion-item no-lines><div class="card-description">{{food.name}}</div>
+                    <img class="full-image" src={{food.imageURL}}></ion-item>
+                    <ion-icon item-right name='checkmark-circle' *ngIf=food.recipeSelected></ion-icon>
+                  </ion-card>
+                </ion-col>
+                
+                <ion-col col-4 *ngIf="(i+1) < copyFoodthings.length" (tap)="multicheckTap(copyFoodthings[i+1])">
+                  <ion-card>
+                    <ion-item no-lines><div class="card-description">{{copyFoodthings[i+1].name}}</div>
+                    <img class="full-image" src={{copyFoodthings[i+1].imageURL}}></ion-item>
+                    <ion-icon item-right name='checkmark-circle' *ngIf=copyFoodthings[i+1].recipeSelected></ion-icon>
+                  </ion-card>
+                </ion-col>
+                
+                <ion-col col-4 *ngIf="(i+2) < copyFoodthings.length" (tap)="multicheckTap(copyFoodthings[i+2])">
+                  <ion-card>
+                    <ion-item no-lines><div class="card-description">{{copyFoodthings[i+2].name}}</div>
+                    <img class="full-image" src={{copyFoodthings[i+2].imageURL}}></ion-item>
+                    <ion-icon item-right name='checkmark-circle' *ngIf=copyFoodthings[i+2].recipeSelected></ion-icon>
+                  </ion-card>
+                </ion-col>
+                
+              </ion-row>
+            </div>
+          </ion-grid>
+          
+        </ion-content>
+    </ion-pullup>
+    </div>
+</div>
