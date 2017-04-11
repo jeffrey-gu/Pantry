@@ -12,7 +12,9 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Food {
 
-	public foodthings = [];
+	public foodthings = [];      //food items from pantry
+  public useInRecipe = [];     //food items that are used to generate recipes, format: {name: "food"}
+  public recentlyUsed = [];    //items recently used in recipes, format: {name: "food"}
 
 	constructor(public http: Http) {
     interface food {
@@ -40,6 +42,17 @@ export class Food {
 			this.foodthings[i]['pantrySelected'] = false;
 		}
 	}
+
+  updateRecentlyUsed(){
+    for(var item of this.useInRecipe){
+      if(recentlyUsed)
+      this.recentlyUsed.push(item);
+    }
+
+    while(this.recentlyUsed.length > 25){
+      this.recentlyUsed.shift();
+    }
+  }
 
 	filterItems(searchQuery){
 		console.log("food filtering");

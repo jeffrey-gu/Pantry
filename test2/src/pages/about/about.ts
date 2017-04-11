@@ -22,8 +22,8 @@ export class AboutPage {
  takePicture(){
     Camera.getPicture({
         destinationType: Camera.DestinationType.DATA_URL,
-        targetWidth: 600,
-        targetHeight: 900
+        targetWidth: 750,
+        targetHeight: 1000
     }).then((imageData) => {
       // imageData is a base64 encoded string
         this.base64Image = "data:image/jpeg;base64," + imageData;

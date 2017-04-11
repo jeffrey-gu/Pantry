@@ -37,7 +37,8 @@ export class FoodCreatePage {
   	}
 
     alert(this.inputList);
-    var array = JSON.stringify({data: 'message'});
+    var array = JSON.stringify(this.inputList);
+    console.log(array);
       let headers = new Headers({
           'Content-Type': 'application/json'
         });
@@ -47,7 +48,7 @@ export class FoodCreatePage {
           this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/addItem', array, options)
           .map(res => res.json())
         .subscribe(data => {
-           console.log(data.json().message);
+           console.log(data.message);
         }, error => {
             console.log("Oooops!");
         });
