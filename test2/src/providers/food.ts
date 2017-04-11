@@ -61,26 +61,33 @@ export class Food {
 		});
 	}
   
-  sortPantry(){
+  sortPantry(sort){
     console.log("boop");
-    
-    this.foodthings = this.foodthings.sort((n1,n2) => {
-        if (n1.name > n2.name) {
-            return 1;
-        }
-    
-        if (n1.name < n2.name) {
-            return -1;
-        }
-    
-        return 0;
-    });
-    console.log("one");
+    console.log(sort);
+    if(sort=="alphabetical"){
+      this.foodthings = this.foodthings.sort((n1,n2) => {
+          if (n1.name > n2.name) {
+              return 1;
+          }
+          if (n1.name < n2.name) {
+              return -1;
+          }
+          return 0;
+      });  
+    }
+    else if (sort=="category"){
+      console.log("catergory ssort not yet!");
+    }
+    else if (sort=="recent"){
+      console.log("recent sort not yet done!");
+    }
+    else{
+      console.log("lol how did you get here")
+    }
     for(var i in this.foodthings){
       console.log(this.foodthings[i].name);
 		}
-    console.log("done");
-		
+    console.log("done sorting!  Enjoy your life!");
   }
   
 

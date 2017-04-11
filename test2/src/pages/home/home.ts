@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 })
 export class HomePage {
     footerState: IonPullUpFooterState;
-
+    recipeView: string = "default";
     public copyFoodthings = [];
     public selected = [];
     public anySelected : boolean = false;
@@ -22,9 +22,10 @@ export class HomePage {
 
     constructor(public navCtrl: NavController, public foodService: Food, public http: Http, public platform: Platform) {
       this.footerState = IonPullUpFooterState.Collapsed;
+      
 
-      this.http.get("../testpantry.json").map(res => res.json()).subscribe(data => {
-        this.recipes = data.food;});
+      this.http.get("../testrecipes.json").map(res => res.json()).subscribe(data => {
+        this.recipes = data;});
     }
 
     ionViewDidLoad(){
@@ -98,6 +99,10 @@ export class HomePage {
     setFilteredItems(){
       console.log("searching");
       this.copyFoodthings = this.foodService.filterItems(this.searchQuery);
+    }
+    
+    echo(){
+      console.log("echoooooooooooooo");
     }
 
 }
