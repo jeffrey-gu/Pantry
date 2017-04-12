@@ -33,7 +33,7 @@ export class FoodCreatePage {
   addFoodItem(){
   	for(var i in this.inputList){
   		console.log("name: " + this.inputList[i].name);
-  		this.foodService.foodthings.push({name: this.inputList[i].name, pantrySelected: false, recipeSelected: false});
+  //		this.foodService.foodthings.push({name: this.inputList[i].name, pantrySelected: false, recipeSelected: false});
   	}
 
     alert(this.inputList);
@@ -45,10 +45,12 @@ export class FoodCreatePage {
          let options = new RequestOptions({
            headers: headers
          });
-          this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/addItem', array, options)
+          this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/add', array, options)
           .map(res => res.json())
         .subscribe(data => {
-           console.log(data.message);
+          console.log(data.message);
+          this.foodService.foodthings.push(data.message);
+          console.log(this.foodService.foodthings);
         }, error => {
             console.log("Oooops!");
         });
