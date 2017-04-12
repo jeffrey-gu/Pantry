@@ -20,11 +20,12 @@
     </ion-segment>
   </div>
   <br>
-  ₍₍ ◝(•̀ㅂ•́)◟ ⁾⁾ gimme some recipes
+  ₍₍ ◝(•̀ㅂ•́)◟ ⁾⁾ gimme some recipes!
+  <button [navPush]="recipeDetail">Recipe</button>
   <div [ngSwitch]="recipeView">
     <div *ngSwitchCase="'default'">
       <ion-list *ngFor="let recipe of recipes">
-        <ion-row (click)="echo()">
+        <ion-row (click)="echo(recipe)" [navPush] = "recipeDetail">
         <ion-item>
           <ion-thumbnail item-left>
             <img src={{recipe.image_link}}>
@@ -34,10 +35,11 @@
             <!--<p>{{recipe.selected}}</p>-->
           </div>
           <div>
-            
-            <button ion-button icon-only clear item-right>
-            <ion-icon name="star-outline"></ion-icon>
-            </button>
+            <ion-row>
+            <ion-badge color="secondary">Used:  {{recipe.numUsedIngredients}} </ion-badge>
+            <ion-badge color="danger">Missing:  {{recipe.numMissedIngredients}}</ion-badge> </ion-row>
+            <button ion-button icon-only clear item-right><ion-icon name="star-outline"></ion-icon></button>
+           
           </div>
         </ion-item>
         </ion-row>
