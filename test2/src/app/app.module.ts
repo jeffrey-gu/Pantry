@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { FoodCreatePage } from '../pages/food-create/food-create';
 import { TabsPage } from '../pages/tabs/tabs';
 import { Food } from '../providers/food';
+import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { IonPullupModule } from 'ionic-pullup';
 
@@ -32,7 +33,7 @@ import { IonPullupModule } from 'ionic-pullup';
     FoodCreatePage,
     TabsPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Food],
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Food, SplashScreen],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {}
