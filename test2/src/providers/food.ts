@@ -51,7 +51,6 @@ export class Food {
 
   updateRecentlyUsed(){
     for(var item of this.useInRecipe){
-      
       this.recentlyUsed.push(item);
     }
 

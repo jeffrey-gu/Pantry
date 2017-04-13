@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 import { IonPullUpFooterState} from 'ionic-pullup';
 import { Food } from '../../providers/food';
-import { Http } from '@angular/http';
+import { RecipePage } from '../recipe/recipe';
+import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -19,11 +19,12 @@ export class HomePage {
     public anyRecipes : boolean = false;
     public searchQuery : string = "";
     public recipes = [];
+    recipeDetail = RecipePage;
     
 
     constructor(public navCtrl: NavController, public foodService: Food, public http: Http, public platform: Platform) {
       this.footerState = IonPullUpFooterState.Collapsed;
-      
+      //this.nav = nav;
       this.http.get('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/loguser')
       .map(res => res.json()).subscribe(data => {
         this.recipes=data.message2;
@@ -33,6 +34,10 @@ export class HomePage {
       this.http.get("../testrecipes.json").map(res => res.json()).subscribe(data => {
         this.recipes = data;});
       */
+    }
+
+    goToRecipeDetail(){
+      //this.nav.push(RecipeDetail);
     }
 
     ionViewDidLoad(){
@@ -108,8 +113,24 @@ export class HomePage {
       this.copyFoodthings = this.foodService.filterItems(this.searchQuery);
     }
     
-    echo(){
+    echo(recipe){
       console.log("echoooooooooooooo");
+      console.log(recipe.name);
+      console.log(recipe.id);
+      var array = JSON.stringify({data: recipe.id});
+      let headers = new Headers({
+          'Content-Type': 'application/json'
+        });
+         let options = new RequestOptions({
+           headers: headers
+         });
+          this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/recipeDetail', array, options)
+          .map(res => res.json())
+        .subscribe(data => {
+           console.log(data.json().message);
+        }, error => {
+            console.log("Oooops!");
+        });
     }
 
 }
