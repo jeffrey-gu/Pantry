@@ -36,8 +36,36 @@ export class HomePage {
       */
     }
 
-    goToRecipeDetail(){
-      //this.nav.push(RecipeDetail);
+    goToRecipeDetail(recipe){
+       console.log(recipe.name);
+      console.log(recipe.id);
+      
+      var array = JSON.stringify({data: recipe.id});
+      console.log("1");
+      let headers = new Headers({
+          'Content-Type': 'application/json'
+        });
+      console.log("2");
+      let options = new RequestOptions({
+           headers: headers
+         });
+      console.log("3");
+          this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/recipeDetail', array, options)
+          .map(res => res.json())
+        .subscribe(data => {
+            this.foodService.recipeDetails=JSON.parse(data.package1);
+            this.foodService.recipeInstructions=JSON.parse(data.package2);
+            console.log("recipe id sent to server");
+            //console.log("message");
+            //console.log(data.message);
+            //console.log("detail")
+           // console.log(data.package1);
+            
+            this.navCtrl.push(this.recipeDetail);
+        }, error => {
+            console.log("Oooops!");
+        });
+      
     }
 
     ionViewDidLoad(){
@@ -63,7 +91,6 @@ export class HomePage {
     
     generateRecipes(){
       //make a GET request to populate recipes array
-
       
     }
 
@@ -128,8 +155,12 @@ export class HomePage {
           this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/recipeDetail', array, options)
           .map(res => res.json())
         .subscribe(data => {
-           console.log("recipe id sent to server");
-           
+            this.foodService.recipeDetails=data.detail;
+            console.log("recipe id sent to server");
+            console.log("message");
+            console.log(data.message);
+            console.log("detail")
+            console.log(data.detail);
         }, error => {
             console.log("Oooops!");
         });

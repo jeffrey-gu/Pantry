@@ -21,11 +21,11 @@
   </div>
   <br>
   ₍₍ ◝(•̀ㅂ•́)◟ ⁾⁾ gimme some recipes!
-  <button [navPush]="recipeDetail">Recipe</button>
+  <button (click)="goToRecipeDetail()">Recipe</button>
   <div [ngSwitch]="recipeView">
     <div *ngSwitchCase="'default'">
       <ion-list *ngFor="let recipe of recipes">
-        <ion-row (click)="echo(recipe)" [navPush] = "recipeDetail">
+        <ion-row (click)="goToRecipeDetail(recipe)">
         <ion-item>
           <ion-thumbnail item-left>
             <img src={{recipe.image_link}}>

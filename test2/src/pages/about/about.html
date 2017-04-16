@@ -43,6 +43,7 @@
   </ion-list>
    
   <img [src]="base64Image" *ngIf="base64Image" />
+  <button (click)="goToFoodDetail()">Test</button>
 
   <ion-grid>
     <div *ngFor="let food of foodService.foodthings; let i = index">

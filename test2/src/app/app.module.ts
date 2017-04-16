@@ -8,6 +8,7 @@ import { FoodCreatePage } from '../pages/food-create/food-create';
 import { RecipePage } from '../pages/recipe/recipe';
 import { TabsPage } from '../pages/tabs/tabs';
 import { Food } from '../providers/food';
+import { FooddetailPage } from '../pages/fooddetail/fooddetail';
 
 import { IonPullupModule } from 'ionic-pullup';
 
@@ -18,6 +19,7 @@ import { IonPullupModule } from 'ionic-pullup';
     ContactPage,
     HomePage,
     FoodCreatePage,
+    FooddetailPage,
     RecipePage,
     TabsPage
   ],
@@ -32,6 +34,7 @@ import { IonPullupModule } from 'ionic-pullup';
     ContactPage,
     HomePage,
     FoodCreatePage,
+    FooddetailPage,
     RecipePage,
     TabsPage
   ],

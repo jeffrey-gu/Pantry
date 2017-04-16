@@ -4,6 +4,7 @@ import { Camera } from 'ionic-native';
 import { FoodCreatePage } from '../food-create/food-create';
 import { Food } from '../../providers/food';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { FooddetailPage } from '../fooddetail/fooddetail';
 import 'rxjs/add/operator/map';
 
 
@@ -15,6 +16,7 @@ export class AboutPage {
   public base64Image: string;
   public selected = [];
   public anySelected : boolean = false;
+  foodDetail = FooddetailPage;
   
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public foodService: Food, public http: Http) {
   }
@@ -110,6 +112,9 @@ export class AboutPage {
      this.foodService.foodthings[index].pantrySelected = false; 
     }
   }
+  goToFoodDetail(){
+      this.navCtrl.push(this.foodDetail);
+    }
 
   deleteFood(){
     var matched : boolean = false;
