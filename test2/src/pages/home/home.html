@@ -25,6 +25,7 @@
   <div [ngSwitch]="recipeView">
     <div *ngSwitchCase="'default'">
       <ion-list *ngFor="let recipe of recipes">
+<<<<<<< HEAD
         <ion-row (click)="goToRecipeDetail(recipe)">
         <ion-item>
           <ion-thumbnail item-left>
@@ -42,6 +43,25 @@
            
           </div>
         </ion-item>
+=======
+        <ion-row (click)="echo(recipe)" [navPush] = "recipeDetail">
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img src={{recipe.image_link}}>
+            </ion-thumbnail>
+            <div>
+              <h2>{{recipe.name}}</h2>
+              <!--<p>{{recipe.selected}}</p>-->
+            </div>
+            <div>
+              <ion-row>
+                <ion-badge color="secondary">Used:  {{recipe.numUsedIngredients}} </ion-badge>
+                <ion-badge color="danger">Missing:  {{recipe.numMissedIngredients}}</ion-badge>
+              </ion-row>
+              <button ion-button icon-only clear item-right><ion-icon name="star-outline"></ion-icon></button>
+            </div>
+          </ion-item>
+>>>>>>> origin/ionic-team
         </ion-row>
       </ion-list>
       </div>
