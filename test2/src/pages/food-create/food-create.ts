@@ -31,29 +31,28 @@ export class FoodCreatePage {
   }
 
   addFoodItem(){
-  	for(var i in this.inputList){
-  		console.log("name: " + this.inputList[i].name);
-  //		this.foodService.foodthings.push({name: this.inputList[i].name, pantrySelected: false, recipeSelected: false});
-  	}
-
-    alert(this.inputList);
-    var array = JSON.stringify(this.inputList);
-    console.log(array);
-      let headers = new Headers({
-          'Content-Type': 'application/json'
-        });
-         let options = new RequestOptions({
-           headers: headers
-         });
-          this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/add', array, options)
-          .map(res => res.json())
-        .subscribe(data => {
-          console.log(data.message);
-          this.foodService.foodthings.push(data.message);
-          console.log(this.foodService.foodthings);
-        }, error => {
-            console.log("Oooops!");
-        });
+    var array = [];
+    for(var i in this.inputList){
+      array.push(this.inputList[i].name);
+    }
+    
+    console.log(JSON.stringify({data: array}));
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    let options = new RequestOptions({
+      headers: headers
+    });
+    this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/add', JSON.stringify({data: array}), options)
+    .map(res => res.json())
+    .subscribe(data => {
+      for(var i in data.message){
+         this.foodService.foodthings.push(data.message[i]);
+      }
+      console.log(this.foodService.foodthings);
+    }, (error) => {
+        console.log(error);
+    });
 
   	this.viewCtrl.dismiss();
   }

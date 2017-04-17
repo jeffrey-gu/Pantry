@@ -1,0 +1,31 @@
+<!--
+  Generated template for the ConfirmScanned page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Confirm Receipt</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-grid>
+		<ion-row>
+			<ion-col col-11 class='text-center'>Name</ion-col>
+			<ion-col col-1></ion-col>
+		</ion-row>
+		<div *ngFor='let item of scannedItems; let i = index; trackBy: trackIndex'>
+			<ion-row>
+				<ion-col col-11><ion-item class='input'><ion-input type='text' [value]='scannedItems[i]' [(ngModel)]='scannedItems[i]'></ion-input></ion-item></ion-col>
+				<ion-col col-1><ion-icon class='col-icon' color='danger' name='close-circle' (click)='removeRow(i)'></ion-icon></ion-col>
+			</ion-row>
+		</div>
+		<button ion-button (click)="addNewRow()"><ion-icon name="add-circle"></ion-icon></button>
+	</ion-grid>
+
+</ion-content>

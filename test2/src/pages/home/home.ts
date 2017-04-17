@@ -43,6 +43,7 @@ export class HomePage {
     ionViewDidLoad(){
       this.setFilteredItems();
       console.log(this.foodService.foodthings);
+      
     }
 
     /******FOR FOOTER*****/

@@ -43,7 +43,6 @@ export class Food {
         });
     */
 		for(var i in this.foodthings){
-      console.log(this.foodthings[i].name);
 			this.foodthings[i]['recipeSelected'] = false;
 			this.foodthings[i]['pantrySelected'] = false;
 		}
