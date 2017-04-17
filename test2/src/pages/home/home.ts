@@ -118,6 +118,7 @@ export class HomePage {
       console.log("echoooooooooooooo");
       console.log(recipe.name);
       console.log(recipe.id);
+      
       var array = JSON.stringify({data: recipe.id});
       let headers = new Headers({
           'Content-Type': 'application/json'
@@ -128,10 +129,12 @@ export class HomePage {
           this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/recipeDetail', array, options)
           .map(res => res.json())
         .subscribe(data => {
-           console.log(data.json().message);
+           console.log("recipe id sent to server");
+           
         }, error => {
             console.log("Oooops!");
         });
+        
     }
 
 }
