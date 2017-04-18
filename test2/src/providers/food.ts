@@ -12,6 +12,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Food {
   public recipeDetails = [];
+  public foodDetails = [];
   public recipeInstructions = [];
 	public foodthings = [];      //food items from pantry
   public useInRecipe = [];     //food items that are used to generate recipes, format: {name: "food"}
@@ -24,13 +25,13 @@ export class Food {
         recipeSelected: boolean;
         pantrySelected:  boolean;
       }
-      /*
+      
       this.http.get('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/loguser')
       .map(res => res.json()).subscribe(data => {
         this.foodthings=data.message;
         console.log("pantry read!");
         });
-        */
+        
       /*
       this.http.get("../testpantry.json").map(res => res.json()).subscribe(data => {
           this.foodthings = data.food;
@@ -83,7 +84,26 @@ export class Food {
       });  
     }
     else if (sort=="category"){
-      console.log("catergory ssort not yet!");
+      this.foodthings = this.foodthings.sort((n1,n2) => {
+          if (n1.attr1 > n2.attr1) {
+              return 1;
+          }
+          else if (n1.attr1 < n2.attr1) {
+              return -1;
+          }
+          else if (n1.attr1 == n2.attr1){
+            if (n1.attr2 > n2.attr2) {
+                return 1;
+            }
+            else if (n1.attr2 < n2.attr2) {
+                return -1;
+            }
+          }
+          else{
+            return 0;
+          }
+          
+      });  
     }
     else if (sort=="recent"){
       console.log("recent sort not yet done!");

@@ -2,36 +2,37 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{details.title}}</ion-title>
+    <ion-title text-wrap>{{details.title}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
-.+:｡(ﾉ･ω･)ﾉﾞ RECIPE!!!!!!
+<!--.+:｡(ﾉ･ω･)ﾉﾞ RECIPE!!!!!!-->
 <ion-grid>
   <ion-row>
     <ion-col col-6>
       <img src={{details.image}}></ion-col>
     <ion-col col-6>
       <ion-row>
-        Ready in:  {{details.readyInMinutes}} Minutes
+        <ion-row><b>Ready in: &nbsp; </b>  {{details.readyInMinutes}} Minutes</ion-row>
+        <ion-row> <b>Servings: &nbsp; </b>  {{details.servings}}</ion-row>
         <br><br>
-        <a href={{details.sourceUrl}}>Source:  {{details.sourceName}}</a>
+        <ion-row>Source: &nbsp; &nbsp;<a href={{details.sourceUrl}}>{{details.sourceName}}</a></ion-row>
       </ion-row>
     </ion-col>
   </ion-row>
   
-  <ion-label>Ingredients</ion-label>
+  <h4>Ingredients</h4>
    <ion-grid>
             <div *ngFor="let food of ingredients; let i = index">
               <ion-row *ngIf="i%3 == 0">
                 
                 <ion-col col-4>
                   <ion-card>
-                    <ion-item no-lines><div class="card-description">{{food.name}}
+                    <ion-item no-lines><div class="card-description" text-wrap>{{food.name}}
                     <br>
-                    {{food.amount}} {{food.unit}}</div>
+                    {{food.amount}} {{food.unitShort}}</div>
                     
                     <img class="full-image" src={{food.image}}></ion-item>
                   </ion-card>
@@ -39,9 +40,9 @@
                 
                 <ion-col col-4 *ngIf="(i+1) < ingredients.length">
                   <ion-card>
-                    <ion-item no-lines><div class="card-description">{{ingredients[i+1].name}}
+                    <ion-item no-lines><div class="card-description" text-wrap>{{ingredients[i+1].name}}
                     <br>
-                    {{ingredients[i+1].amount}} {{ingredients[i+1].unit}}</div>
+                    {{ingredients[i+1].amount}} {{ingredients[i+1].unitShort}}</div>
                     
                     <img class="full-image" src={{ingredients[i+1].image}}></ion-item>
                   </ion-card>
@@ -49,9 +50,9 @@
                 
                 <ion-col col-4 *ngIf="(i+2) < ingredients.length" >
                   <ion-card>
-                    <ion-item no-lines><div class="card-description">{{ingredients[i+2].name}}
+                    <ion-item no-lines><div class="card-description" text-wrap>{{ingredients[i+2].name}}
                     <br>
-                    {{ingredients[i+2].amount}} {{ingredients[i+2].unit}}</div>
+                    {{ingredients[i+2].amount}} {{ingredients[i+2].unitShort}}</div>
                     
                     <img class="full-image" src={{ingredients[i+2].image}}></ion-item>
                   </ion-card>
@@ -92,10 +93,11 @@
    -->
   
   
-  <ion-label>Instructions</ion-label>
+  <h4>Instructions</h4>
    <ion-list *ngFor="let step of instructions; let i = index">
-    {{i+1}}.  {{step.step}}
+    <b>{{i+1}}.</b>  {{step.step}}
    </ion-list>
   
 </ion-grid>
+<button ion-button full>Update Pantry</button>
 </ion-content>

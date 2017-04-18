@@ -102,8 +102,28 @@ export class AboutPage {
      this.foodService.foodthings[index].pantrySelected = false; 
     }
   }
-  goToFoodDetail(){
-      this.navCtrl.push(this.foodDetail);
+  goToFoodDetail(food){
+      console.log(food.name);
+      console.log(food.api_id);
+      
+      var array = JSON.stringify({data: food.api_id});
+      let headers = new Headers({
+          'Content-Type': 'application/json'
+        });
+      let options = new RequestOptions({
+           headers: headers
+         });
+          this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/foodDetail', array, options)
+          .map(res => res.json())
+        .subscribe(data => {
+          console.log(data);
+            this.foodService.foodDetails=data.detail;
+            console.log("food id sent to server");
+            this.navCtrl.push(this.foodDetail);
+      
+        }, error => {
+            console.log("Oooops!");
+        });
     }
 
   deleteFood(){

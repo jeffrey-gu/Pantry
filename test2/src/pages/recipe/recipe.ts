@@ -23,13 +23,14 @@ export class RecipePage {
     this.details = this.foodService.recipeDetails;
     //this.instructions = this.foodService.recipeInstructions;
     //this.instructions = this.details["analyzedInstructions"][0]["steps"];
-    this.instructions = this.foodService.recipeInstructions[0]["steps"];
+    
     this.ingredients = this.details["extendedIngredients"];
      
       console.log("========DETAILS=========");
      console.log(this.details);
      console.log("========INSTRUCTIONS=========");
      console.log(this.foodService.recipeInstructions);
+     this.instructions = this.foodService.recipeInstructions[0]["steps"];
      console.log("========INSTRUCTIONS=========");
       console.log(this.instructions);
   }
