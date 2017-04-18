@@ -13,6 +13,9 @@ import 'rxjs/add/operator/map';
 export class Food {
 
 	public foodthings = [];      //food items from pantry, format: {name: "food"}
+  public recipeDetails = [];
+  public foodDetails = [];
+  public recipeInstructions = [];
   public useInRecipe = [];     //food items that are used to generate recipes, format: {name: "food"}
   public recentlyUsed = [];    //items recently used in recipes, format: {name: "food"}
 
@@ -22,6 +25,7 @@ export class Food {
         this.foodthings=data.message;
         console.log("pantry read!");
         });
+        
       /*
       this.http.get("../testpantry.json").map(res => res.json()).subscribe(data => {
           this.foodthings = data.food;
@@ -88,7 +92,26 @@ export class Food {
       });  
     }
     else if (sort=="category"){
-      console.log("catergory ssort not yet!");
+      this.foodthings = this.foodthings.sort((n1,n2) => {
+          if (n1.attr1 > n2.attr1) {
+              return 1;
+          }
+          else if (n1.attr1 < n2.attr1) {
+              return -1;
+          }
+          else if (n1.attr1 == n2.attr1){
+            if (n1.attr2 > n2.attr2) {
+                return 1;
+            }
+            else if (n1.attr2 < n2.attr2) {
+                return -1;
+            }
+          }
+          else{
+            return 0;
+          }
+          
+      });  
     }
     else if (sort=="recent"){
       console.log("recent sort not yet done!");

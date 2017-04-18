@@ -9,6 +9,7 @@ import { ConfirmScannedPage } from '../pages/confirm-scanned/confirm-scanned';
 import { RecipePage } from '../pages/recipe/recipe';
 import { TabsPage } from '../pages/tabs/tabs';
 import { Food } from '../providers/food';
+import { FooddetailPage } from '../pages/fooddetail/fooddetail';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { IonPullupModule } from 'ionic-pullup';
@@ -20,6 +21,7 @@ import { IonPullupModule } from 'ionic-pullup';
     ContactPage,
     HomePage,
     FoodCreatePage,
+    FooddetailPage,
     ConfirmScannedPage,
     RecipePage,
     TabsPage
@@ -35,6 +37,7 @@ import { IonPullupModule } from 'ionic-pullup';
     ContactPage,
     HomePage,
     FoodCreatePage,
+    FooddetailPage,
     ConfirmScannedPage,
     RecipePage,
     TabsPage
