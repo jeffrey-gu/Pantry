@@ -63,7 +63,7 @@ export class ConfirmScannedPage {
     let options = new RequestOptions({
       headers: headers
     });
-    this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/add', JSON.stringify({data: array}), options)
+    this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/add', array, options)
     .map(res => res.json())
     .subscribe(data => {
       for(var i in data.message){

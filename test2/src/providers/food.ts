@@ -12,17 +12,11 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Food {
 
-	public foodthings = [];      //food items from pantry
+	public foodthings = [];      //food items from pantry, format: {name: "food"}
   public useInRecipe = [];     //food items that are used to generate recipes, format: {name: "food"}
   public recentlyUsed = [];    //items recently used in recipes, format: {name: "food"}
 
 	constructor(public http: Http) {
-    interface food {
-        name: string;
-        imageURL: string;
-        recipeSelected: boolean;
-        pantrySelected:  boolean;
-      }
       this.http.get('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/loguser')
       .map(res => res.json()).subscribe(data => {
         this.foodthings=data.message;
@@ -49,8 +43,22 @@ export class Food {
 	}
 
   updateRecentlyUsed(){
-    for(var item of this.useInRecipe){
-      this.recentlyUsed.push(item);
+    if(this.useInRecipe.length > 0){
+      //useInRecipe after the items were deleted from the original useInRecipe
+      //so doesn't include any items deleted from foodthings
+      for(var item of this.useInRecipe){
+        this.recentlyUsed.push(item);        
+      }
+      this.useInRecipe = [];
+    }
+    else {
+      //removes any items from recently used that are no longer in the pantry
+      for(var item of this.recentlyUsed){
+        var index = this.foodthings.indexOf(item);
+        if(index > -1){
+          this.recentlyUsed.splice(index, 1);
+        }
+      }
     }
 
     while(this.recentlyUsed.length > 25){

@@ -46,9 +46,15 @@ export class FoodCreatePage {
     this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/add', JSON.stringify({data: array}), options)
     .map(res => res.json())
     .subscribe(data => {
-      for(var i in data.message){
-         this.foodService.foodthings.push(data.message[i]);
+      if(data.message.length > 0){
+        for(var i in data.message){
+          this.foodService.foodthings.push(data.message[i]);
+        }
       }
+      else {
+        alert("Item(s) already in pantry");
+      }
+      
       console.log(this.foodService.foodthings);
     }, (error) => {
         console.log(error);

@@ -19,17 +19,20 @@ export class HomePage {
     public anyRecipes : boolean = false;
     public searchQuery : string = "";
     public recipes = [];
+    public isLoggedIn : boolean = false;
     recipeDetail = RecipePage;
     
 
     constructor(public navCtrl: NavController, public foodService: Food, public http: Http, public platform: Platform) {
       this.footerState = IonPullUpFooterState.Collapsed;
-      //this.nav = nav;
+      
+      //uses all the ingredients from the database to generate a recipe
       this.http.get('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/loguser')
       .map(res => res.json()).subscribe(data => {
         this.recipes=data.message2;
         console.log("recipes read!");
-        });
+        this.isLoggedIn = true;
+      });
 /*
       this.http.get("../testrecipes.json").map(res => res.json()).subscribe(data => {
         this.recipes = data;});
@@ -54,6 +57,14 @@ export class HomePage {
 
     footerCollapsed() {
       console.log('Footer collapsed!');
+      if(this.selected.length > 0){
+        console.log("generate recipes with length");
+        this.generateRecipes(1);
+      }
+      else {
+        console.log("generate recipes no length");
+        this.generateRecipes(0);
+      }
     }
 
     toggleFooter() {
@@ -62,10 +73,45 @@ export class HomePage {
 
     /******FOR RECIPE VIEW******/
     
-    generateRecipes(){
-      //make a GET request to populate recipes array
+    generateRecipes(flag){
+      console.log("recipes are generating");
+      console.log(this.selected);
+      let headers = new Headers({
+          'Content-Type': 'application/json'
+      });
+      let options = new RequestOptions({
+        headers: headers
+      });
 
-      
+      if(flag == 1){
+        var array = [];
+        for(var item of this.selected){
+          array.push(item.id);
+        }
+
+        var data = {flag: flag, data: array};
+
+        //if flag is 1, then get recipes for selected ingredients
+        this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/getRecipes', JSON.stringify(data), options)
+        .map(res => res.json())
+        .subscribe(data => {   
+          this.recipes = data.message;
+          console.log("response for length " + data.message);
+        }, (error) => {
+            console.log("something is wrong with request " + error);
+        });
+      }
+      else if(this.isLoggedIn) {
+        var data = {flag: flag, data: []};
+        this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/getRecipes', JSON.stringify(data), options)
+        .map(res => res.json())
+        .subscribe(data => {   
+          this.recipes = data.message;
+          console.log("response for no length " + data.message);
+        }, (error) => {
+            console.log("something is wrong with request " + error);
+        });
+      }
     }
 
     /******FOR SELECTION MODE*****/
@@ -118,7 +164,6 @@ export class HomePage {
       console.log("echoooooooooooooo");
       console.log(recipe.name);
       console.log(recipe.id);
-      
       var array = JSON.stringify({data: recipe.id});
       let headers = new Headers({
           'Content-Type': 'application/json'
@@ -129,12 +174,10 @@ export class HomePage {
           this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/recipeDetail', array, options)
           .map(res => res.json())
         .subscribe(data => {
-           console.log("recipe id sent to server");
-           
+           console.log(data.json().message);
         }, error => {
             console.log("Oooops!");
         });
-        
     }
 
 }

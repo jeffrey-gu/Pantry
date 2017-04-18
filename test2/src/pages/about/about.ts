@@ -33,7 +33,7 @@ export class AboutPage {
         this.navCtrl.push(ConfirmScannedPage, {image: dataImage});
         //set alreadyBuffered variable
     }, (err) => {
-        console.log(err);
+        alert(err);
     });
   }
 
