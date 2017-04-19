@@ -1,17 +1,47 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI. TEE HEE
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  ₍₍ ◝(•̀ㅂ•́)◟ ⁾⁾ gimme some recipes
+  
+  <ion-list>
+    
+    <ion-item>
+      <ion-thumbnail item-left>
+        <img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50">
+      </ion-thumbnail>
+      <div>
+        <h2>RECIPE NAME</h2>
+        <p>SOMETHING</p>
+      </div>
+      <div>
+        <button ion-button icon-only clear item-right>
+        <ion-icon name="star-outline"></ion-icon>
+        </button>
+      </div>
+    </ion-item>
+    
+    
+  </ion-list>
+
 </ion-content>
+
+<ion-pullup (onExpand)="footerExpanded()" (onCollapse)="footerCollapsed()" [(state)]="footerState" padding>
+    <ion-pullup-tab color="primary" [footer]="pullup" (tap)="toggleFooter()">
+      <ion-icon name="search" *ngIf="footerState == 0"></ion-icon><ion-icon name="search" *ngIf="footerState == 1"></ion-icon>
+    </ion-pullup-tab>
+    <ion-toolbar color="primary" (tap)="toggleFooter()">
+      <ion-title *ngIf="footerState == 0"></ion-title><ion-title *ngIf="footerState == 1">Select Ingredients</ion-title>
+      <ion-title *ngIf="anySelected">{{selected.length}} items selected</ion-title>
+    </ion-toolbar>
+
+    <ion-content>
+      Ingredients!
+      <ion-grid>
+        <div *ngFor="let food of foodthings; let i = index">
+          <ion-row *ngIf="i%3 == 0"> 
+            <ion-col col-4  (tap)="multicheckTap(food)"><ion-card><ion-item no-lines>{{food.title}}<ion-thumbnail><img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-thumbnail></ion-item><ion-icon item-right name='checkmark-circle' *ngIf=food.selected></ion-icon></ion-card></ion-col>
+            <ion-col col-4 *ngIf="(i+1) < foodthings.length" (tap)="multicheckTap(foodthings[i+1])"><ion-card><ion-item no-lines>{{foodthings[i+1].title}}<ion-thumbnail><img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-thumbnail></ion-item><ion-icon item-right name='checkmark-circle' *ngIf=foodthings[i+1].selected></ion-icon></ion-card></ion-col>
+            <ion-col col-4 *ngIf="(i+2) < foodthings.length" (tap)="multicheckTap(foodthings[i+2])"><ion-card><ion-item no-lines>{{foodthings[i+2].title}}<ion-thumbnail><img src="https://placeholdit.imgix.net/~text?txtsize=6&txt=50%C3%9750&w=50&h=50"></ion-thumbnail></ion-item><ion-icon item-right name='checkmark-circle' *ngIf=foodthings[i+2].selected></ion-icon></ion-card></ion-col>      
+          </ion-row>
+        </div>
+      </ion-grid>
+    </ion-content>
+</ion-pullup>
