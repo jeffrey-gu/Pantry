@@ -14,21 +14,41 @@
       <img src={{food.image}}></ion-col>
     <ion-col col-6>
       <ion-row>
-        Isle:  food.aisle
-        Serving Size:  food.amount food.unit
+        <b>Aisle: &nbsp;</b>{{food.aisle}}
+        <b>Serving Size: &nbsp;</b>{{food.amount}} {{food.unit}}
       </ion-row>
     </ion-col>
   </ion-row>
-  <ion-label>nutrition details:</ion-label>
-  <!--<div *ngFor="let detail of nutrients; let i = index">-->
-    detail.title
-    detail.amount detail.unit
-    detail.percentOfDailyNeeds
-  <!--</div>-->
-  Caloric Breakdown
-  food.caloricBreakdown.percentProtein
-  food.caloricBreakdown.percentFat
-  food.caloricBreakdown.percentCarbs
+  <h5>Caloric Breakdown</h5>
+  <ion-row>&nbsp; &nbsp;<b>Percent Protein: &nbsp;</b>{{food.nutrition.caloricBreakdown.percentProtein}}%</ion-row>
+  <ion-row>&nbsp; &nbsp;<b>Percent Fat: &nbsp;</b>{{food.nutrition.caloricBreakdown.percentFat}}%</ion-row>
+  <ion-row>&nbsp; &nbsp;<b>Percent Carbs: &nbsp;</b>{{food.nutrition.caloricBreakdown.percentCarbs}}%</ion-row>
+  
+  <h5>Nutrition Details:</h5>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h6>Nutrient</h6>
+      </ion-col>
+      <ion-col>
+        <h6>Amount</h6>
+      </ion-col>
+      <ion-col>
+        <h6>% DV</h6>
+      </ion-col>
+    </ion-row>
+      <ion-row *ngFor="let detail of nutrients; let i = index">
+        <ion-col>
+          <b> {{detail.title}}</b>  
+        </ion-col>
+        <ion-col>
+          {{detail.amount}} {{detail.unit}}
+        </ion-col>
+        <ion-col>
+          {{detail.percentOfDailyNeeds}}%
+        </ion-col>
+      </ion-row>
+  </ion-grid>
   
  
   

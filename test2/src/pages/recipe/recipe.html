@@ -97,7 +97,8 @@
    <ion-list *ngFor="let step of instructions; let i = index">
     <b>{{i+1}}.</b>  {{step.step}}
    </ion-list>
-  
+   <div ng-show="!instructions.length">Instructions unavailable for in-app display.  Please go to <a href={{details.sourceUrl}}>{{details.sourceName}}</a> to view the recipe.</div>
+  <br><br>
 </ion-grid>
 <button ion-button full>Update Pantry</button>
 </ion-content>

@@ -128,6 +128,7 @@ export class HomePage {
             console.log("something is wrong with request " + error);
         });
       }
+    }
 
     /******FOR SELECTION MODE*****/
     multicheckTap(food){
@@ -177,29 +178,5 @@ export class HomePage {
     
     echo(recipe){
       console.log("echoooooooooooooo");
-      console.log(recipe.name);
-      console.log(recipe.id);
-      var array = JSON.stringify({data: recipe.id});
-      let headers = new Headers({
-          'Content-Type': 'application/json'
-        });
-         let options = new RequestOptions({
-           headers: headers
-         });
-          this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/recipeDetail', array, options)
-          .map(res => res.json())
-        .subscribe(data => {
-
-           console.log(data.json().message);
-            this.foodService.recipeDetails=data.detail;
-            console.log("recipe id sent to server");
-            console.log("message");
-            console.log(data.message);
-            console.log("detail")
-            console.log(data.detail);
-        }, error => {
-            console.log("Oooops!");
-        });
     }
-
 }

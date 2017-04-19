@@ -14,11 +14,14 @@ import { Food } from '../../providers/food';
 })
 export class FooddetailPage {
   public food = [];
+  public nutrients = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public foodService: Food) {
     this.food = this.foodService.foodDetails["body"];
     this.food["image"]= "https://spoonacular.com/cdn/ingredients_100x100/"+this.food["image"];
+    this.nutrients=this.food["nutrition"]["nutrients"];
     console.log(this.food);
+    console.log(this.nutrients);
   }
 
   ionViewDidLoad() {

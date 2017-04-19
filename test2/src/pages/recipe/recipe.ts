@@ -12,7 +12,6 @@ import { Food } from '../../providers/food';
   templateUrl: 'recipe.html'
 })
 export class RecipePage {
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
   public details = [];
   
   public instructions = [];
@@ -30,9 +29,16 @@ export class RecipePage {
      console.log(this.details);
      console.log("========INSTRUCTIONS=========");
      console.log(this.foodService.recipeInstructions);
-     this.instructions = this.foodService.recipeInstructions[0]["steps"];
-     console.log("========INSTRUCTIONS=========");
+     if (this.foodService.recipeInstructions === undefined || this.foodService.recipeInstructions.length==0){
+      console.log("No instructions found");
+     }
+     else{
+      this.instructions = this.foodService.recipeInstructions[0]["steps"];
+      console.log("========PARSED INSTRUCTIONS=========");
       console.log(this.instructions);
+     }
+     
+      
   }
 
   ionViewDidLoad() {
