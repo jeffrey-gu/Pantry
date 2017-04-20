@@ -27,12 +27,16 @@ export class HomePage {
       this.footerState = IonPullUpFooterState.Collapsed;
       
       //uses all the ingredients from the database to generate a recipe
-      this.http.get('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/loguser')
-      .map(res => res.json()).subscribe(data => {
-        this.recipes=data.message2;
-        console.log("recipes read!");
-        this.isLoggedIn = true;
-      });
+      // this.http.get('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/loguser')
+      // .map(res => res.json()).subscribe(data => {
+      //   this.foodService.recipes=data.message2;
+      //   console.log("recipes read!");
+      //   this.isLoggedIn = true;
+      // });
+/*
+      this.http.get("../testrecipes.json").map(res => res.json()).subscribe(data => {
+        this.foodService.recipes = data;});
+      */
     }
 
     goToRecipeDetail(recipe){
@@ -111,28 +115,30 @@ export class HomePage {
         this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/getRecipes', JSON.stringify(data), options)
         .map(res => res.json())
         .subscribe(data => {   
-          this.recipes = data.message;
+          this.foodService.recipes = data.message;
           console.log("response for length " + data.message);
         }, (error) => {
             console.log("something is wrong with request " + error);
         });
       }
-      else if(this.isLoggedIn) {
+      else {
         var data = {flag: flag, data: []};
         this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/getRecipes', JSON.stringify(data), options)
         .map(res => res.json())
         .subscribe(data => {   
-          this.recipes = data.message;
+          this.foodService.recipes = data.message;
           console.log("response for no length " + data.message);
         }, (error) => {
             console.log("something is wrong with request " + error);
         });
       }
+    }
 
     /******FOR SELECTION MODE*****/
     multicheckTap(food){
       //checks if item is already selected
       var index = this.selected.indexOf(food);
+      console.log("selected " + this.selected);
       if(index > -1){
         this.selected.splice(index, 1);
         food.recipeSelected = false;

@@ -25,7 +25,6 @@ var RecipePage = (function () {
     };
     return RecipePage;
 }());
-
 RecipePage = __decorate([
     Component({
         selector: 'page-recipe',

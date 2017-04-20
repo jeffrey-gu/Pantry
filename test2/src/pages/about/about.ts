@@ -6,6 +6,7 @@ import { ConfirmScannedPage } from '../confirm-scanned/confirm-scanned';
 import { Food } from '../../providers/food';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { FooddetailPage } from '../fooddetail/fooddetail';
+
 import 'rxjs/add/operator/map';
 
 
@@ -102,29 +103,30 @@ export class AboutPage {
      this.foodService.foodthings[index].pantrySelected = false; 
     }
   }
+
   goToFoodDetail(food){
-      console.log(food.name);
-      console.log(food.api_id);
-      
-      var array = JSON.stringify({data: food.api_id});
-      let headers = new Headers({
-          'Content-Type': 'application/json'
-        });
-      let options = new RequestOptions({
-           headers: headers
-         });
-          this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/foodDetail', array, options)
-          .map(res => res.json())
-        .subscribe(data => {
-          console.log(data);
-            this.foodService.foodDetails=data.detail;
-            console.log("food id sent to server");
-            this.navCtrl.push(this.foodDetail);
-      
-        }, error => {
-            console.log("Oooops!");
-        });
-    }
+    console.log(food.name);
+    console.log(food.api_id);
+    
+    var array = JSON.stringify({data: food.api_id});
+    let headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+    let options = new RequestOptions({
+         headers: headers
+       });
+        this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/foodDetail', array, options)
+        .map(res => res.json())
+      .subscribe(data => {
+        console.log(data);
+          this.foodService.foodDetails=data.detail;
+          console.log("food id sent to server");
+          this.navCtrl.push(this.foodDetail);
+    
+      }, error => {
+          console.log("Oooops!");
+      });
+  }
 
   deleteFood(){
     var matched : boolean = false;
@@ -147,6 +149,10 @@ export class AboutPage {
       array.push(this.selected[item].id);
     }
 
+    console.log(this.foodService.foodthings);
+    console.log(this.selected);
+    console.log(array);
+
     var data = JSON.stringify({data: array});
     let headers = new Headers({
         'Content-Type': 'application/json'
@@ -158,6 +164,13 @@ export class AboutPage {
         .map(res => res.json())
       .subscribe(data => {
          console.log(data.message);
+         this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/getRecipes', JSON.stringify({flag: 0, data: []}), options)
+        .map(res => res.json())
+        .subscribe(data => {   
+          this.foodService.recipes = data.message;
+        }, (error) => {
+            console.log("something is wrong with request " + error);
+        });
       }, error => {
           console.log("Oooops!");
       });

@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { FoodCreatePage } from '../pages/food-create/food-create';
 import { ConfirmScannedPage } from '../pages/confirm-scanned/confirm-scanned';
 import { RecipePage } from '../pages/recipe/recipe';
+import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 import { Food } from '../providers/food';
 import { FooddetailPage } from '../pages/fooddetail/fooddetail';
@@ -24,6 +25,7 @@ import { IonPullupModule } from 'ionic-pullup';
     FooddetailPage,
     ConfirmScannedPage,
     RecipePage,
+    LoginPage,
     TabsPage
   ],
   imports: [
@@ -40,6 +42,7 @@ import { IonPullupModule } from 'ionic-pullup';
     FooddetailPage,
     ConfirmScannedPage,
     RecipePage,
+    LoginPage,
     TabsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Food, SplashScreen],

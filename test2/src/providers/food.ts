@@ -13,6 +13,7 @@ import 'rxjs/add/operator/map';
 export class Food {
 
 	public foodthings = [];      //food items from pantry, format: {name: "food"}
+  public recipes = [];
   public recipeDetails = [];
   public foodDetails = [];
   public recipeInstructions = [];
@@ -25,7 +26,6 @@ export class Food {
         this.foodthings=data.message;
         console.log("pantry read!");
         });
-        
       /*
       this.http.get("../testpantry.json").map(res => res.json()).subscribe(data => {
           this.foodthings = data.food;
@@ -121,7 +121,7 @@ export class Food {
     }
     for(var i in this.foodthings){
       console.log(this.foodthings[i].name);
-		}
+    }
     console.log("done sorting!  Enjoy your life!");
   }
   
