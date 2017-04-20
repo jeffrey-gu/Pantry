@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { Food } from '../../providers/food';
 /*
   Generated class for the Recipe page.
-
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
@@ -29,19 +29,14 @@ export class RecipePage {
      console.log(this.details);
      console.log("========INSTRUCTIONS=========");
      console.log(this.foodService.recipeInstructions);
-     if (this.foodService.recipeInstructions === undefined || this.foodService.recipeInstructions.length==0){
-      console.log("No instructions found");
-     }
-     else{
-      this.instructions = this.foodService.recipeInstructions[0]["steps"];
-      console.log("========PARSED INSTRUCTIONS=========");
+     this.instructions = this.foodService.recipeInstructions[0]["steps"];
+     console.log("========INSTRUCTIONS=========");
       console.log(this.instructions);
-     }
-      
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RecipePage');
   }
+  
 
 }
