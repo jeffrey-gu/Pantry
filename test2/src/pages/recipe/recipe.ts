@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Food } from '../../providers/food';
+
 /*
   Generated class for the Recipe page.
 
@@ -37,7 +37,6 @@ export class RecipePage {
       console.log("========PARSED INSTRUCTIONS=========");
       console.log(this.instructions);
      }
-     
       
   }
 

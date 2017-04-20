@@ -50,6 +50,20 @@ export class FoodCreatePage {
         for(var i in data.message){
           this.foodService.foodthings.push(data.message[i]);
         }
+
+        var array = [];
+        for(var item of this.foodService.foodthings){
+          array.push(item.id);
+        }
+
+        this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/getRecipes', JSON.stringify({flag: 0, data: []}), options)
+        .map(res => res.json())
+        .subscribe(data => {   
+          this.foodService.recipes = data.message;
+        }, (error) => {
+            console.log("something is wrong with request " + error);
+        });
+
       }
       else {
         alert("Item(s) already in pantry");
