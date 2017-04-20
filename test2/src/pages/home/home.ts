@@ -55,6 +55,22 @@ export class HomePage {
         .subscribe(data => {
             this.foodService.recipeDetails=JSON.parse(data.package1);
             this.foodService.recipeInstructions=JSON.parse(data.package2);
+            
+            var ingredients = [];
+            var pantry = this.foodService.foodthings;
+            ingredients = this.foodService.recipeDetails["extendedIngredients"];
+            this.foodService.ingredientsHave = [];
+            
+            console.log(ingredients);
+            console.log(pantry);
+            for (let food of ingredients){
+              for (let item of pantry){
+                if (food.name.search(item.name) != -1){
+                  this.foodService.ingredientsHave.push(item);
+                  console.log(item.name);
+                }
+              }
+            }
             console.log("recipe id sent to server");
             this.navCtrl.push(this.recipeDetail);
         }, error => {
@@ -186,7 +202,8 @@ export class HomePage {
     }
     
     fav = false;
-    favorite(){
+    favorite(recipe){
+      console.log(recipe.name);
       this.fav=!this.fav;
     }
 }

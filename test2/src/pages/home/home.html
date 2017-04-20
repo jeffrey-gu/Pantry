@@ -39,7 +39,7 @@
                 <ion-badge color="secondary">Used:  {{recipe.numUsedIngredients}} </ion-badge>
                 <ion-badge color="danger">Missing:  {{recipe.numMissedIngredients}}</ion-badge>
               </ion-row>
-              <button ion-button icon-only clear item-right (click)="favorite(recipe.id)">
+              <button ion-button icon-only clear item-right (click)="favorite(recipe)">
                 <ion-icon name="star-outline" *ngIf="!fav"></ion-icon>
                 <ion-icon name="star" *ngIf="fav"></ion-icon>
               </button>

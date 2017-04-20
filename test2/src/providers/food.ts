@@ -16,6 +16,7 @@ export class Food {
   public recipes = [];
   public recipeDetails = [];
   public foodDetails = [];
+  public ingredientsHave = [];  //ingredients in a recipe that the user has
   public recipeInstructions = [];
   public useInRecipe = [];     //food items that are used to generate recipes, format: {name: "food"}
   public recentlyUsed = [];    //items recently used in recipes, format: {name: "food"}

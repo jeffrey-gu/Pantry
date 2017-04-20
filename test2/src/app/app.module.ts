@@ -5,6 +5,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { FoodCreatePage } from '../pages/food-create/food-create';
+import { PantryUpdatePage } from '../pages/pantry-update/pantry-update';
 import { ConfirmScannedPage } from '../pages/confirm-scanned/confirm-scanned';
 import { RecipePage } from '../pages/recipe/recipe';
 import { LoginPage } from '../pages/login/login';
@@ -22,6 +23,7 @@ import { IonPullupModule } from 'ionic-pullup';
     ContactPage,
     HomePage,
     FoodCreatePage,
+    PantryUpdatePage,
     FooddetailPage,
     ConfirmScannedPage,
     RecipePage,
@@ -39,6 +41,7 @@ import { IonPullupModule } from 'ionic-pullup';
     ContactPage,
     HomePage,
     FoodCreatePage,
+    PantryUpdatePage,
     FooddetailPage,
     ConfirmScannedPage,
     RecipePage,
