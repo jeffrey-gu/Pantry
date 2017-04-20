@@ -179,4 +179,9 @@ export class HomePage {
     echo(recipe){
       console.log("echoooooooooooooo");
     }
+    
+    fav = false;
+    favorite(){
+      this.fav=!this.fav;
+    }
 }

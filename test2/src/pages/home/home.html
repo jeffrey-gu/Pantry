@@ -23,7 +23,8 @@
   
   <br>
   ₍₍ ◝(•̀ㅂ•́)◟ ⁾⁾ gimme some recipes!
-  <button (click)="goToRecipeDetail()">Recipe</button>
+
+  
   <div [ngSwitch]="recipeView">
     <div *ngSwitchCase="'default'">
       
@@ -44,7 +45,10 @@
                 <ion-badge color="secondary">Used:  {{recipe.numUsedIngredients}} </ion-badge>
                 <ion-badge color="danger">Missing:  {{recipe.numMissedIngredients}}</ion-badge>
               </ion-row>
-              <button ion-button icon-only clear item-right><ion-icon name="star-outline"></ion-icon></button>
+              <button ion-button icon-only clear item-right (click)="favorite(recipe.id)">
+                <ion-icon name="star-outline" *ngIf="!fav"></ion-icon>
+                <ion-icon name="star" *ngIf="fav"></ion-icon>
+              </button>
             </div>
             
           </ion-item>
