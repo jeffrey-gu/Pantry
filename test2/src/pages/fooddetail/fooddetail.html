@@ -15,15 +15,18 @@
     <ion-col col-6>
       <ion-row>
         <b>Aisle: &nbsp;</b>{{food.aisle}}
+      </ion-row>
+      <ion-row>
         <b>Serving Size: &nbsp;</b>{{food.amount}} {{food.unit}}
       </ion-row>
     </ion-col>
   </ion-row>
   <h5>Caloric Breakdown</h5>
-  <ion-row>&nbsp; &nbsp;<b>Percent Protein: &nbsp;</b>{{food.nutrition.caloricBreakdown.percentProtein}}%</ion-row>
-  <ion-row>&nbsp; &nbsp;<b>Percent Fat: &nbsp;</b>{{food.nutrition.caloricBreakdown.percentFat}}%</ion-row>
-  <ion-row>&nbsp; &nbsp;<b>Percent Carbs: &nbsp;</b>{{food.nutrition.caloricBreakdown.percentCarbs}}%</ion-row>
-  
+  <!--
+  <ion-row>&nbsp; &nbsp;<b>Percent Protein: &nbsp;</b>{{caloricBreakdown.percentProtein}}%</ion-row>
+  <ion-row>&nbsp; &nbsp;<b>Percent Fat: &nbsp;</b>{{caloricBreakdown.percentFat}}%</ion-row>
+  <ion-row>&nbsp; &nbsp;<b>Percent Carbs: &nbsp;</b>{{caloricBreakdown.percentCarbs}}%</ion-row>
+-->
   <h5>Nutrition Details:</h5>
   <ion-grid>
     <ion-row>
