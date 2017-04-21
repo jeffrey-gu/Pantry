@@ -21,6 +21,8 @@ export class Food {
   public useInRecipe = [];     //food items that are used to generate recipes, format: {name: "food"}
   public recentlyUsed = [];    //items recently used in recipes, format: {name: "food"}
 
+  public user = ""; //user id
+
 	constructor(public http: Http) {
 		for(var i in this.foodthings){
 			this.foodthings[i]['recipeSelected'] = false;

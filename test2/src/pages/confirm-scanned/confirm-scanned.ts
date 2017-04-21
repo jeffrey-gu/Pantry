@@ -56,7 +56,7 @@ export class ConfirmScannedPage {
   }
 
   addFoodItem(){
-    var array = JSON.stringify({data: this.scannedItems});
+    var array = JSON.stringify({userid: this.foodService.user, data: this.scannedItems});
     let headers = new Headers({
       'Content-Type': 'application/json'
     });

@@ -17,6 +17,7 @@ export class FooddetailPage {
   public nutrients = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public foodService: Food) {
+    console.log(this.foodService.foodDetails);
     this.food = this.foodService.foodDetails["body"];
     this.food["image"]= "https://spoonacular.com/cdn/ingredients_100x100/"+this.food["image"];
     this.nutrients=this.food["nutrition"]["nutrients"];

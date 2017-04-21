@@ -36,14 +36,13 @@ export class FoodCreatePage {
       array.push(this.inputList[i].name);
     }
     
-    console.log(JSON.stringify({data: array}));
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
     let options = new RequestOptions({
       headers: headers
     });
-    this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/add', JSON.stringify({data: array}), options)
+    this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/add', JSON.stringify({userid: this.foodService.user, data: array}), options)
     .map(res => res.json())
     .subscribe(data => {
       if(data.message.length > 0){
@@ -56,7 +55,7 @@ export class FoodCreatePage {
           array.push(item.id);
         }
 
-        this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/getRecipes', JSON.stringify({flag: 0, data: []}), options)
+        this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/getRecipes', JSON.stringify({userid: this.foodService.user, flag: 0, data: []}), options)
         .map(res => res.json())
         .subscribe(data => {   
           this.foodService.recipes = data.message;

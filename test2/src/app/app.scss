@@ -23,3 +23,15 @@
 .select-label {
   width: 25% !important;
 }
+
+[name='checkmark-circle']{
+	color: green;
+}
+
+.is-selected{
+	border: 2px solid green;
+}
+
+ion-icon{
+	padding: 3px;
+}

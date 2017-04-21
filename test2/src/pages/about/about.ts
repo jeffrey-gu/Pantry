@@ -97,7 +97,8 @@ export class AboutPage {
   }
 
   deleteFood(){
-    if(this.inDeletionMode){
+    if(this.inDeletionMode && this.selected.length > 0){
+      console.log("deletion mode");
       var matched : boolean = false;
       var index = 0;
       var array = [];
@@ -122,7 +123,7 @@ export class AboutPage {
       console.log(this.selected);
       console.log(array);
 
-      var data = JSON.stringify({data: array});
+      var data = JSON.stringify({userid: this.foodService.user, data: array});
       let headers = new Headers({
           'Content-Type': 'application/json'
         });
@@ -133,7 +134,7 @@ export class AboutPage {
           .map(res => res.json())
         .subscribe(data => {
            console.log(data.message);
-           this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/getRecipes', JSON.stringify({flag: 0, data: []}), options)
+           this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/getRecipes', JSON.stringify({userid: this.foodService.user, flag: 0, data: []}), options)
           .map(res => res.json())
           .subscribe(data => {   
             this.foodService.recipes = data.message;
@@ -145,9 +146,11 @@ export class AboutPage {
         });
 
         this.selected = [];
+        this.inDeletionMode = false;
       }
-      this.inDeletionMode = !this.inDeletionMode;
-    
+      else {
+        this.inDeletionMode = !this.inDeletionMode;
+      }
   }
 
 }

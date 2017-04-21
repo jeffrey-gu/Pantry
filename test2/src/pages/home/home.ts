@@ -109,7 +109,7 @@ export class HomePage {
           array.push(item.id);
         }
 
-        var data = {flag: flag, data: array};
+        var data = {userid: this.foodService.user, flag: flag, data: array};
 
         //if flag is 1, then get recipes for selected ingredients
         this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/getRecipes', JSON.stringify(data), options)
@@ -123,7 +123,7 @@ export class HomePage {
         });
       }
       else {
-        var data = {flag: flag, data: []};
+        var data = {userid: this.foodService.user, flag: flag, data: []};
         this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/getRecipes', JSON.stringify(data), options)
         .map(res => res.json())
         .subscribe(data => {   

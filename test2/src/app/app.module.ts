@@ -11,6 +11,7 @@ import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 import { Food } from '../providers/food';
 import { FooddetailPage } from '../pages/fooddetail/fooddetail';
+import { PantryUpdatePage } from '../pages/pantry-update/pantry-update';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { IonPullupModule } from 'ionic-pullup';
@@ -26,6 +27,7 @@ import { IonPullupModule } from 'ionic-pullup';
     ConfirmScannedPage,
     RecipePage,
     LoginPage,
+    PantryUpdatePage,
     TabsPage
   ],
   imports: [
@@ -43,6 +45,7 @@ import { IonPullupModule } from 'ionic-pullup';
     ConfirmScannedPage,
     RecipePage,
     LoginPage,
+    PantryUpdatePage,
     TabsPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Food, SplashScreen],

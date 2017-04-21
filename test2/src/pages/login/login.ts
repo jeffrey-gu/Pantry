@@ -29,6 +29,7 @@ export class LoginPage {
     .map(res => res.json())
     .subscribe(data => {   
       if(data.success == 1){
+        this.foodService.user = data.userid;
       	this.foodService.recipes = data.message2;
       	this.foodService.foodthings = data.message;
       	console.log(data.message2);
