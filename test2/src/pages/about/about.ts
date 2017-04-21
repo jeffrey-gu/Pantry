@@ -75,7 +75,7 @@ export class AboutPage {
       console.log(food.name);
       console.log(food.api_id);
       
-      var array = JSON.stringify({data: food.api_id});
+      var array = JSON.stringify({data: [food.api_id, 100, "grams"]});
       let headers = new Headers({
           'Content-Type': 'application/json'
         });

@@ -183,8 +183,35 @@ export class HomePage {
       this.copyFoodthings = this.foodService.filterItems(this.searchQuery);
     }
     
-    fav = false;
-    favorite(){
-      this.fav=!this.fav;
+    favorite(recipe){
+      recipe.isFav=!recipe.isFav;
+      let headers = new Headers({
+          'Content-Type': 'application/json'
+      });
+      let options = new RequestOptions({
+        headers: headers
+      });
+      var data = {userid: this.foodService.user, data: recipe.id};
+
+      //if just now favorited
+      if(recipe.isFav){
+        this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/favorite', JSON.stringify(data), options)
+        .map(res => res.json())
+        .subscribe(data => {   
+          alert(data.message);
+        }, (error) => {
+            console.log("something is wrong with request " + error);
+        });
+      }
+      else {
+        this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/unfavorite', JSON.stringify(data), options)
+        .map(res => res.json())
+        .subscribe(data => {   
+          alert(data.message);
+        }, (error) => {
+            console.log("something is wrong with request " + error);
+        });
+      }
+
     }
 }
