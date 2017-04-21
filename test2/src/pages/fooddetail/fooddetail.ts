@@ -14,13 +14,24 @@ import { Food } from '../../providers/food';
 })
 export class FooddetailPage {
   public food = [];
+  public caloricBreakdown = [];
   public nutrients = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public foodService: Food) {
     console.log(this.foodService.foodDetails);
     this.food = this.foodService.foodDetails["body"];
+    if (this.food["nutrition"] === undefined){
+        console.log("No food details found");
+        
+       }
+      else{
+        this.caloricBreakdown = this.food["nutrition"]["caloricBreakdown"];
+        this.nutrients=this.food["nutrition"]["nutrients"];
+       
+      }
+    
     this.food["image"]= "https://spoonacular.com/cdn/ingredients_100x100/"+this.food["image"];
-    this.nutrients=this.food["nutrition"]["nutrients"];
+    
     console.log(this.food);
     console.log(this.nutrients);
   }
