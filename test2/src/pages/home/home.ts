@@ -53,24 +53,8 @@ export class HomePage {
           this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/recipeDetail', array, options)
           .map(res => res.json())
         .subscribe(data => {
-            this.foodService.recipeDetails=JSON.parse(data.package1);
-            this.foodService.recipeInstructions=JSON.parse(data.package2);
-            
-            var ingredients = [];
-            var pantry = this.foodService.foodthings;
-            ingredients = this.foodService.recipeDetails["extendedIngredients"];
-            this.foodService.ingredientsHave = [];
-            
-            console.log(ingredients);
-            console.log(pantry);
-            for (let food of ingredients){
-              for (let item of pantry){
-                if (food.name.search(item.name) != -1){
-                  this.foodService.ingredientsHave.push(item);
-                  console.log(item.name);
-                }
-              }
-            }
+            this.foodService.recipeDetails=data.package1;
+            this.foodService.recipeInstructions=data.package2;
             console.log("recipe id sent to server");
             this.navCtrl.push(this.recipeDetail);
         }, error => {
@@ -132,7 +116,8 @@ export class HomePage {
         .map(res => res.json())
         .subscribe(data => {   
           this.foodService.recipes = data.message;
-          console.log("response for length " + data.message);
+          console.log("response for recipes with selected");
+          console.log(data.message);
         }, (error) => {
             console.log("something is wrong with request " + error);
         });
@@ -143,7 +128,8 @@ export class HomePage {
         .map(res => res.json())
         .subscribe(data => {   
           this.foodService.recipes = data.message;
-          console.log("response for no length " + data.message);
+          console.log("response for recipes with all");
+          console.log(data.message);
         }, (error) => {
             console.log("something is wrong with request " + error);
         });
@@ -197,13 +183,8 @@ export class HomePage {
       this.copyFoodthings = this.foodService.filterItems(this.searchQuery);
     }
     
-    echo(recipe){
-      console.log("echoooooooooooooo");
-    }
-    
     fav = false;
-    favorite(recipe){
-      console.log(recipe.name);
+    favorite(){
       this.fav=!this.fav;
     }
 }

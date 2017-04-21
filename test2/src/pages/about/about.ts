@@ -17,7 +17,7 @@ import 'rxjs/add/operator/map';
 export class AboutPage {
   public base64Image: string;
   public selected = [];
-  public anySelected : boolean = false;
+  public inDeletionMode : boolean = false;
   foodDetail = FooddetailPage;
   
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public foodService: Food, public http: Http) {
@@ -34,7 +34,6 @@ export class AboutPage {
         var dataImage = JSON.stringify({image: this.base64Image});
         
         this.navCtrl.push(ConfirmScannedPage, {image: dataImage});
-        //set alreadyBuffered variable
     }, (err) => {
         alert(err);
     });
@@ -46,34 +45,9 @@ export class AboutPage {
   }
 
   /******FOR SELECTION MODE*****/
-  multicheckPress(food){
-
-    if(!this.anySelected){
-      //checks if item is already selected
-      var index = this.selected.indexOf(food);
-      if(index > -1){
-        this.selected.splice(index, 1);
-        food.pantrySelected = false;
-      }
-      else {
-        this.selected.push(food);
-        food.pantrySelected = true;
-      }
-
-      //checks if any items are selected
-      if(this.selected.length == 0){
-        this.anySelected = false;    
-      }
-      else {
-        this.anySelected = true;
-      }
-    }
-
-  }
-
   multicheckTap(food){
 
-    if(this.anySelected){
+    if(this.inDeletionMode){
       //checks if item is already selected
       var index = this.selected.indexOf(food);
       if(index > -1){
@@ -83,100 +57,97 @@ export class AboutPage {
       else {
         this.selected.push(food);
         food.pantrySelected = true;
-      }
-
-      //checks if any items are selected
-      if(this.selected.length == 0){
-        this.anySelected = false;
-      }
-      else {
-        this.anySelected = true;
-      }      
+      }     
     }
 
   }
 
   closeSelected(){
+    this.inDeletionMode = false;
     this.selected = [];
-    this.anySelected = false;
     for (var index in this.foodService.foodthings) {
      this.foodService.foodthings[index].pantrySelected = false; 
     }
   }
 
   goToFoodDetail(food){
-    console.log(food.name);
-    console.log(food.api_id);
-    
-    var array = JSON.stringify({data: food.api_id});
-    let headers = new Headers({
-        'Content-Type': 'application/json'
+    if(!this.inDeletionMode){
+      console.log(food.name);
+      console.log(food.api_id);
+      
+      var array = JSON.stringify({data: food.api_id});
+      let headers = new Headers({
+          'Content-Type': 'application/json'
+        });
+      let options = new RequestOptions({
+           headers: headers
+         });
+          this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/foodDetail', array, options)
+          .map(res => res.json())
+        .subscribe(data => {
+          console.log(data);
+            this.foodService.foodDetails=data.detail;
+            console.log("food id sent to server");
+            this.navCtrl.push(this.foodDetail);
+      
+        }, error => {
+            console.log("Oooops!");
       });
-    let options = new RequestOptions({
-         headers: headers
-       });
-        this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/foodDetail', array, options)
-        .map(res => res.json())
-      .subscribe(data => {
-        console.log(data);
-          this.foodService.foodDetails=data.detail;
-          console.log("food id sent to server");
-          this.navCtrl.push(this.foodDetail);
-    
-      }, error => {
-          console.log("Oooops!");
-      });
+    }
   }
 
   deleteFood(){
-    var matched : boolean = false;
-    var index = 0;
-    var array = [];
+    if(this.inDeletionMode){
+      var matched : boolean = false;
+      var index = 0;
+      var array = [];
 
-    for (var item in this.selected){
-      while(!matched){
-        if(this.selected[item].name == this.foodService.foodthings[index].name){
-          matched = true;
+      for (var item in this.selected){
+        while(!matched){
+          if(this.selected[item].name == this.foodService.foodthings[index].name){
+            matched = true;
+          }
+          else {
+            index++;
+          }
         }
-        else {
-          index++;
-        }
+
+        this.foodService.foodthings.splice(index, 1);
+        index = 0;
+        matched = false;
+        array.push(this.selected[item].id);
       }
 
-      this.foodService.foodthings.splice(index, 1);
-      index = 0;
-      matched = false;
-      array.push(this.selected[item].id);
-    }
+      console.log(this.foodService.foodthings);
+      console.log(this.selected);
+      console.log(array);
 
-    console.log(this.foodService.foodthings);
-    console.log(this.selected);
-    console.log(array);
-
-    var data = JSON.stringify({data: array});
-    let headers = new Headers({
-        'Content-Type': 'application/json'
-      });
-       let options = new RequestOptions({
-         headers: headers
-       });
-        this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/deleteItem', data, options)
-        .map(res => res.json())
-      .subscribe(data => {
-         console.log(data.message);
-         this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/getRecipes', JSON.stringify({flag: 0, data: []}), options)
-        .map(res => res.json())
-        .subscribe(data => {   
-          this.foodService.recipes = data.message;
-        }, (error) => {
-            console.log("something is wrong with request " + error);
+      var data = JSON.stringify({data: array});
+      let headers = new Headers({
+          'Content-Type': 'application/json'
         });
-      }, error => {
-          console.log("Oooops!");
-      });
+         let options = new RequestOptions({
+           headers: headers
+         });
+          this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/deleteItem', data, options)
+          .map(res => res.json())
+        .subscribe(data => {
+           console.log(data.message);
+           this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/getRecipes', JSON.stringify({flag: 0, data: []}), options)
+          .map(res => res.json())
+          .subscribe(data => {   
+            this.foodService.recipes = data.message;
+          }, (error) => {
+              console.log("something is wrong with request " + error);
+          });
+        }, error => {
+            console.log("Oooops!");
+        });
 
-    this.selected = [];
-    this.anySelected = false;
+        this.selected = [];
+      }
+      this.inDeletionMode = !this.inDeletionMode;
+    
   }
 
 }
