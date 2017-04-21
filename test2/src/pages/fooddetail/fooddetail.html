@@ -22,11 +22,11 @@
     </ion-col>
   </ion-row>
   <h5>Caloric Breakdown</h5>
-  <!--
-  <ion-row>&nbsp; &nbsp;<b>Percent Protein: &nbsp;</b>{{caloricBreakdown.percentProtein}}%</ion-row>
-  <ion-row>&nbsp; &nbsp;<b>Percent Fat: &nbsp;</b>{{caloricBreakdown.percentFat}}%</ion-row>
-  <ion-row>&nbsp; &nbsp;<b>Percent Carbs: &nbsp;</b>{{caloricBreakdown.percentCarbs}}%</ion-row>
--->
+  <div *ngIf="caloricBreakdown">
+    <ion-row>&nbsp; &nbsp;<b>Percent Protein: &nbsp;</b>{{caloricBreakdown.percentProtein}}%</ion-row>
+    <ion-row>&nbsp; &nbsp;<b>Percent Fat: &nbsp;</b>{{caloricBreakdown.percentFat}}%</ion-row>
+    <ion-row>&nbsp; &nbsp;<b>Percent Carbs: &nbsp;</b>{{caloricBreakdown.percentCarbs}}%</ion-row>
+  </div>
   <h5>Nutrition Details:</h5>
   <ion-grid>
     <ion-row>
