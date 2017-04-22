@@ -122,3 +122,30 @@
     </ion-pullup>
     </div>
 </div>
+
+<div [ngSwitch]='recipeView'>
+  <div *ngSwitchCase='favorites'>
+    <ion-list *ngFor="let recipe of foodService.favoriteRecipes">
+        <ion-row>
+          <ion-item>
+            <ion-thumbnail item-left>
+              <img src={{recipe.image_link}} (click)="goToRecipeDetail(recipe)">
+            </ion-thumbnail>
+            <div (click)="goToRecipeDetail(recipe)">
+              <h2>{{recipe.name}}</h2>
+              <!--<p>{{recipe.selected}}</p>-->
+            </div>
+            <div>
+              <ion-row (click)="goToRecipeDetail(recipe)">
+                <ion-badge color="secondary">Used:  {{recipe.numUsedIngredients}} </ion-badge>
+                <ion-badge color="danger">Missing:  {{recipe.numMissedIngredients}}</ion-badge>
+              </ion-row>
+              <button ion-button icon-only clear item-right (click)="removeFavorite(recipe)">
+                <ion-icon name="star"></ion-icon>
+              </button>
+            </div>
+          </ion-item>
+        </ion-row>
+      </ion-list>
+  </div>
+</div>
