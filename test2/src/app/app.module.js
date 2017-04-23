@@ -13,9 +13,13 @@ import { HomePage } from '../pages/home/home';
 import { FoodCreatePage } from '../pages/food-create/food-create';
 import { ConfirmScannedPage } from '../pages/confirm-scanned/confirm-scanned';
 import { RecipePage } from '../pages/recipe/recipe';
+import { LoginPage } from '../pages/login/login';
 import { TabsPage } from '../pages/tabs/tabs';
 import { Food } from '../providers/food';
+import { FooddetailPage } from '../pages/fooddetail/fooddetail';
+import { PantryUpdatePage } from '../pages/pantry-update/pantry-update';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { NativeStorage } from '@ionic-native/native-storage';
 import { IonPullupModule } from 'ionic-pullup';
 var AppModule = (function () {
     function AppModule() {
@@ -30,8 +34,11 @@ AppModule = __decorate([
             ContactPage,
             HomePage,
             FoodCreatePage,
+            FooddetailPage,
             ConfirmScannedPage,
             RecipePage,
+            LoginPage,
+            PantryUpdatePage,
             TabsPage
         ],
         imports: [
@@ -45,11 +52,14 @@ AppModule = __decorate([
             ContactPage,
             HomePage,
             FoodCreatePage,
+            FooddetailPage,
             ConfirmScannedPage,
             RecipePage,
+            LoginPage,
+            PantryUpdatePage,
             TabsPage
         ],
-        providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Food, SplashScreen],
+        providers: [{ provide: ErrorHandler, useClass: IonicErrorHandler }, Food, SplashScreen, NativeStorage],
         schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
 ], AppModule);

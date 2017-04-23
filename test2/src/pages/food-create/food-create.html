@@ -4,8 +4,10 @@
   	<ion-buttons left>
     	<button ion-button (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
     </ion-buttons>
-    <ion-title>Add Food to Your Pantry</ion-title>
-    
+    <ion-title>New Food Item</ion-title>
+    <ion-buttons right>
+    	<button ion-button (click)="addFoodItem()">SAVE</button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -14,7 +16,7 @@
 <ion-content padding>
 	<ion-grid>
 		<ion-row>
-			<ion-col col-11 class='text-center'>New Foods</ion-col>
+			<ion-col col-11 class='text-center'>Name</ion-col>
 			<ion-col col-1></ion-col>
 		</ion-row>
 		<div *ngFor="let item of inputList">
@@ -23,7 +25,6 @@
 				<ion-col col-1><ion-icon *ngIf='inputList.length > 1' class='col-icon' color='danger' name='close-circle' (click)='removeRow(item)'></ion-icon></ion-col>
 			</ion-row>
 		</div>
-		<button ion-button (click)="addNewRow()"><ion-icon name="add-circle"></ion-icon>Add another item</button>
-    <button ion-button color="secondary" (click)="addFoodItem()">Save changes</button>
+		<button ion-button (click)="addNewRow()"><ion-icon name="add-circle"></ion-icon></button>
 	</ion-grid>
 </ion-content>

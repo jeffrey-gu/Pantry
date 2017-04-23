@@ -15,13 +15,13 @@ export class PantryUpdatePage {
     this.overlap = this.foodService.overlapIngredients;
     console.log("--overlap--");
     console.log(this.overlap);
-	}
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PantryUpdatePage');
   }
   dismiss(){
-   	this.viewCtrl.dismiss();
+     this.viewCtrl.dismiss();
    }
    
    multicheckTap(food){

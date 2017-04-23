@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { NativeStorage } from '@ionic-native/native-storage';
 import 'rxjs/add/operator/map';
 /*
   Generated class for the Food provider.
@@ -17,44 +18,46 @@ import 'rxjs/add/operator/map';
   for more info on providers and Angular 2 DI.
 */
 var Food = (function () {
-    function Food(http) {
-        var _this = this;
+    function Food(http, nativeStorage) {
         this.http = http;
-        this.foodthings = []; //food items from pantry
+        this.nativeStorage = nativeStorage;
+        this.foodthings = []; //food items from pantry, format: {name: "food"}
+        this.recipes = [];
+        this.recipeDetails = [];
+        this.foodDetails = [];
+        this.ingredientsHave = []; //ingredients in a recipe that the user has
+        this.recipeInstructions = [];
+        this.favoriteRecipes = [];
         this.useInRecipe = []; //food items that are used to generate recipes, format: {name: "food"}
         this.recentlyUsed = []; //items recently used in recipes, format: {name: "food"}
-        this.http.get('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/loguser')
-            .map(function (res) { return res.json(); }).subscribe(function (data) {
-            _this.foodthings = data.message;
-            console.log("pantry read!");
-        });
-        /*
-        this.http.get("../testpantry.json").map(res => res.json()).subscribe(data => {
-            this.foodthings = data.food;
-            console.log(this.foodthings);
-          });
-  */
-        //GET request to populate ingredients in pantry
-        /*
-        this.http.get('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/fetchPantry')
-        .map(res => res.json())
-        .subscribe(data => {
-            console.log(data.message);
-          });
-      */
+        this.user = ""; //user id
         for (var i in this.foodthings) {
             this.foodthings[i]['recipeSelected'] = false;
             this.foodthings[i]['pantrySelected'] = false;
         }
     }
     Food.prototype.updateRecentlyUsed = function () {
-        for (var _i = 0, _a = this.useInRecipe; _i < _a.length; _i++) {
-            var item = _a[_i];
-            this.recentlyUsed.push(item);
+        if (this.useInRecipe.length > 0) {
+            //useInRecipe after the items were deleted from the original useInRecipe
+            //so doesn't include any items deleted from foodthings
+            for (var _i = 0, _a = this.useInRecipe; _i < _a.length; _i++) {
+                var item = _a[_i];
+                this.recentlyUsed.push(item);
+            }
+            this.useInRecipe = [];
         }
-        while (this.recentlyUsed.length > 25) {
-            this.recentlyUsed.shift();
+        else {
+            //removes any items from recently used that are no longer in the pantry
+            for (var _b = 0, _c = this.recentlyUsed; _b < _c.length; _b++) {
+                var item = _c[_b];
+                var index = this.foodthings.indexOf(item);
+                if (index > -1) {
+                    this.recentlyUsed.splice(index, 1);
+                }
+            }
         }
+        this.nativeStorage.setItem('recentIngrdts', this.recentlyUsed)
+            .then(function () { return alert('Stored item!'); }, function (error) { return alert('Error storing item' + error); });
     };
     Food.prototype.filterItems = function (searchQuery) {
         console.log("food filtering");
@@ -77,7 +80,25 @@ var Food = (function () {
             });
         }
         else if (sort == "category") {
-            console.log("catergory ssort not yet!");
+            this.foodthings = this.foodthings.sort(function (n1, n2) {
+                if (n1.attr1 > n2.attr1) {
+                    return 1;
+                }
+                else if (n1.attr1 < n2.attr1) {
+                    return -1;
+                }
+                else if (n1.attr1 == n2.attr1) {
+                    if (n1.attr2 > n2.attr2) {
+                        return 1;
+                    }
+                    else if (n1.attr2 < n2.attr2) {
+                        return -1;
+                    }
+                }
+                else {
+                    return 0;
+                }
+            });
         }
         else if (sort == "recent") {
             console.log("recent sort not yet done!");
@@ -94,7 +115,7 @@ var Food = (function () {
 }());
 Food = __decorate([
     Injectable(),
-    __metadata("design:paramtypes", [Http])
+    __metadata("design:paramtypes", [Http, NativeStorage])
 ], Food);
 export { Food };
 //# sourceMappingURL=food.js.map

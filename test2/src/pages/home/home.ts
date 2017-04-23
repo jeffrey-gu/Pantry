@@ -14,73 +14,59 @@ export class HomePage {
     footerState: IonPullUpFooterState;
     recipeView: string = "default";
     public copyFoodthings = [];
-    public selected = [];
     public anySelected : boolean = false;
     public anyRecipes : boolean = false;
     public searchQuery : string = "";
     public recipes = [];
-    public isLoggedIn : boolean = false;
     recipeDetail = RecipePage;
     
 
     constructor(public navCtrl: NavController, public foodService: Food, public http: Http, public platform: Platform) {
       this.footerState = IonPullUpFooterState.Collapsed;
-      
-      //uses all the ingredients from the database to generate a recipe
-      // this.http.get('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/loguser')
-      // .map(res => res.json()).subscribe(data => {
-      //   this.foodService.recipes=data.message2;
-      //   console.log("recipes read!");
-      //   this.isLoggedIn = true;
-      // });
-/*
-      this.http.get("../testrecipes.json").map(res => res.json()).subscribe(data => {
-        this.foodService.recipes = data;});
-      */
     }
 
-    goToRecipeDetail(recipe){
-      console.log(recipe.name);
-      console.log(recipe.id);
-      
-      var array = JSON.stringify({data: recipe.id});
-      let headers = new Headers({
-          'Content-Type': 'application/json'
-        });
-      let options = new RequestOptions({
-           headers: headers
-         });
-          this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/recipeDetail', array, options)
-          .map(res => res.json())
-        .subscribe(data => {
-            this.foodService.recipeDetails=JSON.parse(data.package1);
-            this.foodService.recipeInstructions=JSON.parse(data.package2);
-             var pantry = this.foodService.foodthings;
-             var ingredients = this.foodService.recipeDetails["extendedIngredients"];
-             this.foodService.overlapIngredients = [];
-             
-             console.log(ingredients);
-             console.log(pantry);
-             for (let food of ingredients){
-               for (let item of pantry){
-                 if ((food.name.search(item.name) != -1)){
-                  
-                   this.foodService.overlapIngredients.push(item);
-                   this.foodService.haveIngredients.push(food);
-                   this.foodService.dontHaveIngredients.push(food);
-                   console.log(item.name);
-                 }
-                 else{
-                  
-                 }
+  goToRecipeDetail(recipe){
+    console.log(recipe.name);
+    console.log(recipe.id);
+    
+    var array = JSON.stringify({data: recipe.id});
+    let headers = new Headers({
+        'Content-Type': 'application/json'
+      });
+    let options = new RequestOptions({
+         headers: headers
+       });
+        this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/recipeDetail', array, options)
+        .map(res => res.json())
+      .subscribe(data => {
+          this.foodService.recipeDetails=JSON.parse(data.package1);
+          this.foodService.recipeInstructions=JSON.parse(data.package2);
+           var pantry = this.foodService.foodthings;
+           var ingredients = this.foodService.recipeDetails["extendedIngredients"];
+           this.foodService.overlapIngredients = [];
+           
+           console.log(ingredients);
+           console.log(pantry);
+           for (let food of ingredients){
+             for (let item of pantry){
+               if ((food.name.search(item.name) != -1)){
+                
+                 this.foodService.overlapIngredients.push(item);
+                 this.foodService.haveIngredients.push(food);
+                 this.foodService.dontHaveIngredients.push(food);
+                 console.log(item.name);
+               }
+               else{
+                
                }
              }
-             console.log(this.foodService.overlapIngredients);
-            console.log("recipe id sent to server");
-            this.navCtrl.push(this.recipeDetail);
-        }, error => {
-            console.log("Oooops!");
-        });
+           }
+           console.log(this.foodService.overlapIngredients);
+          console.log("recipe id sent to server");
+          this.navCtrl.push(this.recipeDetail);
+      }, error => {
+          console.log("Oooops!");
+      });
       
     }
 
@@ -98,7 +84,7 @@ export class HomePage {
 
     footerCollapsed() {
       console.log('Footer collapsed!');
-      if(this.selected.length > 0){
+      if(this.foodService.selectedInPullup.length > 0){
         console.log("generate recipes with length");
         this.generateRecipes(1);
       }
@@ -116,7 +102,7 @@ export class HomePage {
     
     generateRecipes(flag){
       console.log("recipes are generating");
-      console.log(this.selected);
+      console.log(this.foodService.selectedInPullup);
       let headers = new Headers({
           'Content-Type': 'application/json'
       });
@@ -126,7 +112,7 @@ export class HomePage {
 
       if(flag == 1){
         var array = [];
-        for(var item of this.selected){
+        for(var item of this.foodService.selectedInPullup){
           array.push(item.id);
         }
 
@@ -140,7 +126,7 @@ export class HomePage {
           console.log("response for recipes with selected");
           console.log(data.message);
         }, (error) => {
-            console.log("something is wrong with request " + error);
+            console.log("something is wrong with request", error);
         });
       }
       else {
@@ -152,7 +138,7 @@ export class HomePage {
           console.log("response for recipes with all");
           console.log(data.message);
         }, (error) => {
-            console.log("something is wrong with request " + error);
+            console.log("something is wrong with request", error);
         });
       }
     }
@@ -160,19 +146,19 @@ export class HomePage {
     /******FOR SELECTION MODE*****/
     multicheckTap(food){
       //checks if item is already selected
-      var index = this.selected.indexOf(food);
-      console.log("selected " + this.selected);
+      var index = this.foodService.selectedInPullup.indexOf(food);
+      console.log("selected " + this.foodService.selectedInPullup);
       if(index > -1){
-        this.selected.splice(index, 1);
+        this.foodService.selectedInPullup.splice(index, 1);
         food.recipeSelected = false;
       }
       else {
-        this.selected.push(food);
+        this.foodService.selectedInPullup.push(food);
         food.recipeSelected = true;
       }
 
       //checks if any items are selected
-      if(this.selected.length == 0){
+      if(this.foodService.selectedInPullup.length == 0){
         this.anySelected = false;
       }
       else {
@@ -187,7 +173,7 @@ export class HomePage {
           item.recipeSelected = false;
         }
       }
-      this.selected = [];
+      this.foodService.selectedInPullup = [];
       this.anySelected = false;
       console.log("Unselecting all");
       this.foodService.foodthings = this.copyFoodthings;
@@ -216,23 +202,89 @@ export class HomePage {
 
       //if just now favorited
       if(recipe.isFav){
+        console.log("favoriting");
+        console.log(recipe);
+        console.log(data);
         this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/favorite', JSON.stringify(data), options)
         .map(res => res.json())
         .subscribe(data => {   
           alert(data.message);
+          this.foodService.favoriteRecipes.push(recipe);
         }, (error) => {
-            console.log("something is wrong with request " + error);
+            console.log("something is wrong with request", error);
         });
       }
       else {
+        console.log("unfavoriting");
+        console.log(recipe);
+
+        //looking through favorite recipes array, only looking for id
+        var index = 0;
+        var matched = false;
+        while(!matched){
+          if(recipe.id == this.foodService.favoriteRecipes[index].id){
+            matched = true;
+          }
+          else {
+            index++;
+          }
+        }
+
+        console.log(index);
+        if(matched){
+          this.foodService.favoriteRecipes.splice(index, 1);
+          console.log(this.foodService.favoriteRecipes);
+          this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/unfavorite', JSON.stringify(data), options)
+          .map(res => res.json())
+          .subscribe(data => {   
+            alert(data.message);
+          }, (error) => {
+              console.log("something is wrong with request", error);
+          });          
+        }
+        else {
+          console.log("can't find this favorite");
+        }
+
+      }
+
+    }
+
+    //ONLY USED FOR FAVORITES SEGMENT, so that the recipe won't
+    //show up in the Favorites segment anymore
+    removeFavorite(recipe){
+      console.log("unfavoriting");
+      console.log(recipe);
+      
+      var index = 0;
+      var matched = false;
+      while(!matched){
+        if(recipe.id == this.foodService.favoriteRecipes[index].id){
+          matched = true;
+        }
+        else {
+          index++;
+        }
+      }
+
+      if(matched){
+        this.foodService.favoriteRecipes.splice(index, 1);
+
+        let headers = new Headers({
+          'Content-Type': 'application/json'
+        });
+        let options = new RequestOptions({
+          headers: headers
+        });
+        var data = {userid: this.foodService.user, data: recipe.id};
         this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/unfavorite', JSON.stringify(data), options)
         .map(res => res.json())
         .subscribe(data => {   
           alert(data.message);
-        }, (error) => {
-            console.log("something is wrong with request " + error);
+        }, (error) => {""
+            console.log("something is wrong with request", error);
         });
-      }
 
+      }
     }
 }

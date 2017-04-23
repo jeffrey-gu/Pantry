@@ -18,15 +18,21 @@
 
 	  <ion-item>
 	    <ion-label floating>Username</ion-label>
-	    <ion-input type="text" (value)='username' [(ngModel)]='username'></ion-input>
+	    <ion-input type="text" (focus)='clearMessage()' (value)='username' [(ngModel)]='username'></ion-input>
 	  </ion-item>
 
 	  <ion-item>
 	    <ion-label floating>Password</ion-label>
-	    <ion-input type="password" (value)='password' [(ngModel)]='password'></ion-input>
+	    <ion-input type="password" (focus)='clearMessage()' (value)='password' [(ngModel)]='password'></ion-input>
 	  </ion-item>
 
 	</ion-list>
-	<button ion-button full (click)="sendLogin()">Login</button>
+
+	<ion-label class='err-msg' *ngIf='!fieldsFilled'>Please fill out all fields</ion-label>
+	<ion-label class='err-msg' *ngIf='!correctInfo'>Incorrect username/password</ion-label>
+	<ion-label class='err-msg' *ngIf='!validUser'>User already exists</ion-label>
+
+	<button ion-button (click)="sendLogin()">Login</button>
+	<button ion-button (click)="sendRegister()">Register</button>
 
 </ion-content>

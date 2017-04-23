@@ -40,18 +40,34 @@ var FoodCreatePage = (function () {
         for (var i in this.inputList) {
             array.push(this.inputList[i].name);
         }
-        console.log(JSON.stringify({ data: array }));
         var headers = new Headers({
             'Content-Type': 'application/json'
         });
         var options = new RequestOptions({
             headers: headers
         });
-        this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/add', JSON.stringify({ data: array }), options)
+        this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/add', JSON.stringify({ userid: this.foodService.user, data: array }), options)
             .map(function (res) { return res.json(); })
             .subscribe(function (data) {
-            for (var i in data.message) {
-                _this.foodService.foodthings.push(data.message[i]);
+            if (data.message.length > 0) {
+                for (var i in data.message) {
+                    _this.foodService.foodthings.push(data.message[i]);
+                }
+                var array = [];
+                for (var _i = 0, _a = _this.foodService.foodthings; _i < _a.length; _i++) {
+                    var item = _a[_i];
+                    array.push(item.id);
+                }
+                _this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/getRecipes', JSON.stringify({ userid: _this.foodService.user, flag: 0, data: [] }), options)
+                    .map(function (res) { return res.json(); })
+                    .subscribe(function (data) {
+                    _this.foodService.recipes = data.message;
+                }, function (error) {
+                    console.log("something is wrong with request " + error);
+                });
+            }
+            else {
+                alert("Item(s) already in pantry");
             }
             console.log(_this.foodService.foodthings);
         }, function (error) {

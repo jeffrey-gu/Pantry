@@ -71,6 +71,17 @@ export class ConfirmScannedPage {
       }
       this.loader.dismiss();
       console.log(this.foodService.foodthings);
+      this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/getRecipes', JSON.stringify({userid: this.foodService.user, flag: 0, data: []}), options)
+        .map(res => res.json())
+        .subscribe(data => {   
+          this.foodService.recipes = data.message;
+            this.foodService.selectedInPullup = [];
+            for(var item of this.foodService.foodthings){
+              item.recipeSelected = false;
+            }
+        }, (error) => {
+            console.log("something is wrong with request", error);
+        });
     }, (error) => {
         console.log(error);
     });

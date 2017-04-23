@@ -42,8 +42,7 @@ var ConfirmScannedPage = (function () {
         this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/receipt', dataImage, options)
             .map(function (res) { return res.json(); })
             .subscribe(function (data) {
-            _this.scannedItems = data.payload.split(',');
-            alert(_this.scannedItems);
+            _this.scannedItems = data.payload;
             _this.receivedScannedItems = true;
             _this.loader.dismiss();
         }, function (error) {
@@ -51,39 +50,38 @@ var ConfirmScannedPage = (function () {
         });
         this.loader.present();
     }
-    ConfirmScannedPage.prototype.removeRow = function (item) {
-        var index = this.scannedItems.indexOf(item);
+    ConfirmScannedPage.prototype.removeRow = function (index) {
         this.scannedItems.splice(index, 1);
         console.log("Row removed");
     };
     ConfirmScannedPage.prototype.addNewRow = function () {
-        alert(this.scannedItems);
         this.scannedItems.push("");
     };
     ConfirmScannedPage.prototype.addFoodItem = function () {
         var _this = this;
-        var array = [];
-        for (var i in this.scannedItems) {
-            array.push(this.scannedItems[i].name);
-        }
-        var data = JSON.stringify({ data: array });
+        var array = JSON.stringify({ userid: this.foodService.user, data: this.scannedItems });
         var headers = new Headers({
             'Content-Type': 'application/json'
         });
         var options = new RequestOptions({
             headers: headers
         });
-        this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/add', data, options)
+        this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/add', array, options)
             .map(function (res) { return res.json(); })
             .subscribe(function (data) {
             for (var i in data.message) {
                 _this.foodService.foodthings.push(data.message[i]);
             }
+            _this.loader.dismiss();
             console.log(_this.foodService.foodthings);
         }, function (error) {
             console.log(error);
         });
+        this.loader.present();
         this.navCtrl.pop();
+    };
+    ConfirmScannedPage.prototype.trackIndex = function (index, item) {
+        return index;
     };
     return ConfirmScannedPage;
 }());

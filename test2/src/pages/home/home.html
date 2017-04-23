@@ -11,11 +11,6 @@
       <ion-segment-button value="default">
         Recommended
       </ion-segment-button>
-      <!--
-      <ion-segment-button value="recent">
-        Recent
-      </ion-segment-button>
-      -->
       <ion-segment-button value="favorites">
         Favorites
       </ion-segment-button>
@@ -33,7 +28,6 @@
             </ion-thumbnail>
             <div (click)="goToRecipeDetail(recipe)">
               <h2>{{recipe.name}}</h2>
-              <!--<p>{{recipe.selected}}</p>-->
             </div>
             <div>
               <ion-row (click)="goToRecipeDetail(recipe)">
@@ -50,6 +44,33 @@
       </ion-list>
       </div>
     </div>
+
+  <div [ngSwitch]="recipeView">
+    <div *ngSwitchCase="'favorites'">
+        <ion-list *ngFor="let recipe of foodService.favoriteRecipes">
+          <ion-row>
+            <ion-item>
+              <ion-thumbnail item-left>
+                <img src={{recipe.image_link}} (click)="goToRecipeDetail(recipe)">
+              </ion-thumbnail>
+              <div (click)="goToRecipeDetail(recipe)">
+                <h2>{{recipe.name}}</h2>
+              </div>
+              <div>
+                <ion-row (click)="goToRecipeDetail(recipe)">
+                  <ion-badge color="secondary">Used:  {{recipe.numUsedIngredients}} </ion-badge>
+                  <ion-badge color="danger">Missing:  {{recipe.numMissedIngredients}}</ion-badge>
+                </ion-row>
+                <button ion-button icon-only clear item-right (click)="removeFavorite(recipe)">
+                  <ion-icon name="star"></ion-icon>
+                </button>
+              </div>
+            </ion-item>
+          </ion-row>
+        </ion-list>
+    </div>
+  </div>
+
 </ion-content>
 <div [ngSwitch]="recipeView">
     <div *ngSwitchCase="'default'">
@@ -59,8 +80,8 @@
         </ion-pullup-tab>
         <ion-toolbar class='pullup-toolbar' color="primary" (tap)="toggleFooter()">
           <ion-title *ngIf="footerState == 0"></ion-title><ion-title *ngIf="footerState == 1 && !anySelected">Select Ingredients</ion-title>
-          <ion-title *ngIf="anySelected">{{selected.length}} items selected</ion-title>
-          <div *ngIf="anySelected"><span *ngFor="let item of selected">{{item.name}}&nbsp;</span></div>
+          <ion-title *ngIf="footerState == 1 && anySelected">{{foodService.selectedInPullup.length}} items selected</ion-title>
+          <div *ngIf="anySelected"><span class='select-item' *ngFor="let item of foodService.selectedInPullup">#{{item.name}}&nbsp;</span></div>
         </ion-toolbar>
     
         <ion-content>
@@ -74,7 +95,7 @@
                     <ion-select class='select-box' [(ngModel)]="sort" (ionChange)="foodService.sortPantry(sort)">
                       <ion-option value="alphabetical">Alphabetical</ion-option>
                       <ion-option value="category">Category</ion-option>
-                      <!--<ion-option value="recent">Recent</ion-option>-->
+                      <ion-option value="recent">Recent</ion-option>
                     </ion-select>
                   </ion-item>
                   </ion-row>

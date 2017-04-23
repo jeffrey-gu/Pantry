@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { Camera } from 'ionic-native';
+import { HomePage } from '../home/home';
 import { FoodCreatePage } from '../food-create/food-create';
 import { ConfirmScannedPage } from '../confirm-scanned/confirm-scanned';
 import { Food } from '../../providers/food';
@@ -138,6 +139,10 @@ export class AboutPage {
           .map(res => res.json())
           .subscribe(data => {   
             this.foodService.recipes = data.message;
+            this.foodService.selectedInPullup = [];
+            for(var item of this.foodService.foodthings){
+              item.recipeSelected = false;
+            }
           }, (error) => {
               console.log("something is wrong with request " + error);
           });

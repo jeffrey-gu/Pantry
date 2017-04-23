@@ -3,11 +3,6 @@
     <ion-title>
       Pantry
     </ion-title>
-    <!--
-    <ion-buttons right>
-      <button ion-button icon-only (click)="deleteFood()"><ion-icon name="trash"></ion-icon></button>
-    </ion-buttons>
-    -->
   </ion-navbar>
 </ion-header>
 
@@ -19,17 +14,12 @@
     <ion-title>
       {{selected.length}} items selected
     </ion-title>
-    <!--
-    <ion-buttons right>
-      <button ion-button icon-only (click)="deleteFood()"><ion-icon name="trash"></ion-icon></button>
-    </ion-buttons>
-    -->
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
-  <ion-fab left bottom *ngIf=!inDeletionMode>
+<ion-fab left bottom *ngIf=!inDeletionMode>
       <button ion-fab mini (click)="deleteFood()" ><ion-icon name="trash"></ion-icon></button>
     </ion-fab>
   
@@ -60,12 +50,9 @@
       <ion-select class='select-box' [(ngModel)]="sort" (ionChange)="foodService.sortPantry(sort)">
         <ion-option value="alphabetical">Alphabetical</ion-option>
         <ion-option value="category">Category</ion-option>
-        <!--<ion-option value="recent">Recent</ion-option>-->
       </ion-select>
     </ion-item>
   </ion-list>
-   
-  <img [src]="base64Image" *ngIf="base64Image" />
 
   <ion-grid>
     <div *ngFor="let food of foodService.foodthings; let i = index">
