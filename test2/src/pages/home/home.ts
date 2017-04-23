@@ -214,29 +214,4 @@ export class HomePage {
       }
 
     }
-
-    //ONLY USED FOR FAVORITES SEGMENT, so that the recipe won't
-    //show up in the Favorites segment anymore
-    removeFavorite(recipe){
-      var index = this.foodService.favoriteRecipes.indexOf(recipe);
-      if(index > -1){
-        this.foodService.favoriteRecipes.splice(index, 1);
-
-        let headers = new Headers({
-          'Content-Type': 'application/json'
-        });
-        let options = new RequestOptions({
-          headers: headers
-        });
-        var data = {userid: this.foodService.user, data: recipe.id};
-        this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/unfavorite', JSON.stringify(data), options)
-        .map(res => res.json())
-        .subscribe(data => {   
-          alert(data.message);
-        }, (error) => {
-            console.log("something is wrong with request " + error);
-        });
-
-      }
-    }
 }

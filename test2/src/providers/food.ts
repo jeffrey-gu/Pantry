@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { NativeStorage } from '@ionic-native/native-storage';
 import 'rxjs/add/operator/map';
 
 
@@ -19,13 +18,12 @@ export class Food {
   public foodDetails = [];
   public ingredientsHave = [];  //ingredients in a recipe that the user has
   public recipeInstructions = [];
-  public favoriteRecipes = [];
   public useInRecipe = [];     //food items that are used to generate recipes, format: {name: "food"}
   public recentlyUsed = [];    //items recently used in recipes, format: {name: "food"}
 
   public user = ""; //user id
 
-	constructor(public http: Http, public nativeStorage: NativeStorage) {
+	constructor(public http: Http) {
 		for(var i in this.foodthings){
 			this.foodthings[i]['recipeSelected'] = false;
 			this.foodthings[i]['pantrySelected'] = false;
@@ -50,11 +48,7 @@ export class Food {
         }
       }
     }
-    this.nativeStorage.setItem('recentIngrdts',this.recentlyUsed)
-    .then(
-      () => alert('Stored item!'),
-      error => alert('Error storing item' + error)
-    );
+    
   }
 
 	filterItems(searchQuery){

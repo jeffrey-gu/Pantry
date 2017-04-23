@@ -3,7 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { Food } from '../../providers/food';
-import { NativeStorage } from '@ionic-native/native-storage';
 import 'rxjs/add/operator/map';
 
 @Component({
@@ -14,8 +13,7 @@ export class LoginPage {
 	username : string = "";
 	password : string = "";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public foodService: Food,
-    public nativeStorage: NativeStorage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public foodService: Food) {
 
   }
 
@@ -36,17 +34,6 @@ export class LoginPage {
       	this.foodService.foodthings = data.message;
       	console.log(data.message2);
       	this.navCtrl.setRoot(TabsPage, {}, {animate: true, direction: 'forward'});
-
-        this.nativeStorage.getItem('recentIngrdts')
-        .then(
-          data => {
-            this.foodService.recentlyUsed = data;
-            console.log(data);
-          },
-          error => console.error(error)
-        );
-        //GET FAVORITE RECIPES
-        //this.foodService.favoriteRecipes = data.message3;
       }
       else {
       	console.log("not success");

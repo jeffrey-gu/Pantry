@@ -13,7 +13,6 @@ import { Food } from '../providers/food';
 import { FooddetailPage } from '../pages/fooddetail/fooddetail';
 import { PantryUpdatePage } from '../pages/pantry-update/pantry-update';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { NativeStorage } from '@ionic-native/native-storage';
 
 import { IonPullupModule } from 'ionic-pullup';
 
@@ -49,7 +48,7 @@ import { IonPullupModule } from 'ionic-pullup';
     PantryUpdatePage,
     TabsPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Food, SplashScreen, NativeStorage],
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Food, SplashScreen],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule {}
