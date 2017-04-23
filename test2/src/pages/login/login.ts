@@ -32,6 +32,9 @@ export class LoginPage {
         this.foodService.user = data.userid;
       	this.foodService.recipes = data.message2;
       	this.foodService.foodthings = data.message;
+        for (let food of this.foodService.foodthings){
+          food.image_link = food.image_link.replace(" ", "");
+        }
       	console.log(data.message2);
       	this.navCtrl.setRoot(TabsPage, {}, {animate: true, direction: 'forward'});
       }

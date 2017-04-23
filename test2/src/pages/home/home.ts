@@ -53,8 +53,29 @@ export class HomePage {
           this.http.post('http://ec2-52-37-159-82.us-west-2.compute.amazonaws.com/api/recipeDetail', array, options)
           .map(res => res.json())
         .subscribe(data => {
-            this.foodService.recipeDetails=data.package1;
-            this.foodService.recipeInstructions=data.package2;
+            this.foodService.recipeDetails=JSON.parse(data.package1);
+            this.foodService.recipeInstructions=JSON.parse(data.package2);
+             var pantry = this.foodService.foodthings;
+             var ingredients = this.foodService.recipeDetails["extendedIngredients"];
+             this.foodService.overlapIngredients = [];
+             
+             console.log(ingredients);
+             console.log(pantry);
+             for (let food of ingredients){
+               for (let item of pantry){
+                 if ((food.name.search(item.name) != -1)){
+                  
+                   this.foodService.overlapIngredients.push(item);
+                   this.foodService.haveIngredients.push(food);
+                   this.foodService.dontHaveIngredients.push(food);
+                   console.log(item.name);
+                 }
+                 else{
+                  
+                 }
+               }
+             }
+             console.log(this.foodService.overlapIngredients);
             console.log("recipe id sent to server");
             this.navCtrl.push(this.recipeDetail);
         }, error => {

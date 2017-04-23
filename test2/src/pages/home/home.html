@@ -9,11 +9,13 @@
   <div>
     <ion-segment [(ngModel)]="recipeView">
       <ion-segment-button value="default">
-        Search
+        Recommended
       </ion-segment-button>
+      <!--
       <ion-segment-button value="recent">
         Recent
       </ion-segment-button>
+      -->
       <ion-segment-button value="favorites">
         Favorites
       </ion-segment-button>
@@ -21,7 +23,6 @@
   </div>
   <br>
   ₍₍ ◝(•̀ㅂ•́)◟ ⁾⁾ gimme some recipes!
-  <button [navPush]="recipeDetail">Recipe</button>
   <div [ngSwitch]="recipeView">
     <div *ngSwitchCase="'default'">
       <ion-list *ngFor="let recipe of foodService.recipes">
@@ -73,7 +74,7 @@
                     <ion-select class='select-box' [(ngModel)]="sort" (ionChange)="foodService.sortPantry(sort)">
                       <ion-option value="alphabetical">Alphabetical</ion-option>
                       <ion-option value="category">Category</ion-option>
-                      <ion-option value="recent">Recent</ion-option>
+                      <!--<ion-option value="recent">Recent</ion-option>-->
                     </ion-select>
                   </ion-item>
                   </ion-row>

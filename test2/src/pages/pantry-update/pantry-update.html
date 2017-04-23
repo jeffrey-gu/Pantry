@@ -7,12 +7,42 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>pantryUpdate</ion-title>
+  	<ion-buttons left>
+    	<button ion-button (click)="dismiss()"><ion-icon name="arrow-round-back"></ion-icon></button>
+    </ion-buttons>
+    <!--
+    <ion-title>Update Pantry</ion-title>
+    -->
+    
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
-
+  <h5>Have you used up any of the following?</h5>
+  <h6>Please select item(s) to delete.</h6>
+  <ion-grid>
+    <div *ngFor="let food of overlap; let i = index">
+      <ion-row *ngIf="i%3 == 0">
+        <ion-col col-4 (tap)="multicheckTap(food)">
+          <ion-card><ion-item no-lines><div class="card-description">{{food.name}}</div>
+          <img class="full-image" src={{food.image_link}}>
+          </ion-item><ion-icon item-right name='checkmark-circle' *ngIf=food.pantrySelected></ion-icon></ion-card>
+        </ion-col>
+       
+        <ion-col col-4 *ngIf="(i+1) < overlap.length" (tap)="multicheckTap(overlap[i+1])">
+          <ion-card><ion-item no-lines><div class="card-description">{{overlap[i+1].name}}</div>
+          <img class="full-image" src={{overlap[i+1].image_link}}>
+          </ion-item><ion-icon item-right name='checkmark-circle' *ngIf=overlap[i+1].pantrySelected></ion-icon></ion-card>
+        </ion-col>
+        
+        <ion-col col-4 *ngIf="(i+2) < overlap.length" (tap)="multicheckTap(overlap[i+2])">
+          <ion-card><ion-item no-lines><div class="card-description">{{overlap[i+2].name}}</div>
+          <img class="full-image" src={{overlap[i+2].image_link}}>
+          </ion-item><ion-icon item-right name='checkmark-circle' *ngIf=overlap[i+2].pantrySelected></ion-icon></ion-card>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-grid>
+<button ion-button full (click)="deleteItems()">Delete selected from pantry</button>
 </ion-content>

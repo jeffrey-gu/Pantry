@@ -3,30 +3,50 @@
     <ion-title>
       Pantry
     </ion-title>
+    <!--
     <ion-buttons right>
       <button ion-button icon-only (click)="deleteFood()"><ion-icon name="trash"></ion-icon></button>
     </ion-buttons>
+    -->
   </ion-navbar>
 </ion-header>
 
 <ion-header  *ngIf=inDeletionMode>
-  <ion-toolbar color="primary">
+  <ion-toolbar color="danger">
     <ion-buttons left>
       <button ion-button icon-only (click)="closeSelected()"><ion-icon name="close"></ion-icon></button>
     </ion-buttons>
     <ion-title>
       {{selected.length}} items selected
     </ion-title>
+    <!--
     <ion-buttons right>
       <button ion-button icon-only (click)="deleteFood()"><ion-icon name="trash"></ion-icon></button>
     </ion-buttons>
+    -->
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content padding>
-   <ion-fab right bottom>
-    <button ion-fab color="danger"><ion-icon name="add"></ion-icon></button>
+  <ion-fab left bottom *ngIf=!inDeletionMode>
+      <button ion-fab mini (click)="deleteFood()" ><ion-icon name="trash"></ion-icon></button>
+    </ion-fab>
+  
+  <ion-fab left bottom *ngIf=inDeletionMode>
+      <button ion-fab (click)="deleteFood()" color="danger"><ion-icon name="trash"></ion-icon></button>
+    </ion-fab>
+  
+   <ion-fab right bottom *ngIf=!inDeletionMode>
+    <button ion-fab color><ion-icon name="add"></ion-icon></button>
+    <ion-fab-list side="left">
+      <button ion-fab (click)="takePicture()"><ion-icon name="camera"></ion-icon></button>
+      <button ion-fab (click)="openFoodCreate()"><ion-icon name="md-create"></ion-icon></button>
+    </ion-fab-list>
+  </ion-fab>
+   
+   <ion-fab right bottom *ngIf=inDeletionMode>
+    <button mini ion-fab color><ion-icon name="add"></ion-icon></button>
     <ion-fab-list side="left">
       <button ion-fab (click)="takePicture()"><ion-icon name="camera"></ion-icon></button>
       <button ion-fab (click)="openFoodCreate()"><ion-icon name="md-create"></ion-icon></button>
@@ -40,13 +60,12 @@
       <ion-select class='select-box' [(ngModel)]="sort" (ionChange)="foodService.sortPantry(sort)">
         <ion-option value="alphabetical">Alphabetical</ion-option>
         <ion-option value="category">Category</ion-option>
-        <ion-option value="recent">Recent</ion-option>
+        <!--<ion-option value="recent">Recent</ion-option>-->
       </ion-select>
     </ion-item>
   </ion-list>
    
   <img [src]="base64Image" *ngIf="base64Image" />
-  <button (click)="goToFoodDetail()">Test</button>
 
   <ion-grid>
     <div *ngFor="let food of foodService.foodthings; let i = index">
